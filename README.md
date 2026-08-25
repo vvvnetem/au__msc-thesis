@@ -39,7 +39,7 @@ To compile the document make sure the following packages are present on the host
 - `acro`
 - `biblatex`
 
-### Autocompletions for TeXstudio
+# Autocompletions for TeXstudio
 
 TeXstudio specific completions for repository content can be installed using `setup_texstudio__completions.sh` script.
 
