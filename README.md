@@ -1,6 +1,10 @@
-# Description
+# Master Thesis
 
 The repository contains the sources for my MSc Thesis (Aarhus University).
+
+## Course Description
+
+Refer to: [https://kursuskatalog.au.dk/en/course/138418/Thesis-30-ECTS-Computer-Science]
 
 # Compilation
 
