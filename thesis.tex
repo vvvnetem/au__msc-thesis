@@ -1,0 +1,1958 @@
+\documentclass[twoside,11pt,openright]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[american]{babel}
+\usepackage{a4}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{euscript} % render Big-O as math
+\usepackage{amsthm}
+\usepackage{epsfig}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{color}
+\usepackage{epstopdf}
+\usepackage{microtype}
+\usepackage{xfrac}
+\usepackage{indentfirst}
+\usepackage[
+colorlinks=false,
+hidelinks=true,
+urlcolor=black,
+citecolor=black,
+filecolor=black,
+linkcolor=blue,
+pagecolor=black,
+menucolor=black]{hyperref}
+\usepackage[useregional]{datetime2}
+%\DTMlangsetup[en-US]{showdayofmonth=false}
+\usepackage{lipsum}		% test page format with lipsum
+
+\usepackage{graphicx} 	% Required for inserting images
+\usepackage{multirow}	% 
+\usepackage{url}		% Insert url
+
+\usepackage{tikz}		% Insert TiKZ pictures
+\usetikzlibrary{positioning, fit}
+\usepackage{tikz-cd}
+% Cryptographic related packages
+\usepackage[
+n,
+advantage,
+operators,
+sets,
+adversary,
+landau,
+probability,
+notions,
+logic,
+ff,
+mm,
+primitives,
+events,
+complexity,
+oracles,
+asymptotics,
+keys
+]{cryptocode}
+
+%\usepackage{algorithm}
+\let\nl\relax			% needed to supress the \nl command already defined error
+\let\procedure\relax	% needed to supress the \nl command already defined error
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e} % pseudocode 
+%\usepackage{algpseudocode}
+
+%\usepackage{algorithmic}
+
+% Tooltips
+\usepackage[inactive,blur=0.6, fixcolor]{fancytooltips}
+
+% =============================================================================
+% CUSTOM__LISTINGS_ENVIRONMENT
+
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\newcommand{\white}[1]{\textcolor{white}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+% .........................................................................
+%% SageMath Language specification
+\lstdefinelanguage{sagemath}{
+	% Python keywords
+	keywords={
+		and, as, assert, break, class, continue, def, del, elif, else,
+		except, False, finally, for, from, global, if, import, in,
+		is, lambda, None, nonlocal, not, or, pass, raise, return,
+		True, try, while, with, yield
+	},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={
+		var, function, assume, forget, solve, factor, expand, simplify,
+		integrate, diff, limit, plot, show, matrix, vector, identity_matrix,
+		zero_matrix, Graph, DiGraph, PolynomialRing, QQ, ZZ, RR, CC,
+		Integers, RationalField, RealField, ComplexField
+	},
+	ndkeywordstyle=\color{purple}\bfseries,
+	sensitive=true,
+	identifierstyle=\color{black},
+	comment=[l]{\#},
+	commentstyle=\color{darkgray}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+
+\lstset{
+	basicstyle=\ttfamily\scriptsize,
+	breaklines=true,
+	columns=fullflexible,
+	language=sagemath,
+	backgroundcolor=\color{white},
+	basicstyle=\footnotesize\ttfamily,
+	extendedchars=true,
+	showstringspaces=false,
+	showspaces=false,
+	showtabs=true,
+	numbers=left,
+	numberstyle=\footnotesize,
+	numbersep=9pt,
+	tabsize=2,
+	breaklines=true,
+	captionpos=b,
+	frame=single,
+	rulecolor=\color{black},
+	framerule=0.5pt,
+	framesep=4pt
+}
+
+% Set style definition for podman yaml file:
+\lstdefinelanguage{yaml}{
+	keywords={
+		version,
+		services,
+		networks,
+		volumes,
+		build,
+		context,
+		dockerfile,
+		container_name,
+		tty,
+		cap_add,
+		devices,
+		sysctls,
+		command,
+		image,
+		restart,
+		depends_on,
+		environment,
+		ports,
+		expose,
+		hostname,
+		entrypoint,
+		working_dir,
+		user
+	},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={
+		ipam,
+		config,
+		subnet,
+		ipv4_address,
+		name,
+		ALL,
+		true,
+		false,
+		yes,
+		no,
+		on,
+		off,
+		null
+	},
+	ndkeywordstyle=\color{purple}\bfseries,
+	sensitive=false,
+	comment=[l]{\#},
+	commentstyle=\color{darkgray}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]",
+	morestring=[b]',
+	showstringspaces=false
+}
+\lstset{
+	language=yaml,
+	backgroundcolor=\color{white},
+	basicstyle=\footnotesize\ttfamily,
+	extendedchars=true,
+	showstringspaces=false,
+	showspaces=false,
+	numbers=left,
+	numberstyle=\footnotesize,
+	numbersep=9pt,
+	tabsize=4,
+	breaklines=true,
+	showtabs=false,
+	captionpos=b, 
+	frame=single,
+	rulecolor=\color{black},
+	framerule=0.5pt,
+	framesep=4pt
+}
+% .........................................................................
+
+
+
+% =============================================================================
+
+% =============================================================================
+% NOTATIONS__SYMBOLS
+\usepackage{mathtools}
+\usepackage[symbols,nogroupskip,sort=none]{glossaries-extra}
+
+\renewcommand{\O}{$\mathcal{O}$}
+
+
+%%% Symbols from Costello__PairingsFromBeginners
+\glsxtrnewsymbol[description={divisor of the function $f$}]{function__f.divisorOfTheFunction}{\ensuremath{(f)}}
+
+\glsxtrnewsymbol[description={function with divisor $(f_{m,P})=m(P)-([m]P)-(m-1)(\mathcal{O})$}]{function__f.functionWithDivisor}{\ensuremath{(f_{m,P})}}
+
+\glsxtrnewsymbol[description={degree of divisor $f$}]{function__f.degreeOfDivisior}{\ensuremath{\mathsf{deg}(D)}}
+
+\glsxtrnewsymbol[description={function evaluated at a divisor}]{function__f.functionEvaluatedAtDivisor}{\ensuremath{f(D)}}
+
+\glsxtrnewsymbol[description={equivalence of divisors}]{function__f.equivalenceOfDivisors}{\ensuremath{\sim}}
+
+
+
+% ......
+\glsxtrnewsymbol[description={scalar multiplication (exponentiation) of $P$ by $n \in \mathbb{Z}$ }]{curve.operation__scalarMultiplicationOfPPoint}{\ensuremath{[n]P}}
+
+\glsxtrnewsymbol[description={affine $n$-space over the field $K$}]{field__affineNspaceOverKField}{\ensuremath{\mathbb{A}^n(K)}}
+
+\glsxtrnewsymbol[description={divisor $(P)-(\mathcal{O})$}]{curve.divisor__PPointminusInfinity}{\ensuremath{D_P}}
+
+\glsxtrnewsymbol[description={divisor $(Q)-(\mathcal{O})$}]{curve.divisor__QPointminusInfinity}{\ensuremath{D_Q}}
+
+\glsxtrnewsymbol[description={effective part of the divisior $D$}]{curve.divisor__effectivePartOfDivisor}{\ensuremath{\epsilon(D)}}
+
+%% Szamtest jelolesek
+\glsxtrnewsymbol[description={finite Field with $q$ elements}]{field__finiteFieldWithQElements}{\ensuremath{\mathbb{F}_q}}
+\glsxtrnewsymbol[description={full extension field}]{field__finiteField}{\ensuremath{\mathbb{F}_q^k}}
+
+\glsxtrnewsymbol[description={integer numbers}]{field__algebraicNumberFieldInteger}{\ensuremath{\mathbb{Z}}}
+\glsxtrnewsymbol[description={integers modulo $n$}]{field.opertion__integersModuloN}{\ensuremath{\mathbb{Z}_n}}
+
+%% When p is prime, we are working with Z_p as a field rather than a group or ring
+\glsxtrnewsymbol[description={when $p$ is a prime $\mathbb{Z}_p$  denotes field rather than a group or ring}. $\mathbb{Z}_p$  does not denote the $p$-adic integers]{field__algebraicNumberFieldIntegerPrimeField}{\ensuremath{\mathbb{Z}_p}}
+
+\glsxtrnewsymbol[description={rational numbers}]{field__algebraicNumberFieldRationalNumbers}{\ensuremath{\mathbb{Q}}}
+\glsxtrnewsymbol[description={$p$-adic rational numbers}]{number__pAdicRationalNumber}{\ensuremath{\mathbb{Q}_p}}
+
+
+\glsxtrnewsymbol[description={real numbers}]{field__algebraicNumberFieldRational}{\ensuremath{\mathbb{R}}}
+\glsxtrnewsymbol[description={Complex numbers}]{field__algebraicNumberFieldComplex}{\ensuremath{\mathbb{C}}}
+
+\glsxtrnewsymbol[description={arbitrary field}]{field__algebraicNumberFieldArbitraryField}{\ensuremath{K}}
+
+\glsxtrnewsymbol[description={denotes the multiplicative group for field $K$}]{field__algebraicNumberFieldArbitraryFieldMultiplicativeGroup}{\ensuremath{K^*}}
+
+\glsxtrnewsymbol[description={denotes the additive group for field $K$}]{field__algebraicNumberFieldArbitraryFieldAdditiveGroup}{\ensuremath{K^+}}
+
+%% Algebraic closures
+\glsxtrnewsymbol[description={if $K$ is a field, then $\overline{K}$ denotes an algebraic closure of $K$ }]{field.operation__closureArbitraryKField}{\ensuremath{\overline{K}}}
+
+\glsxtrnewsymbol[description={projective $n$-space over the $K$ field}]{space__projectiveNSpaceOverKArbitraryField}{\ensuremath{\mathbb{P}^n(K)}}
+
+\glsxtrnewsymbol[description={affine $n$-space over the arbitrary $K$ field }]{space__affineNSpaceOverKArbitraryField}{\ensuremath{\mathbb{A}^n(K)}}
+
+\glsxtrnewsymbol[description={characteristics of field $K$}]{field__algebraicNumberFieldArbitraryFieldCharacteristics}{\ensuremath{\mathsf{char}(\mathbb{K})}}
+
+\glsxtrnewsymbol[description={Galois group of $L$ over $K$}]{field__GaloisGroupofLOverKArbitraryField}{\ensuremath{\mathsf{Gal}(L/K)}}
+
+
+
+\glsxtrnewsymbol[description={indeterminate Miller line function regarding the addition of $R$ and $Q$}]{curve.operation__MillerLineFunctionAddition}{\ensuremath{\ell_{R,Q}}}
+
+\glsxtrnewsymbol[description={indeterminate Miller line function regarding the doubling of $R$ }]{curve.operation__MillerLineFunctionDoubling}{\ensuremath{\ell_{R,R}}}
+
+
+% Subgroups
+\glsxtrnewsymbol[description={base field subgroup: $E[r] \cap \mathsf{ker}[\pi - [1]]$ (in Type 3 pairings)} ]{curve.basefield__baseFieldSubgroupG1}{\ensuremath{\mathbb{G}_1}}
+
+\glsxtrnewsymbol[description={base field subgroup: $E[r] \cap \mathsf{ker}[\pi - [q]]$  (in Type 3 pairings)}]{curve.basefield__baseFieldSubgroupG2}{\ensuremath{\mathbb{G}_2}}
+
+\glsxtrnewsymbol[description={order $r$ subgroup of $\mathbb{F}^*_{q^k}$, also the $r$-th roots of unity $\mu_k$ }]{curve.basefield__rOrderSubgroupTarget}{\ensuremath{\mathbb{G}_T}}
+
+%%% twists, endomorphisms, isomorphisms
+
+\glsxtrnewsymbol[description={degree of twist}]{curve.twist__degreeOfTwist}{\ensuremath{d}}
+
+% Elliptic Curve Endomorphism Ring
+\glsxtrnewsymbol[description={endomorphism ring of Elliptic Curve \ensuremath{E}}]{curve.endomorphism_ring_of_curve}{\ensuremath{\mathsf{End}(E)}} 
+
+% Automorphism (isomorphism from a mathematical object to itself, preserves symmetry)
+\glsxtrnewsymbol[description={automorphism of $E$ elliptic curve}]{curve.automorphism_of_curve}{\ensuremath{\mathsf{Aut}(E)}}
+
+
+%\glsxtrnewsymbol[description={occurs as the distortion map on supersingular curves and as the GLV endomorphism}]{supersingularcurve.distortion}{\ensuremath{\phi}}
+\glsxtrnewsymbol[description={occurs as the distortion map on supersingular curves and as the GLV endomorphism}]{curve.operation__multiplicationGLVEndomorphism}{\ensuremath{\phi}}
+
+\glsxtrnewsymbol[description={the $i$-th cyclotomic polynomial}]{polynomial__iThCyclotomicPolynomial}{\ensuremath{\Phi_i}}
+
+\glsxtrnewsymbol[description={$q$-power Frobenius endomorphisms: $(x,y) \rightarrow (x^q, y^q)$}]{field__finiteFieldEndomorphismFrobenius}{\ensuremath{\pi}}
+
+\glsxtrnewsymbol[description={occurs as both the isomorphism from $\mathbb{G}_2$ to $\mathbb{G}_1$ and as the GLS isomorphism}]{psi}{\ensuremath{\psi}}
+
+\glsxtrnewsymbol[description={the $l$-th division polynomial on $E$ (for odd $l$)}]{curve.operation__divisionOfLThePolynomialonECurve}{\ensuremath{\psi_l(x)}}
+
+\glsxtrnewsymbol[description={the (un)twisting isomorphism}]{curve.twist__twistingIsomorphism}{\ensuremath{\Psi}}
+
+% Field size and subgroups size
+\glsxtrnewsymbol[description={the ratio between base field size and subgroup size for pairing-friendly curve}]{curve.basefield__ratioBetweenBaseFieldSizeAndSubGroupSize}{\ensuremath{\rho}}
+
+% Source: Costello Thesis
+\glsxtrnewsymbol[description={Picard group of $E$}]{curve.group__picardGroupofE}{\ensuremath{\mathsf{Pic}^0(E)}}
+
+% Source: Costello Thesis
+\glsxtrnewsymbol[description={group of principal divisors on $E$ }]{curve.divisors__principalDivisorsonE}{\ensuremath{\mathsf{Prin}(E)}}
+
+% Source: Costello Thesis
+\glsxtrnewsymbol[description={set of quadratic residues modulo $q$}]{set.residues__setOfQuadraticResiduesModuloQ}{\ensuremath{\mathsf{QR}(q)}}
+
+% Source: Costello Thesis
+\glsxtrnewsymbol[description={support of the divisor $D$ }]{curve.divisor__supportOfTheDivisorD}{\ensuremath{\mathsf{Pic}^0(E)}}
+
+
+% Elliptic curve
+% ...............
+
+\glsxtrnewsymbol[description={an arbitrary curve}]{curve.definition__arbitraryCurve}{\ensuremath{C}}
+
+\glsxtrnewsymbol[description={an (imaginary quadratic) hyperelliptic curve with genus $g$}]{curve.definition__imaginaryQuadraticHyperellipticCurve}{\ensuremath{C_g}}
+
+\glsxtrnewsymbol[description={an elliptic curve}]{curve.definition__ellipticCurve}{\ensuremath{E}}
+
+\glsxtrnewsymbol[description={a twisted elliptic curve defined over $\mathbb{F}_{q^{\sfrac{k}[/]{d}}}$}]{curve.definition__ellipticCurveTwistedOverQkPerD}{\ensuremath{E'}}
+
+\glsxtrnewsymbol[description={the entire $r$-torsion}]{curve.operation__torsionFull}{\ensuremath{E[r]}}
+
+\glsxtrnewsymbol[description={elliptic curve defined over field $K$}]{curve.definition__ellipticCurveOverArbitraryKField}{\ensuremath{E/K}}
+
+\glsxtrnewsymbol[description={occurs as both divisor on $E$ and the CM discriminant of $E$}]{curve.divisor}{\ensuremath{D}}
+
+\glsxtrnewsymbol[description={genus of the curve}]{curve.genus}{\ensuremath{g}}
+
+\glsxtrnewsymbol[description={order of the large prime subgroup in $E(\mathbb{F}_q)$}]{curve.order}{\ensuremath{r}}
+
+\glsxtrnewsymbol[description={embedding degree of the $E$ elliptic curve (with respect to $q$ and $r$)}]{curve.embedding_degree}{\ensuremath{k}}
+
+\glsxtrnewsymbol[description={ratio between base field size and subgroup size for a pairing-
+	friendly curve}]{curve.ratio}{\ensuremath{\rho}}
+
+
+%% Points of the elliptic curve
+\glsxtrnewsymbol[description={number of points on $E$}]{curve.definition__numberOfPointsOnEllipticCurve}{\ensuremath{\#E}}
+
+\glsxtrnewsymbol[description={points at infinity on the $E$ elliptic curve}]{curve.definition__numberOfPointsOnEllipticCurveAtInfinity}{\ensuremath{\mathcal{O}}}
+
+\glsxtrnewsymbol[description={multiplicity of point $P$ in associated divisor}]{curve.definition__multiplicityOfPointP}{\ensuremath{nP}}
+
+\glsxtrnewsymbol[description={generator of $\mathbb{G}_1$}]{curve.definition__generatorOfG1}{\ensuremath{P}}
+
+\glsxtrnewsymbol[description={ twist of the point $P$}]{curve.definition__twistOfPointP}{\ensuremath{P'}}
+
+\glsxtrnewsymbol[description={generator of $\mathbb{G}_2$}]{curve.definition__generatorOfG2}{\ensuremath{Q}}
+
+\glsxtrnewsymbol[description={ twist of the point $Q$}]{curve.definition__twistOfPointQ}{\ensuremath{Q'}}
+
+% Elliptic curve pairings
+% .......................
+
+\glsxtrnewsymbol[description={a general pairing}]{pairing__generalPairing}{\ensuremath{e}}
+
+\glsxtrnewsymbol[description={pairing of $P$ and $Q$ (paired value)}]{pairing__pairingOfPAndQ}{\ensuremath{e(P,Q)}}
+
+\glsxtrnewsymbol[description={eta $(T)$ pairing}]{pairing.variant__etaTPairing}{\ensuremath{\eta_T}}
+
+\glsxtrnewsymbol[description={ate pairing}]{pairing.variant__ate}{\ensuremath{a_T}}
+
+\glsxtrnewsymbol[description={trace of Frobenius}]{trace__frobenius}{\ensuremath{t}}
+
+\glsxtrnewsymbol[description={anti-trace map}]{trace__antiTrace}{\ensuremath{aTr}}
+
+\glsxtrnewsymbol[description={ate pairing loop parameter $(T=t-1)$}]{pairing.variant__eateTPairingLoopParameter}{\ensuremath{T}}
+
+\glsxtrnewsymbol[description={order-$r$ Tate pairing}]{pairing.variant__orderRTatePairing}{\ensuremath{t_r(P,Q)}}
+
+\glsxtrnewsymbol[description={order-$r$ reduced Tate pairing}]{pairing.variant__orderRReducedTatePairing}{\ensuremath{T_r(P,Q)}}
+
+\glsxtrnewsymbol[description={order-$r$ Weil pairing}]{pairing.variant__weilPairing}{\ensuremath{w_r(P,Q)}}
+
+
+% =============================================================================
+
+% =============================================================================
+% NOTATIONS__ABBREVIATIONS
+\usepackage{acro}
+
+%% ACRONYMS::ALGEBRAIC_NUMBER_THEORY
+%% ...............................................
+\DeclareAcronym{acronym.algebra.gcd}{
+	short=GCD,
+	long=Greates Common Divisor
+}
+
+\DeclareAcronym{acronym.algebra.lcm}{
+	short=LCM,
+	long=Least Common Multiple
+}
+
+%% ACRONYMS::ARITHMETIC_DEFINITONS
+%% ...............................................
+\DeclareAcronym{acronym.algebra.agm}{
+	short=AGM,
+	long=Arithmetic Geometric Mean
+}
+
+%% ACRONYMS::CRYPTO::DEFINITIONS
+%% ...............................................
+\DeclareAcronym{acronym.crypto.branch.pairingbased}{
+	short=PBC,
+	long=Pairing-based Cryptography
+}
+
+%% ACRONYMS::CRYPTO::ENCRYPTION_MECHANISMS
+%% ...............................................
+\DeclareAcronym{acronym.crypto.ecnryption.dem}{
+	short=DEM,
+	long=Data Encapsulation Mechanism
+}
+
+\DeclareAcronym{acronym.crypto.ecnryption.dhaes}{
+	short=DHAES,
+	long=Diffie-Hellman Augmented Encryption Scheme
+}
+
+\DeclareAcronym{acronym.crypto.ecnryption.dhies}{
+	short=DHIES,
+	long=Diffie-Hellman Integrated Encryption Scheme
+}
+
+\DeclareAcronym{acronym.crypto.ecnryption.aes}{
+	short=AES,
+	long=Advanced Encryption Standard
+}
+
+\DeclareAcronym{acronym.crypto.ecnryption.ecdsa}{
+	short=ECDSA,
+	long=Elliptic Curve Digital Signature Algorithm
+}
+
+\DeclareAcronym{acronym.crypto.ecnryption.ecies}{
+	short=ECIES,
+	long=Elliptic Curve Integrated Encryption Scheme
+}
+
+\DeclareAcronym{acronym.crypto.ecnryption.ecmqv}{
+	short=ECMQV,
+	long=Elliptic Curve Menezes-Qu-Vanstone protocol
+}
+
+
+\DeclareAcronym{acronym.crypto.ecnryption.kdf}{
+	short=KDF,
+	long=Key Derivation Function
+}
+
+\DeclareAcronym{acronym.crypto.ecnryption.kds}{
+	short=KDS,
+	long=Key Distribution System
+}
+
+\DeclareAcronym{acronym.crypto.ecnryption.kem}{
+	short=KEM,
+	long=Key Encapsulation Mechanism
+}
+
+
+%% ACRONYMS::ALGORITHMIC_COMPLEXITY
+%% ...............................................
+
+\DeclareAcronym{acronym.algorithmcomplexity.bdh}{
+	short=BDH,
+	long=Bilinear Diffie-Hellman problem
+}
+
+\DeclareAcronym{acronym.algorithmcomplexity.cdh}{
+	short=CDH,
+	long=Computational Diffie-Hellman problem
+}
+
+\DeclareAcronym{acronym.algorithmcomplexity.dbdh}{
+	short=DBDH,
+	long=Decision Bilinear Diffie-Hellman problem
+}
+
+\DeclareAcronym{acronym.algorithmcomplexity.ddh}{
+	short=DDH,
+	long=Decision Diffie-Hellman problem
+}
+
+\DeclareAcronym{acronym.algorithmcomplexity.dhp}{
+	short=DHP,
+	long=Diffie-Hellman Problem
+}
+
+\DeclareAcronym{acronym.algorithmcomplexity.dlp}{
+	short=DLP,
+	long=Discrete Logarithm Problem
+}
+
+\DeclareAcronym{acronym.algorithmcomplexity.dlp.lowerItalic}{
+	short=DLP,
+	long=\textit{discrete logarithm problem}
+}
+
+
+\DeclareAcronym{acronym.algorithmcomplexity.ecddh}{
+	short=ECDDH,
+	long=Elliptic Curve Decision Diffie-Hellman problem
+}
+
+\DeclareAcronym{acronym.algorithmcomplexity.ecdh}{
+	short=ECDH,
+	long=Elliptic Curve Diffie-Hellman protocol
+}
+
+\DeclareAcronym{acronym.algorithmcomplexity.ecdhp}{
+	short=ECDHP,
+	long=Elliptic Curve Diffie-Hellman Problem
+}
+
+\newacronym{acronym.algorithmcomplexity.ecdlp}{ECDLP}{Elliptic Curve Discrete Logarithm Problem}
+
+\DeclareAcronym{acronym.algorithmcomplexity.ecdlp}{
+	short=ECDLP,
+	long=Elliptic Curve Discrete Logarithm Problem
+}
+
+\DeclareAcronym{acronym.algorithmcomplexity.ecddhp}{
+	short=ECDDHP,
+	long=Elliptic Curve Decision Diffie-Hellman Problem
+}
+
+
+\newacronym{acronym.numbertheory.crt}{CRT}{Chinese Remainder Theorem}
+\DeclareAcronym{acronym.numbertheory.crt}{
+	short=CRT,
+	long=Chinese Remainder Theorem 
+}
+
+%% ACRONYMS::ALGORITHMS
+%% ...............................................
+\DeclareAcronym{acronym.algorithm.bsgs}{
+	short=BSGS,
+	long=Baby Step/Giant Step method
+}
+
+\DeclareAcronym{acronym.algorithm.ellipticcurve.cm}{
+	short=CM,
+	long=Complex Multiplication method
+}
+
+% Source: Costello Thesis
+\DeclareAcronym{acronym.divisors.degreeofdivisior}{
+	short=\ensuremath{\mathsf{Deg}(D)},
+	long=degree of the divisor $D$.
+}
+
+% Source: Costello Thesis
+\DeclareAcronym{acronym.divisors.groupOfDegreeZeroDivisors}{
+	short=\ensuremath{\mathsf{Deg}^{0}(D)},
+	long=group of degree zero divisors on $E$ elliptic curve.
+}
+
+% Source: Costello Thesis
+\DeclareAcronym{acronym.divisors.groupOfDivisorsonEOverFiniteField}{
+	short=\ensuremath{\mathsf{Deg}_{\overline{\FieldF}_q}(E)},
+	long=group of divisors on $E/\FieldF_q$.
+}
+
+
+\DeclareAcronym{acronym.algorithm.ellipticcurve.glv}{
+	short=GLV,
+	long=Gallant-Lambert-Vanstone method. Used to speed up the computation of scalar multiplication of some $E$ elliptic curve defined over large prime field characteristics
+}
+\newacronym{acronym.algorithm.ellipticcurve.glv}{GLV}{Gallant-Lambert-Vanstone method. Used to speed up the computation of scalar multiplication of some $E$ elliptic curve defined over large prime field characteristics}
+
+
+\DeclareAcronym{acronym.algorithm.ellipticcurve.gls}{
+	short=GLS,
+	long=Galbraith-Lin-Scott method. Generalisation of the Gallant-Lambert-Vanstone method
+}
+\newacronym{acronym.algorithm.ellipticcurve.gls}{GLS}{Galbraith-Lin-Scott method. Generalisation of the Gallant-Lambert-Vanstone method.}
+
+
+\DeclareAcronym{acronym.algorithm.ellipticcurve.mnt}{
+	short=MNT,
+	long=MNT criteria: Miyaji \,Nakabayashi and Takano showed how to use properties of the cyclotomic polynomial (with order $k$) to build non-supersingular curves over $\FieldF_q$ using the CM method.
+}
+
+%% ACRONYMS::CRYPTOGRAPHY::BUILDING_BLOCKS
+\DeclareAcronym{acronym.crypto.system.privateKeyGenerator}{
+	short=PKG,
+	long=Private Key Generator
+}
+
+\DeclareAcronym{acronym.crypto.system.certificateAuthority}{
+	short=CA,
+	long=Certificate Authority
+}
+
+%% ACRONYMS::CRYPTOGRAPHY::CRYPTOSYSTEMS
+\DeclareAcronym{acronym.crypto.system.identityBasedEncryption}{
+	short=IBE,
+	long=Identity-based Encryption
+}
+
+
+
+
+%% ACRONYMS::CRYPTOGRAPHY::ATTACKS
+%% ...............................................
+\DeclareAcronym{acronym.crypto.attacks.cca}{
+	short=CCA,
+	long=Chosen Ciphertext Attack
+}
+
+\DeclareAcronym{acronym.crypto.attacks.cpa}{
+	short=CPA,
+	long=Chosen Plaintext Attack
+}
+
+\DeclareAcronym{acronym.crypto.attacks.dpa}{
+	short=DPA,
+	long=Differential Power Analysis
+}
+
+
+\DeclareAcronym{acronym.ellipticcurveattacks.mov}{
+	short=MOV,
+	long=Menezes?Okamoto?Vanstone attack
+}
+
+%% ACRONYMS::DEFINITIONS
+%% ...............................................
+\DeclareAcronym{acronym.definitions.ellipticcurve}{
+	short=ECC,
+	long=Elliptic Curve Cryptography
+}
+
+\newacronym{ac.definitions.ellipticcurve}{ECC}{Elliptic Curve Cryptography}
+
+\DeclareAcronym{acronym.definitions.ellipticcurve.lowerItalic}{
+	short=ECC,
+	long=elliptic curve cryptography
+}
+
+
+\DeclareAcronym{acronym.definitions.messageauthenticationcode}{
+	short=MAC,
+	long=Message Authentication Code
+}
+
+
+\DeclareAcronym{acronym.definitions.hmac}{
+	short=HMAC,
+	long=Hash-based Message Authentication Code
+}
+
+
+
+
+% =============================================================================
+
+% =============================================================================
+% THEOREMS__DEFINITIONS__COROLLARIES__LEMMAS____NUMBERED_ENVIRONMENTS
+
+%% THEOREMS
+%% ...............................................
+\newtheorem{theorem}{Theorem}[section] % [section] restarts the theorem counter at every new section
+
+%% DEFINITIONS
+%% ...............................................
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+%% COROLLARIES
+%% ...............................................
+\newtheorem{corollary}{Corollary}[theorem]
+
+%% LEMMAS
+%% ...............................................
+\newtheorem{lemma}[theorem]{Lemma} % new {lemma} environment,same counter as [theorem]
+
+% % THEOREMS__DEFINITIONS__COROLLARIES__LEMMAS____UN-NUMBERED_ENVIRONMENTS
+% =============================================================================
+
+% =============================================================================
+% BIBLIOGRAPHY
+
+%% Check non utf8 characters 
+%% Search and replace with regexp: [^\x00-\x7F]
+
+\usepackage[style=numeric,sorting=none]{biblatex}
+\addbibresource{forrasok.bib} %Import the bibliography file
+% =============================================================================
+
+% =============================================================================
+% CUSTOM_COMMANDS
+
+%% USER_SPECIFIC_COMMANDS
+
+%%% TextFormatting
+\newcommand{\textFormatRegular}[1]{
+	\text{#1}%
+}
+
+\newcommand{\textFormatBold}[1]{
+	\text{\textbf{#1}}%
+}
+
+%%% Minipage with background color
+\newcommand{\minitext}[1]{
+\noindent\fcolorbox{red}{lightgray}{%
+	\begin{minipage}{\dimexpr0.88\textwidth-2\fboxrule-2\fboxsep\relax}
+		{#1}
+\end{minipage}}%
+}
+
+%% Bold formatted text for ECC
+
+\newcommand{\mathFormulaCostOfComputingMultiplication}{
+	\ensuremath{\textbf{M}}%
+}
+
+\newcommand{\mathFormulaCostOfComputingSquaring}{
+	\ensuremath{\textbf{S}}%
+}
+
+\newcommand{\mathFormulaCostOfComputingInversions}{
+	\ensuremath{\textbf{I}}%
+}
+
+% Italic
+\newcommand{\textFormatItalic}[1]{
+	\text{\textit{#1}}%
+}
+
+%%% flow notation
+\newcommand{\textSnippetIff}{
+ \text{if and only if}%
+}
+
+%Cryptosystem Member's
+\newcommand{\PartyMember}[1]{
+	\textit{{#1}}%
+}
+
+%% USER_SPECIFIC_COMMANDS__RENEW_COMMANDS
+\renewcommand*\sfdefault{lmss}
+\renewcommand*\ttdefault{txtt}
+
+%% USER_SPECIFIC_COMMANDS::THESIS_WORKFLOW
+\newcommand{\todo}[1]{{\color[rgb]{.5,0,0}\textbf{$\blacktriangleright$#1$\blacktriangleleft$}}%
+}
+
+\newcommand{\info}[1]{{\color[rgb]{.3,0.8,0.3}\textbf{$\blacktriangleright$#1$\blacktriangleleft$}}%
+}
+
+
+%% USER_SPECIFIC_COMMANDS::MATHEMATICAL_FORMULAS
+
+%%% Arrows, delimiters
+\newcommand{\tilderightarrow}{\mathrel{
+		\hbox to 1.2em{\rightarrowfill}\kern0pt % 0 kerning for no line break
+		\smash{\clap{\raise .7ex \hbox{$\mkern-25mu \scriptstyle\sim$}}}
+}}
+%%% mathematical notations
+\renewcommand{\ZZ}{\ensuremath{\mathbb{Z}}%
+}	% Number Field: Integer
+\renewcommand{\RR}{\ensuremath{\mathbb{R}}%
+}	% Number Field: Real
+\renewcommand{\QQ}{\ensuremath{\mathbb{Q}}%
+}	% Number Field: Rationals
+\renewcommand{\NN}{\ensuremath{\mathbb{N}}%
+}	% Number Field: Naturals
+\renewcommand{\CC}{\ensuremath{\mathbb{C}}%
+}	% Number Field: Complex
+
+% Space Operations
+\renewcommand{\PP}{\ensuremath{\mathbb{P}}%
+}	% Projective Plane
+
+\newcommand{\FieldIndexed}[2]{\ensuremath{\mathbb{#1}_{#2}}%
+}% % Indexed Field
+
+% Define a math formula object
+\newcommand{\mathFormulaObject}[1]{
+	\ensuremath{#1}%
+}
+
+\newcommand{\mathFormulaAlgebraicClosureOf}[1]{
+	\ensuremath{\overline{#1}}%
+}
+
+% 
+\newcommand{\mathFormulaAlgebraicClosureOfFiniteFieldWithIndex}[1]{
+	\ensuremath{\mathFormulaAlgebraicClosureOf{\FieldF}_{#1}}%
+}
+
+
+% Characteristic of Algebraic Field 
+\newcommand{\mathFormulaCharacteristicOfAlgebraicFieldPar}[1]{
+	\ensuremath{\mathsf{Char}({#1})}%
+}
+
+
+\newcommand{\mathFormulaFiniteFieldWithIndex}[1]{
+	\ensuremath{\FieldF_{#1}}%
+}
+
+\newcommand{\mathFormulaFieldWithExtension}[1]{
+	\ensuremath{\FieldF_{q^{#1}}}%
+}% % Indexed Field
+
+
+
+% divides
+\newcommand{\mathFormulaIsDivides}[2]{
+	\ensuremath{{#1} \lvert {#2}}%
+}
+
+\newcommand{\mathFormulaLeftDividesRight}[2]{
+	\ensuremath{{#1} \lvert {#2}}%
+}
+
+
+\newcommand{\mathFormulaFieldExtensionOverField}[2]{
+	\ensuremath{{#1}/{#2}}%
+}
+
+%% Custom functions for Arrays
+\newcommand{\mathFormulaSetFromTo}[2]{
+	\ensuremath{{#1},  \ldots, {#2}}%
+}
+
+%% Arrays with index (e.g: m=(m9,...,m0)_2)
+\newcommand{\mathFormulaArrayWithIndex}[3]{
+	\ensuremath{ \left( #1, \ldots , #2 \right)_{#3} }%
+}
+
+%% Interval
+\newcommand{\mathFormulaIntervalFromTo}[2]{
+	\ensuremath{\left[	{#1},  \ldots, {#2} \right]}%
+}
+
+
+% Partials derivatives
+\newcommand{\mathFormulaPartialDerivative}[2]{
+	\ensuremath{\dfrac{\partial #1}{\partial #2}}%
+}
+
+
+\newcommand{\partials}[2]{
+	\ensuremath{\dfrac{\partial #1}{\partial #2}}%
+}
+
+
+%%% Arbitrary Fields Notations
+\renewcommand{\FF}{\ensuremath{\mathbb{F}}%
+}
+
+\newcommand{\EE}{\ensuremath{\mathbb{E}%
+	}%
+}
+
+\newcommand{\KK}{\ensuremath{\mathbb{K}}%
+}
+\renewcommand{\GG}{\ensuremath{\mathbb{G}}%
+}
+
+%%% Fields, Rings, Spaces, Operators
+\newcommand{\FieldF}{\ensuremath{\mathbb{F}}%
+} 			% Notation for field F
+\newcommand{\FieldFCross}{
+	\ensuremath{\mathbb{F}_{q^k}^{\times}}%
+}
+
+\newcommand{\FieldFp}{
+	\ensuremath{\FieldF_p}%
+}
+
+\newcommand{\FieldFpStar}{
+	\ensuremath{\FF_{p}^{*}}%
+}
+
+
+\newcommand{\FieldFq}{
+	\ensuremath{\mathbb{F}_q}%
+}
+
+\newcommand{\FieldFqStar}{
+	\ensuremath{\FF_{q}^{*}}%
+}
+
+
+% Notation for arbitrary field K
+\newcommand{\FieldArbitrary}{\ensuremath{K}%
+} 	
+% Notation for arbitrary field K
+\newcommand{\mathFormulaFieldArbitrary}{\ensuremath{{K}}%
+}
+% Notation for algebraic closure of arbitrary field K
+\newcommand{\FieldArbitraryClosure}{\ensuremath{\overline{K}}%
+}
+% Notation for algebraic closure of arbitrary field K
+\newcommand{\mathFormulaFieldArbitraryClosure}{\ensuremath{\overline{K}}%
+}
+
+% Notation of Polynomial Ring
+\newcommand{\mathFormulaPolynomialRing}[1]{
+	\ensuremath{#1}%
+}
+\newcommand{\mathFormulaPolynomialRingWithIndex}[2]{
+	\ensuremath{{#1}_{#2}}%
+}
+
+% Definition of Polynomial Ring 
+\newcommand{\mathFormulaPolynomialRingDefinedOver}[3]{
+	\ensuremath{\mathFormulaTwoSidesEqual{#1}{{#2}/{#3}}}%
+}
+
+
+% Space projection
+
+%%% subsetOf::= {in} in {set}
+\newcommand{\mathFormulaIsSubsetOf}[2]{
+	\ensuremath{{#1} \in {#2}}%
+}
+
+\newcommand{\mathFormulaIsInSet}[2]{
+	\ensuremath{{#1} \in {#2}}%
+}
+
+\newcommand{\mathFormulaSetIntersection}[2]{
+	\ensuremath{{#1} \cap {#2}}%
+}
+
+% Set exclusion:
+%% left_input  := the set the noted as excluded
+%% right_input := the set  that will remain
+\newcommand{\mathFormulaSetExcludedFrom}[2]{
+	\ensuremath{{#1} \setminus {#2}}%
+}
+
+
+%%% subsetOfField::= {input} in {Field} 
+\newcommand{\mathFormulaIsSubsetOfField}[2]{
+	\ensuremath{{#1} \in \mathbb{#2}}%
+}
+
+%% F_{q^k}-beli {q^k} tag
+\newcommand{\mathFormulaFieldBaseOverK}{
+	\ensuremath{q^k}%
+}
+
+%%% generalPairing::= {set_of_points__P, set_of_points__Q} 
+\newcommand{\mathFormulaGeneralPairing}[2]{
+	\ensuremath{e({#1},{#2})}%
+}
+
+%% Pairing with Two Input : {1}({2}, {3})
+\newcommand{\mathFormulaPairing}[3]{
+	\ensuremath{{#1}({#2},{#3})}%
+}
+
+\newcommand{\mathFormulaPairingPower}[2]{
+	\ensuremath{\sfrac{(#1)}{{#2}}}%
+}
+
+%% General Function notation with arguments
+\newcommand{\mathFormulaFunctionGeneralPar}[1]{
+	\ensuremath{f({#1})}%
+}
+
+% Divisor
+\newcommand{\mathFormulaDivisor}{
+	\ensuremath{D}%
+}
+
+\newcommand{\mathFormulaPrincipalDivisor}[1]{
+	\ensuremath{\mathsf{Prin}({#1})}%
+}
+
+%% Divisor Functions: f_{l,P}(Q)
+\newcommand{\mathFormulaFunctionWithDivisor}[3]{
+	\ensuremath{f_{{#1},#2}({#3})}%
+}
+
+% degree is in superscript, index is subscript !!
+\newcommand{\mathFormulaDivisorOfPar}[2]{
+	\ensuremath{\mathsf{Div}_{#2} \left( {#1}\right)}%
+}
+
+% degree is in superscript, index is subscript !!
+\newcommand{\mathFormulaDivisorWithDegreeOf}[2]{
+	\ensuremath{\mathsf{Div}^{#2} \left( {#1}\right)}%
+}
+
+\newcommand{\mathFormulaDivisorWithIndex}[1]{
+	\ensuremath{D_{#1}}%
+}
+
+
+\newcommand{\mathFormulaDivisorOfFunction}[2]{
+	\ensuremath{{#1}({#2})}%
+}
+
+\newcommand{\mathFormulaSetOfDivisors}[2]{
+	\ensuremath{ \{  {#1} \in \mathsf{Div}(E): \mathsf{Deg}({#1}) = {#2} \} }%
+}
+
+
+\newcommand{\mathFormulaDivisorProperSubgroupOf}[2]{
+	\ensuremath{\mathsf{Div}^{#1}({#2}) \subset \mathsf{Div}(#2)}%
+}	
+
+
+\newcommand{\mathFormulaDivisorGroupWithIndexPar}[2]{
+	\ensuremath{ \mathsf{Div}^{#2} ({#1})}%
+}
+
+\newcommand{\mathFormulaEffectivePartOfDivisor}[1]{
+	\ensuremath{\varepsilon (#1)}%
+}
+
+\newcommand{\mathFormulaGenus}{
+	\ensuremath{g}%
+}
+
+\newcommand{\mathFormulaPicardGroupWithIndexPar}[2]{
+	\ensuremath{ \mathsf{Pic}^{#2} ({#1})}%
+}
+
+
+\newcommand{\mathFormulaRaisePower}[2]{
+	\ensuremath{{#1}^{#2}}%
+}
+
+\newcommand{\mathFormulaPowerOf}[2]{
+	\ensuremath{{#1}^{#2}}%
+}
+
+\newcommand{\mathFormulaSqrt}[1]{
+	\ensuremath{\sqrt{#1}}%
+}
+
+\newcommand{\mathFormulaSqrtNRootOf}[2]{
+	\ensuremath{ \sqrt[#1]{#2}}%
+}
+
+%%% USER_SPECIFIC_COMMANDS::FORMULAS
+\newcommand{\mathFormulaTwoSidesEqual}[2]{
+	\ensuremath{{#1} = {#2}}%
+}
+
+\newcommand{\mathFormulaTwoSidesCongruent}[2]{
+	\ensuremath{{#1} \equiv {#2}}%
+}
+
+\newcommand{\mathFormulaTwoSidesSimilar}[2]{
+	\ensuremath{ {#1} \sim {#2} }%
+}
+
+\newcommand{\mathFormulaTwoSidesCongruentCondition}[2]{
+	\ensuremath{ {#1} \sim {#2} }%
+}
+
+\newcommand{\mathFormulaTwoSidesNotEqual}[2]{
+	\ensuremath{{#1} \neq {#2}}%
+}
+
+\newcommand{\mathFormulaTwoSidesLeftLess}[2]{
+	\ensuremath{{#1} < {#2}}%
+}
+
+\newcommand{\mathFormulaTwoSidesLeftEqLess}[2]{
+	\ensuremath{{#1} \leq {#2}}%
+}
+
+\newcommand{\mathFormulaTwoSidesLeftGreater}[2]{
+	\ensuremath{{#1} > {#2}}%
+}
+
+\newcommand{\mathFormulaTwoSidesLeftEqGreater}[2]{
+	\ensuremath{{#1} \geq {#2}}%
+}
+
+\newcommand{\mathFormulaMuchGreaterThan}[2]{
+	\ensuremath{{#1} \gg {#2}}%
+}
+
+\newcommand{\mathFormulaMuchLessThan}[2]{
+	\ensuremath{{#1} \ll {#2}}%
+}
+
+\newcommand{\mathFormulaTwoSidesApproximate}[2]{
+	\ensuremath{ {#1} \approx {#2}}%
+}
+
+\newcommand{\mathFormulaTwoSidesApproximateEquals}[2]{
+	\ensuremath{ {#1} \cong {#2}}%
+}
+
+\newcommand{\mathFormulaTwoSidesOplus}[2]{
+	\ensuremath{{#1} \oplus {#2}}%
+}
+
+
+
+% Ratio
+\newcommand{\mathFormulaRatioBetween}[2]{
+	{#1}:{#2}
+}
+
+\newcommand{\mathFormulaTwoSideSubSet}[2]{
+	\ensuremath{{#1} \subset {#2}}%
+}
+\newcommand{\mathFormulaTwoSideSubSetEquals}[2]{
+	\ensuremath{{#1} \subseteq {#2}}%
+}
+\newcommand{\mathFormulaTwoSideSupSet}[2]{
+	\ensuremath{{#1} \supset {#2} }%
+}
+
+\newcommand{\mathFormulaTwoSideSupSetEquals}[2]{
+	\ensuremath{{#1} \supseteq {#2}}%
+}
+
+\newcommand{\mathFormulaMapInto}[2]{
+	\ensuremath{{#1} \mapsto {#2}}%
+}
+% inverz mapsto as:  T <- P
+\newcommand{\mathFormulaInitialise}[2]{
+	\ensuremath{ {#1} \leftarrow {#2}}%
+}
+
+
+\newcommand{\mathFormulaProjectInto}[2]{
+	\ensuremath{{#1} \rightarrow {#2}}%
+}
+
+\newcommand{\mathEquationMonicPolynomial}{
+	\ensuremath{x^n+c_{n-1}x^{n-1} + \ldots + c_2x^2 + c_1 x + c_0}%
+}
+
+
+% Cross Product
+\newcommand{\mathFormulaCrossProduct}[2]{
+	\ensuremath{{#1} \times {#2}}%
+}
+
+% bilinear map: FormulaFromBook
+\newcommand{\mathFormulaBilinearMapGGT}{
+	\ensuremath{\GG_1 \times \GG_2 \rightarrow \GG_T}%
+}
+
+% bilinear map: Indexed
+\newcommand{\mathFormulaBilinearMapIndexed}[6]{
+	\ensuremath{\FieldIndexed{#1}{#2} \times \FieldIndexed{#3}{#4} \rightarrow \FieldIndexed{#5}{#6}}%
+}
+
+\newcommand{\mathFormulaBilinearMapBetweenGroups}[3]{
+	\ensuremath{\GG_{#1} \times \GG_{#2} \rightarrow \GG_{#3}}%
+}
+
+% Bilinearity formula, variant: e(g1+g2, h)
+\newcommand{\mathFormulaBilinearityPlusFirst}[2]{
+	\ensuremath{e({#1}_{1} + {#1}_{2}, {#2})=e(#1_{1},#2)e(#1_{2},#2) }%
+}	
+
+% Bilinearity formula, variant: variant: e(g, h1+h2)
+\newcommand{\mathFormulaBilinearityPlusLast}[2]{
+	\ensuremath{e({#1},{#2}_{1} + {#2}_{2})=e(#1,#2_{1})e(#1,#2_{2}) }%
+}
+
+% Space scalar product (inner product)
+\newcommand{\mathFormulaSpaceScalarProduct}[2]{
+	\ensuremath{ \left< \cdot, \cdot \right>: {#1}^{#2} \times {#1}^{#2} \rightarrow {#1}}%
+}
+
+% Canonical inner product
+\newcommand{\mathFormulaCanonicalInnerProduct}[3]{
+	\ensuremath{ \langle {#1},{#2} \rangle_{#3}}%
+}
+
+% Abstract Algebra
+\newcommand{\mathFormulAlgebraFrobenius}{
+	\ensuremath{\pi_q}%
+}
+
+\newcommand{\mathFormulaEndomorphismFrobenius}{
+	\ensuremath{\pi}%
+}
+
+\newcommand{\mathFormulaFrobeniusEndomorphism}{
+	\ensuremath{\pi}%
+}
+
+\newcommand{\mathFormulaFrobeniusEndomorphismPar}[1]{
+	\ensuremath{\pi({#1})}%
+}
+
+\newcommand{\mathFormulaAutomorphismOf}[1]{
+	\ensuremath{\mathsf{Aut}({#1})}%
+}
+
+\newcommand{\mathFormulaAutomorphismOfPar}[1]{
+	\ensuremath{\mathsf{Aut}({#1})}%
+}
+
+\newcommand{\mathFormulaEndomorphism}[1]{
+	\ensuremath{\mathsf{End}({#1})}%
+}
+
+\newcommand{\mathFormulaEndomorphismOfPar}[1]{
+	\ensuremath{\mathsf{End}({#1})}%
+}
+
+%% endomorphisms characteristic equation
+\newcommand{\mathFormulaEndomorphismCharEquation}{
+	\ensuremath{\pi^2 - t \pi_q+q = 0 }%
+}
+
+%% isomorphism within G1 and G2
+\newcommand{\mathFormulaIsomorphism}[1]{
+	\ensuremath{\psi_{#1}}%
+}
+
+\newcommand{\mathFormulaIsomorphismPar}[2]{
+	\ensuremath{\psi_{#2}\left({#1}\right)}%
+}
+
+\newcommand{\mathFormulaIsomorphismWithIndexPar}[2]{
+	\ensuremath{\psi_{#2}\left({#1}\right)}%
+}
+
+%% distortion map
+\newcommand{\mathFormulaDistortionMap}[1]{
+	\ensuremath{\phi({#1})}%
+}
+
+\newcommand{\mathFormulaNumberOf}[1]{
+	\ensuremath{\#{#1}}%
+}
+
+\newcommand{\mathFormulaDegreeOf}[1]{
+	\ensuremath{\mathsf{deg}{#1}}%
+}
+
+\newcommand{\mathFormulaDegreeOfPar}[1]{
+	\ensuremath{\mathsf{deg}\left({#1}\right) }%
+}
+
+% Support of Divisor 
+\newcommand{\mathFormulaSupportOf}[1]{
+	\ensuremath{ \mathsf{supp}({#1})}%
+}
+
+
+%% kernel < X >
+\newcommand{\mathFormulaKernel}[1]{
+	\ensuremath{\langle {#1} \rangle}%
+}
+
+\newcommand{\mathFormulaKernelOf}[1]{
+	\ensuremath{\mathsf{ker} \left( {#1}\right)}%
+}
+
+%% Distortion map characteristic equation
+\newcommand{\mathFormulaDistortionMapCharEquation}{
+	\ensuremath{T=\lambda P + \mu Q \neq 0 }%
+}
+
+% Linear Algebra
+
+%% Solving linear equations
+\newcommand{\mathFormulaLinAlgLinCombination}[1]{
+	\ensuremath{{#1} = \sum_{i}^{}\lambda_i {#1}_i}%
+}
+
+%% Summarized From .. To
+\newcommand{\mathFormulaSumFromTo}[3]{
+	\ensuremath{\sum_{#2}^{#3} #1}%
+}
+
+
+
+%% Eigen problems (-values, -vector, -space)
+
+% Norm, Metrics, Spaces
+%% Norm (L1): Absolute norm |x|
+\newcommand{\mathFormulaAbsNormOfVector}[1]{
+	\ensuremath{\lvert {#1} \rvert}%
+}
+
+\newcommand{\mathFormulaOrderOfGroup}[1]{
+	\ensuremath{\lvert {#1} \rvert}%
+}
+
+\newcommand{\mathFormulaOrderOfWithIndex}[2]{
+	\ensuremath{\mathsf{ord}_{#2} (#1)}%
+}
+
+
+%% Norm (L2): Euclidean norm ||x||
+\newcommand{\mathFormulaEuclidNormOfVector}[1]{
+	\ensuremath{\lvert \lvert {#1} \rvert \rvert}%
+}
+
+%% Norm (p-norm)
+\newcommand{\mathFormulaPNormOfVector}[1]{
+	\ensuremath{\lvert \lvert {#1}_p \rvert \rvert}%
+}
+
+\newcommand{\mathFormulaEquationPNormOfVector}[1]{
+	\ensuremath{\lvert \lvert {#1}_p \rvert \rvert := \left( \sum_{i=1}^{n} \mathFormulaAbsNormOfVector{x_i}^p \right)^{\sfrac{1}{p}}}%
+}
+
+
+%% Norm (infinite-norm or maximum-norm): ||x||_infty
+\newcommand{\mathFormulaInfiniteNormOfVector}[1]{
+	\ensuremath{\lvert \lvert {#1}_{\infty} \rvert \rvert}%
+}
+
+% Projections
+\newcommand{\mathFormulaProjectionSurjective}[3]{
+	\ensuremath{\langle {#1} \rangle \times \langle {#2} \rangle \rightarrow \langle {#3} \rangle}%
+}
+
+\newcommand{\mathFormulaEllipticCurve}[1]{
+	\ensuremath{E}%
+}
+
+\newcommand{\mathFormulaEllipticCurvePar}[2]{
+	\ensuremath{#1 \left( {#2} \right)}%
+}
+
+\newcommand{\mathFormulaEllipticCurveOverField}[1]{
+	\ensuremath{E({#1})}%
+}
+
+\newcommand{\mathFormulaEllipticCurveDefinedOverField}[1]{
+	\ensuremath{E /{#1}}%
+}
+
+\newcommand{\mathFormulaEllipticCurveLineEquation}{
+	\ensuremath{\ell: y= \lambda x + \nu}%
+}
+
+\newcommand{\mathFormulaEllipticCurveGradientOfLine}{
+	\ensuremath{\lambda}%
+}
+
+
+
+\newcommand{\EquationFermatLastTheorem}{
+	\ensuremath{x^n + y^n = z^n}%
+}
+
+
+\newcommand{\mathEquationLineEquation}{
+	\ensuremath{\ell:y = \lambda x + \nu}%
+}
+
+\newcommand{\mathFOrmulaEllipticCurveDefinePoint}[3]{
+	\ensuremath{{#1} = ({#2}_{#1},{#3}_{#1})}%
+}
+
+%% Formulas for Elliptic Curve
+\newcommand{\EquationWeierstrassEquation}{
+	\ensuremath{E:y^2 + a_1xy+a_3y=x^3+a2x^2+a_4 x + a_6}%
+}
+
+\newcommand{\EquationShortWeierstrassEquation}{
+	\ensuremath{E:y^2=x^3+ax+b}%
+}
+
+\newcommand{\EquationShortWeierstrassEquationFree}{
+	\ensuremath{y^2=x^3+ax+b}%
+}
+
+\newcommand{\EquationShortWeierstrassEquationFreeRightSide}{
+	\ensuremath{x^3+ax+b}%
+}
+
+
+% Homogenised Weierstrass equation
+\newcommand{\EquationShortWeierstrassEquationHomoennised}{
+	\ensuremath{E_{\PP}: Y^2 Z = X^3 + aXZ^2 + bZ^3}%
+}
+
+% Hasse Bound for the `t` trace of Frobenius
+\newcommand{\EquationHasseBoundOfFrobenius}{
+	\ensuremath{ -2 \sqrt{q} \leq t \leq 2 \sqrt{q}}%
+}
+
+\newcommand{\EquationHasseBoundOfFrobeniusUpperBound}{
+	\ensuremath{ \varPi_\ell \mathFormulaTraceOfFrobeniusWithIndex{\ell} \geq \mathFormulaSqrtNRootOf{4}{q}}%
+}
+
+% Equation of degree of Divisor 
+\newcommand{\EquationDegreeOfDivisor}{
+	\ensuremath{\mathsf{Deg}(D) = \sum_{P \in E(\mathFormulaAlgebraicClosureOf{\FieldF}_q)}^{} n_P}%
+}
+
+\newcommand{\EquationDivisorOnEOverFieldFq}{
+\mathFormulaDivisorOfPar{E}{\mathFormulaAlgebraicClosureOf{\FieldF}_q}%
+}
+
+\newcommand{\BigO}{
+	\ensuremath{\EuScript{O}}%
+}
+
+
+\newcommand{\mathFormulaEllipticCurvePointAtInfinity}{
+	\ensuremath{\EuScript{O}}%
+}
+
+\newcommand{\mathFormulaImaginaryTwoDCircleEquation}{
+	\ensuremath{i^2 + 1 = 0}%
+}
+
+\newcommand{\mathFormulaEllipticCurveNumberOfPoints}{
+	\ensuremath{\#E}%
+}
+
+\newcommand{\mathFormulaEllipticCurveNumberOfPointsOnCurve}[1]{
+	\ensuremath{\#E({#1})}%
+}
+
+\newcommand{\mathFormulaEllipticCurveCofactor}{
+	\ensuremath{h = \mathFormulaEllipticCurveNumberOfPoints / r}%
+}
+
+\newcommand{\mathFormulaEllipticCurveGroupOrder}{
+	\mathFormulaEllipticCurveNumberOfPointsOnCurve{\FieldF_q}%
+}
+
+% trace of Frobenius
+\newcommand{\mathFormulaTraceOfFrobenius}{
+	\ensuremath{t}%
+}
+
+\newcommand{\mathFormulaTraceOfFrobeniusWithIndex}[1]{
+		\ensuremath{t_{#1}}%
+}
+
+
+\newcommand{\mathFormulaModDivision}[2]{
+	\ensuremath{{#1} \mod {#2}}%
+}
+
+%% Algorithmic Bounds
+
+%%% Hasse Bound
+\newcommand{\mathFormulaAlgorithmHasseBoundInterval}{
+	\ensuremath{\left[ q+1 - \mathFormulaSqrtNRootOf{2}{q} , q + 1 + \mathFormulaSqrtNRootOf{2}{q} \right]}%
+}
+
+%\insertAlgorithmBoundInterval
+%\insertAlgorithmBoundLower
+%\insertAlgorithmBoundUpper
+
+% Cryptosystems
+\newcommand{\mathFormulaEncryptionFunctionOf}[1]{
+	\ensuremath{\mathsf{Enc}(#1)}%
+}
+
+% Elliptic Curve: Group Law,
+\newcommand{\mathFormulaEllipticCurvePointMinus}[1]{
+	\ensuremath{\ominus {#1}}%
+}
+
+\newcommand{\mathFormulaEllipticCurvePointPlus}[1]{
+	\ensuremath{\oplus {#1}}%
+}
+
+%% Elliptic Curve Composition Law also refers for point Addition and Point Doubling
+\newcommand{\mathFormulaEllipticCurveCompositionLaw}[3]{
+	\ensuremath{{#1} = {#2} \oplus {#3}}%
+}
+
+% Special case of the Composition law
+\newcommand{\mathFormulaEllipticCurvePointAddition}[3]{
+	\ensuremath{{#1} = {#2} \oplus {#3}}%
+}
+
+% Special case of the Composition Law
+\newcommand{\mathFormulaEllipticCurvePointMultiplication}[2]{
+	\ensuremath{{#1} = {#2} \oplus {#2}}%
+}
+
+\newcommand{\mathFormulaEllipticCurveLine}{
+	\ensuremath{\ell}%
+}
+
+\newcommand{\mathFormulaEllipticCurvePoint}[1]{
+	\ensuremath{{#1}}%
+}
+
+\newcommand{\mathFormulaEllipticCurvePointCoord}[2]{
+	\ensuremath{{#1}_{#2}}%
+}
+
+\newcommand{\mathFormulaEllipticCurvePointCoordEquation}[1]{
+\mathFormulaTwoSidesEqual{\mathFormulaEllipticCurvePoint{#1}}{(\mathFormulaEllipticCurvePointCoord{x}{#1},\mathFormulaEllipticCurvePointCoord{y}{#1})}
+}
+
+% lfrac := "inline fraction"
+\newcommand{\lfrac}[2]{
+	\ensuremath{{#1}/{#2}}%
+}
+
+% lfracpar := "inline fraction with parenthesis"
+\newcommand{\lfracpar}[2]{
+	\ensuremath{\left({#1}\right)/\left({#2}\right)}%
+}
+
+%% "fraction tower, towerfrac" (tobbszintu tort)
+\newcommand{\multifrac}[3]{
+	\ensuremath{\dfrac{{#1}_{#3}}{{#2}_{#3}}}%
+}
+
+%% \dmultiplicator := double multiplicator X_P Z_q
+%% "double multiplicator" 
+\newcommand{\kettoszorzat}[4]{
+	\ensuremath{{#1_{#3}}{#2_{#4}}}%
+}
+
+
+\newcommand{\mathFormulaEllipticCurveGradientOfLineCalculated}[2]{
+\ensuremath{
+	\mathFormulaEllipticCurveGradientOfLine = \left(\mathFormulaEllipticCurvePointCoord{y}{#2} - \mathFormulaEllipticCurvePointCoord{y}{#1}\right)/ \left(\mathFormulaEllipticCurvePointCoord{x}{#2} - \mathFormulaEllipticCurvePointCoord{x}{#1}\right)}%
+}
+
+
+%% Denote Projective Coordinates as member of an Array Element
+\newcommand{\mathFormulaProjectiveCoordinates}[1]{
+	\ensuremath{#1}%
+}
+%% Denote Affine coordinates as member of an Array Element
+\newcommand{\mathFormulaAffineCoordinates}[1]{
+	\ensuremath{#1}%
+}
+
+% Space Operations (affine space, projections, projective plane)
+
+% Affine space (Affine point representation on Elliptic Curve)
+\newcommand{\mathFormulaAffineSpace}{
+	\ensuremath{\mathbb{A}}%
+}
+\newcommand{\mathFormulaAffinePlane}{
+	\ensuremath{\mathbb{A}^2}%
+}
+
+\newcommand{\mathFormulaProjectivePlane}{
+	\ensuremath{\PP^2}%
+}
+
+\newcommand{\mathFormulaSetOfPointsInProjectiveSpace}[3]{
+	\ensuremath{({#1}: {#2} :{#3})}%
+}
+
+%%% USER_SPECIFIC_COMMANDS::ENVIRONMENT
+\newcommand{\addListItem}[1]{\item {#1}%
+}
+\newcommand{\addEnumItem}[1]{\item {#1}%
+}
+
+\newcommand{\addListItemTodo}[1]{\item \todo{{#1}}}
+
+\newcommand{\addEquation}[1]{
+	\ensuremath{#1}%
+}
+
+\newcommand{\addSplitEquation}[1]{
+	\ensuremath{
+		\begin{split}
+			#1
+		\end{split}
+	}%
+}
+
+% Insert List
+\newcommand{\insertListEnvironment}[1]{
+	\begin{itemize}
+		#1
+	\end{itemize}%
+}
+
+\newcommand{\insertEnumEnvironment}[1]{
+	\begin{enumerate}
+		#1
+	\end{enumerate}%
+}
+
+% Insert Equations
+\newcommand{\insertEquationEnvironment}[1]{
+	\begin{equation}
+		\ensuremath{{#1}%
+		}
+	\end{equation}
+}
+
+\newcommand{\insertEquationEnvironmentWithLabel}[2]{
+	\begin{equation}
+	\ensuremath{{#1}%
+		\label{#2}
+	}
+\end{equation}
+}
+
+\newcommand{\insertEquationEnvironmentAligned}[1]{
+\begin{align*}
+	#1
+\end{align*}%
+}
+
+\newcommand{\insertEquationEnvironmentAlignedWithLabel}[2]{
+\begin{align}\label{#2}
+	#1
+\end{align}%
+}
+
+% Insert Theorems
+\newcommand{\insertTheoremEnvironment}[3]{
+	\begin{theorem}[#1]
+		\label{#3}
+		#2
+	\end{theorem}%
+}
+
+% .....................................................................
+% Insert SageMath code environment
+\newcounter{sagemain}		% init empty counter for sage environment
+\setcounter{sagemain}{1}	% set counter for sage environment
+\lstnewenvironment{sage}[1][firstnumber=\thesagemain,name=sagemain]
+{\lstset{language=sagemath,
+		basicstyle=\small\ttfamily,
+		numbers=left,
+		numberstyle=\tiny\color{gray},
+		backgroundcolor=\color{lightgray},
+		#1
+	}
+}
+{\setcounter{sagemain}{\value{lstnumber}}}
+
+% Insert Bash code environment
+\newcounter{bashmain}		% init empty counter for sage environment
+\setcounter{bashmain}{1}	% set counter for sage environment
+\lstnewenvironment{bash}[1][firstnumber=\thebashmain,name=bashmain]
+{\lstset{language=bash,
+		basicstyle=\small\ttfamily,
+		numbers=left,
+		numberstyle=\tiny\color{gray},
+		backgroundcolor=\color{lightgray},
+		#1
+	}
+}
+{\setcounter{bashmain}{\value{lstnumber}}}
+
+% Insert yaml environment
+\newcounter{yamlmain}		% init empty counter for sage environment
+\setcounter{yamlmain}{1}	% set counter for sage environment
+\lstnewenvironment{yaml}[1][firstnumber=\theyamlmain,name=yamlmain]
+{\lstset{language=yaml,
+		basicstyle=\small\ttfamily,
+		numbers=left,
+		numberstyle=\tiny\color{gray},
+		backgroundcolor=\color{lightgray},
+		#1
+	}
+}
+{\setcounter{yamlmain}{\value{lstnumber}}}
+
+% .....................................................................
+% 
+
+% References for objects with Labels
+%% Reference Section
+\newcommand{\refSection}[1]{
+	\textit{Section \ref{#1}%
+	}
+}
+
+%% Reference SubSection
+\newcommand{\refSubsection}[1]{
+	\textit{Subsection \ref{#1}%
+	}
+}
+
+%% Reference SubSubSection
+\newcommand{\refSubSubsection}[1]{
+	\textit{Subsection \ref{#1}%
+	}
+}
+
+\newcommand{\refChapter}[1]{
+	\textit{Chapter \ref{#1}%
+	}
+}
+
+%% Reference Appendix Section
+%% Reference Appendix SubSection
+%% Reference Appendix SubSubSection
+
+%% Reference Images
+\newcommand{\refFigure}[1]{
+	\textit{Figure \ref{#1}}%
+}
+
+%% Reference Tables
+\newcommand{\refTable}[1]{
+	\textit{Table \ref{#1}}%
+}
+
+%% Reference equations
+\newcommand{\refEquation}[1]{
+\textit{Equation \ref{#1}}%
+}
+
+%% Reference Theorem
+\newcommand{\refTheorem}[1]{
+\textit{Theorem \ref{#1}}%
+}
+
+\newcommand{\refDef}[1]{
+\textit{Definition \ref{#1}}%
+}
+
+%% Reference Pseudocode
+\newcommand{\refPseudo}[1]{
+\textit{Pseudo-code \ref{#1}}%
+}
+
+%% Reference Example
+\newcommand{\refExample}[1]{
+	\textit{Example \ref{#1}}%
+}
+
+%% Reference Algortihm
+\newcommand{\refAlgo}[1]{
+	\textit{Algorithm \ref{#1}}%
+}
+
+%% Reference Code/ Code Snippet
+\newcommand{\refCode}[1]{
+	\textit{Code \ref{#1}}%
+}
+
+\newcommand{\refCodeSnippet}[1]{
+	\textit{Code Snippet \ref{#1}}%
+}
+
+\newcommand{\refApxCode}[1]{
+	\textit{Appedix \ref{#1}}%
+}
+
+
+\newcommand{\insertDefinitionEnvironment}[1]{
+	\begin{definition}
+			{#1}
+	\end{definition}%
+}
+
+% Insert Example Environment
+
+\newtheorem{example}{Example}[section]
+
+\newcommand{\insertExampleEnvironment}[1]{
+	\begin{example}
+		{#1}
+	\end{example}%
+}
+
+% Insert Case Environment. Use with \insertCase() !
+\newcommand{\insertCaseEnvironment}[2]{
+	\[ \ensuremath{{#1}} = \begin{cases*}
+		\ensuremath{#2}
+	\end{cases*} \]%
+}
+
+\newcommand{\insertCase}[1]{
+	\ensuremath{#1}%
+}
+
+%%% USER_SPECIFIC_COMMANDS::ALGORITHMS
+\newcommand{\mathFormulaNaturalLog}[1]{
+	\ensuremath{e^{#1}}%
+}
+
+\newcommand{\mathFormulaLogBase}[2]{
+	\ensuremath{\log_{#1}({#2})}%
+}
+
+% ========================================================s=====================
+
+
+\begin{document}
+
+\input{00__Cover/titlepage.tex}
+\input{99__Appendix/abstract.tex}
+
+
+\include{Chapter/resume}
+\include{Chapter/koszonet} % Acknowledgements
+
+
+% --------------------------------------------
+% Print Symbols
+\printunsrtglossary[type=symbols,style=long, title=Notations]
+% --------------------------------------------
+
+% --------------------------------------------
+% Print acronyms
+\printacronyms
+% --------------------------------------------
+
+\vspace{2ex}
+
+\begin{flushright}
+  \emph{Mikl\'os D\'aniel Vad\'asz,}\\ 
+  \emph{Aarhus, \today.}
+\end{flushright}
+
+\tableofcontents
+\cleardoublepage
+\pagenumbering{arabic}
+\setcounter{secnumdepth}{2}
+
+% =============================================================================
+% CHAPTER_1
+
+% \chapter{todo}
+%\label{ch99:todo}
+%\include{00__Chapters/999__Chapter__TODO/99.tex}
+
+\chapter{Introduction}
+\input{00__Chapters/01__Chapter__Intro/01__Section/98}
+\label{ch:introtodo}
+
+\chapter{Preliminaries}	% Preliminaries + intor for the whole thesis
+\label{ch:prelim}
+
+\input{00__Chapters/01__Chapter__Intro/01__Section/99}
+% Section intro szoveg
+\input{00__Chapters/01__Chapter__Intro/01__Section/01}  % Section: Introduction to Finite Field operations
+\input{00__Chapters/01__Chapter__Intro/01__Section/00}	% Section: IBE
+
+%\include{00__Chapters/01__Chapter__Intro/01__Section/02}
+\input{00__Chapters/01__Chapter__Intro/01__Section/02a} % Elliptic Curve operations over Finite Fields
+\input{00__Chapters/01__Chapter__Intro/01__Section/02b} % Divisors
+\input{00__Chapters/01__Chapter__Intro/01__Section/02c} % Elliptic Curves as Pairing Groups
+
+% CHAPTER_2
+\chapter{Computational Aspects of Pairings}
+\label{ch:pairingsbasics}
+
+% Miller's algorithm for the Weil and Tate pairings
+\input{00__Chapters/02__Chapter__Intro/01__Section/00}
+\input{00__Chapters/02__Chapter__Intro/01__Section/01}
+\input{00__Chapters/02__Chapter__Intro/01__Section/02}
+
+% CHAPTER_3
+\chapter{BLS curves for high-security pairings}
+\label{ch:blscurvefamilies}
+
+\input{00__Chapters/03__Chapter__Intro/01__Section/99}
+\input{00__Chapters/03__Chapter__Intro/01__Section/00}
+\input{00__Chapters/03__Chapter__Intro/01__Section/01}
+
+\chapter*{Conclusion}
+\input{00__Chapters/04__Chapter__Intro/01__Section/99}
+
+% =============================================================================
+% CHAPTER_3
+
+%\chapter{Implementing and evaulating pairings in SageMath}
+%\label{ch:results}
+%\input{00__Chapters/04__Chapter__Intro/01__Section/00} %%
+%\input{00__Chapters/04__Chapter__Intro/01__Section/01} %%
+
+% =============================================================================
+
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Bibliography}
+\printbibliography
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\appendix
+\chapter{SageMath Code examples}
+\label{apx_implementation}
+
+\section*{Environment Setup}
+\input{99__Appendix/99__Implementation_Details/00_EnvironmentSetup/environment.tex}
+
+\input{99__Appendix/99__Implementation_Details/01_ChapterExamples/preliminaries.tex}
+
+%\section{Example codes Pairing computations}
+%
+%\input{99__Appendix/99__Implementation_Details/01_ChapterExamples/pairings.tex}
+
+\section{Tate pairing implementation over BLS Curve}
+\input{99__Appendix/99__Implementation_Details/01_ChapterExamples/blspairings.tex}
+
+
+\chapter{Theoretical Appendices}
+\label{apx_theory}
+%
+%\section{Pairing properties}
+%\label{apx_theory__pairing_properties}
+% Pairing properties	
+
+\section{Weil Pairing}
+
+%\subsection{Weil reciprocity}
+%\label{apx_theory__pairing_properties_weilreciprocity}
+%\input{99__Appendix/99__Appendix_Theoretical_Appendices/pairingproperties/weilreciprocity.tex}
+
+\subsection{Provable properties of Weil pairing}
+\label{apx_theory__pairing_properties_weil}
+\input{99__Appendix/99__Appendix_Theoretical_Appendices/pairingproperties/weil.tex}
+
+%\subsection{Eigenspaces and eigenvalues}
+%\label{apx_theory__pairing_eigenspacevs1eigenspace}
+%\input{99__Appendix/99__Appendix_Theoretical_Appendices/pairingproperties/eigenspaceandvectors.tex}
+
+
+% Elliptic curve properties: standards, etc
+%\section{Elliptic curve standards}
+%\label{apx_theory__elliptic_curve_standards}
+%
+%\subsection{AA}
+
+
+
+
+\end{document}
+

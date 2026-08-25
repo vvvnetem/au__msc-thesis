@@ -1,0 +1,276 @@
+%
+
+\section{Introduction to groups, rings and fields}
+\label{sec:ch01.groupsringsandfields}
+
+In this first section I review the fundamental definitions  from the field of Abstract Algebra based on \cite{abstractalgebra}. First I begin by defining groups in \refSubsection{sesc:ch01.groups}, afterwards I will consider rings and fields in \refSection{ssec:ch01.rings} and \ref{ssec:ch01.fields} respectively. 
+
+\subsection{Groups and subgroups}
+\label{sesc:ch01.groups}
+
+\insertDefinitionEnvironment{
+A group $(G,\cdot)$ is a set $G$ together with binary operator $\cdot$
+(that is, a function) $G \times G \to G$ that satisfies the following four properties:
+
+\insertEnumEnvironment{
+	\addListItem{  \textbf{(Closure)}  If $a,b \in G$, then $a \cdot b \in G$.}
+	\addListItem{  \textbf{(Associativity)} If $a,b,c \in G$, then $(a \cdot b)\cdot c = a \cdot (b \cdot c)$. }
+	\addListItem{\textbf{(Identity)}  For every $a \in G$ there exists identity element 
+		$e \in G$, such that $e \cdot a = a \cdot e = a$. }
+	\addListItem{ \textbf{(Inverse)} Every $a \in G$ has an inverse
+		element $a^{-1} \in G$, such that $ a \cdot a^{-1} = a^{-1} \cdot a = e$.}
+}
+\label{def:group}
+}
+
+\insertDefinitionEnvironment{
+An abelian group $(G,\cdot)$ is a group $(G,\cdot)$ satisfying the
+additional commutativity property in addition to closure, associativity , identity and inverse properties:
+\insertEnumEnvironment{
+	\item[5.] \textbf{(Commutativity)} If $a,b \in G$, then $a \cdot b = b \cdot a$. 
+}
+\label{def:abelgroup}
+}
+
+\insertDefinitionEnvironment{
+Let $G$ given a group. Then the \emph{order} of $G$ is the cardinality of the
+set $G$, denoted by
+\[
+|G| = \#G.
+\]
+
+Using \textit{Corollary 2.6.6} from \cite{abstractalgebra} and \refDef{def:abelgroup} the followings are equivalent: $G$ is cyclic  (refer to \refDef{def:cyclicgroup}); for any integer $d \mid n$, $G$ group has exactly $d$ elements such that order divides $d$.
+% lastly any integer $d$ that divides $n$, $G$ has at most $d$ elements whose order divides $d$.
+\label{def:orderofgroup}
+}
+	
+
+
+\insertDefinitionEnvironment{
+
+Given groups $G$ and $H$. Their \emph{direct product} denoted as $G \times H$ is the group:
+\[
+G \times H = \{(g,h) \mid g \in G,\; h \in H\},
+\]
+
+\noindent with group operation defined componentwise as $(g_1,h_1)\cdot(g_2,h_2) = (g_1g_2,\; h_1h_2)$.
+\label{def:directproductofgroups}
+}
+
+
+\insertDefinitionEnvironment{
+Let $G$ be a group and let $A$ and $B$ be subsets of $G$. Then the product
+$AB$ is the subset of $G$ given by
+\[
+AB=\{ab \mid a\in A,\; b\in B\}.
+\]
+\label{def:productofabgroups}
+}
+
+The following definition is the direct consequence of the associative law $(ab)c = a(bc)$ 
+for multiplication of individual elements of $G$:
+
+\insertDefinitionEnvironment{
+Let $G$ be a group and let $A,B,C \subseteq G$. Then we can formulate
+\[
+(AB)C = A(BC).
+\]	
+\label{def:groupassociativity}
+}
+
+Given $G$, $H$ groups. As a next step we want to consider mapping $\varphi : G \rightarrow H$ between groups, which are taking into account the operations on given groups as well. 
+
+\insertDefinitionEnvironment{
+	Let $G$ and $H$ groups, then homomorphism $\varphi: G \rightarrow H$ from a group $G$ to
+	a group $H$ is a function for all $a, b \in G$, with the property:
+	 \[
+	 \Phi (ab) = \Phi (a) \Phi(b)
+	 \]
+
+Two important properties of homomorphisms are the following:
+$\varphi(e) = e$, and $a \in G, \Phi(a^{-1} ) = \Phi(a)^{-1}$.
+\label{def:grouphomomorphism}
+}
+
+\insertExampleEnvironment{
+As an example let us consider homomorphisms between
+abelian groups, using additive notation.
+
+\insertListEnvironment{
+\item[(i)] For any fixed integer $n$, we have a homomorphism $\phi : \mathbb{Z} \to \mathbb{Z}$ defined by $\phi(i) = ni$. Then the following observation can be made regarding $\varphi$ as homomorphism as follows: $\varphi(i+j) = n(i+j) = ni + nj = \varphi(i) + \varphi(j)$
+
+\item[(ii)] We have a homomorphism $\varphi : \mathbb{Z} \to \mathbb{Z}_n$ for any fixed integer \(n\) defined by: $\varphi(i) = [i]_n$. Then one may observe \(\varphi\) is a homomorphism by the definition of addition in \(\mathbb{Z}_n\) as: \[
+\varphi(i+j)
+= [i+j]_n
+= [i]_n + [j]_n
+= \varphi(i) + \varphi(j),
+\]
+\item[(iii)] For any  fixed integers \(m\) and \(n\), we have a homomorphism $\varphi : \mathbb{Z}_n \to \mathbb{Z}_n$ defined by $\varphi([i]_n) = [mi]_n$. With a similar observation as before we conclude that \[
+\begin{aligned}
+	\varphi([i]_n + [j]_n)
+	&= \varphi([i+j]_n) = [m(i+j)]_n \\
+	&= [mi + mj]_n = [mi]_n + [mj]_n \\
+	&= \varphi([i]_n) + \varphi([j]_n).
+\end{aligned}
+\]
+\item[(iv)] Lastly, we
+have a homomorphism  $\varphi : \mathbb{Z}_n \to \mathbb{Z}_m$ defined by $\varphi([i]_n) = [i]_m$. To ensure that \(\varphi\) is well defined, we need to know that the value of \(\varphi([i]_n)\) does not depend on the choice of
+representative of the congruence class \([i]_n\). We refer \textit{Example 2.2.4} furthermore in \cite{abstractalgebra}.
+}
+\label{example:homomorphismbetweenabeliangroups}
+}
+
+\insertDefinitionEnvironment{
+Given \(G\) and \(H\) groups, then the homomorphism \(\varphi : G \to H\) is an isomorphism if there exists an inverse homomorphism defined as:
+\[
+\varphi^{-1} : H \to G.
+\]
+
+On the otherhand an isomorphism \(\varphi : G \to H\) exists, then the groups \(G\) and \(H\) are said to be isomorphic. Furthermore, the isomorphism \(\varphi : G \to G\) is also called the automorphism of \(G\)).
+
+With that being said the automorphism group \(\mathrm{Aut}(G)\) of \(G\) is the group of all automorphisms \(\varphi : G \to G\).
+\label{def:grouphomomorphismsisisomorphism}
+}
+
+\insertDefinitionEnvironment{
+	A group \(G\) is cyclic if it consists of the powers of some element \(a \in G\). Such an element is called a generator of \(G\). A finite cyclic group \(G\) is isomorphic to \(\mathbb{Z}_n\), where \(n\) is the order of \(G\).
+\label{def:cyclicgroup}
+}
+
+Later, subgroups will play an important role. Lastly in this subsection groups will be written multiplicatively.
+
+\insertDefinitionEnvironment{
+Let $G$ be a group, then $H$ is a subgroup of $G$ denoted if $H \subseteq G$ and $H$ is a group with the same operation as in $G$. In case $G$ is abelian, the group's \textit{torsion subgroup} can be defined as: $G_{tor} = \{\, x \in G \mid x \text{ is an element of finite order} \,\}$.
+
+Note, we are using the notation $G_{tor}$ only for this given section. Later on torsion subgroups will noted simply as $r$-torsion subgroups. 
+\label{def:torsionsubgroups}
+}
+
+\insertDefinitionEnvironment{
+Let $G$ be a ﬁnite group
+and let $H$ be a subgroup of $G$. Then $|H|$ divides $|G|$. (Also known as Lagrange's theorem) Consequently, if $|G| = n$, and $a$ has order $m$, then $H = \{e, a, \dots, a^{m-1}\}$ is a subgroup of \(G\), and so \(|H| = m\) divides \(|G| = n\). 
+
+%On the other hand, referring Corollary 2.3.18 from \cite{abstractalgebra} we also know, that if $G$ is a finite group with $H$ being the subgroup of $G$, than Then $|H|$ divides $|G|$.
+\label{def:finitesubgroup}
+}
+
+Now, the question arises, how does the subgroups relate to homomorphism. \refDef{def:imageandkernel} gives us the definition of \textit{image} and \textit{kernel} as follows. 
+
+\insertDefinitionEnvironment{
+Given $\phi : G \to H$ group homomorphism, then image of $\varphi$ is defined as $\operatorname{Im}(\varphi)
+=
+\{\, h \in H \mid h = \varphi(g) \text{ for some } g \in G \,\}$. 
+While the kernel of $\varphi$ homomorphism is $\operatorname{Ker}(\varphi)
+=
+\{\, g \in G \mid \varphi(g) = e \,\}$.   Using \textit{Lemma 2.3.29} \cite{abstractalgebra} yields us with the following two observations: $\operatorname{Im}(\varphi)$ is also a subgroup of $H$, $\operatorname{Ker}(\varphi)$ is recognized as the normal subgroup of $G$.
+
+\label{def:imageandkernel}
+}
+
+\subsection{Basic definitions and properties from Ring and general Field Theory}
+\label{ssec:ch01.rings}
+
+Let us continue with rings. The difference oppose to groups is that groups have
+one binary operation (denoted as $\cdot$), while rings have two related operations, \textit{addition} and \textit{multiplication}.  Please note, \cite{allocatednumbers} mentions numerous interesting properties, definitions and techniques from ring theory; however, due to space constraints, only those definitions that are absolutely necessary for understanding the content of the following chapters have been included in this subsection. 
+
+
+\insertDefinitionEnvironment{
+Given $R$ set  with addition $(+)$ and
+multiplication $(\cdot)$ operations. Given $(R,+)$ form an abelian group, then we have the following properties under multiplication operation:
+\insertEnumEnvironment{
+	\addListItem{
+		(\textbf{Closure}) $R$ is closed under multiplication for every $a,b \in R$:  $a \cdot b \in R$.
+	}
+	\addListItem{
+		(\textbf{Associativity}) $\text{for every } a,b,c \in R$ Multiplication is associative, $a \cdot (b \cdot c) = (a \cdot b) \cdot c$.
+	}
+	\addListItem{
+		(\textbf{Distributivity over addition})  For all $a,b,c \in R$ multiplication distributes over addition as:  $a(b+c)=ab+ac
+		~ \text{and} ~
+		(b+c)a=ba+ca$.
+	}
+	\addListItem{
+		(\textbf{Commutativity})  Multiplication is commutative, $a \cdot b = b \cdot a, ~
+		\text{ for every } a,b \in R.$
+	}
+	
+We also call $R$ a ring with identity, if such $a\cdot 1 = 1 \cdot a = a$ exists for every $a\in R$ with condition $1 \neq 0 $. (Note here, $1$ denotes the multiplicative identity. )
+
+On the otherhand $R$ is called commutative ring with identity if $R$ is both a ring with identity and multiplicative. 
+}
+\label{def:commutativering}
+}
+
+\insertDefinitionEnvironment{
+Let $S$ denote the subset of ring $R$. Then $S$ is also a subring of $R$ if $S$ is a ring with the same operations as $R$. 
+
+Similarly, if $R$ is a ring with identity element, the the subset $S$ of $R$ is a subring with identity element as long as it has the same operation as $R$, and $1_S = 1_R$ ($1_R, 1_S$ here denotes the multiplicative identity element).
+\label{def:ringsubset}
+}
+
+\insertDefinitionEnvironment{
+Next, we continue with ring homomorphisms. Depending on wheter we have rings with identity elements we may distinct the following cases
+
+\insertListEnvironment{
+	\item[(i)] Ring homomorphism between rings $R$ and $S$ is a map $\varphi: R \rightarrow S$ satisfying:
+	$\phi(r_1+r_2)=\phi(r_1)+\phi(r_2)$, and $\phi(r_1r_2)=\phi(r_1)\phi(r_2) ~ \text{for all } r_1,r_2\in R$
+	\item[(ii)] A homomorphism of rings with $1$ between $R$ and $S$ rings with $1$ is the map $\phi : R \to S$ such that $\phi(1_R)=1_S$. We also note the special case if $R$ and $S$ are \textit{fields}, then $\varphi: R \rightarrow S$ homomorphism of rings with $\varphi(1_R)=1_S$
+	\item[(iii)] In either case, an invertible homomorphism is called an \emph{isomorphism}. If there exists an isomorphism $\phi : R \to S$, then $R$ and $S$ are said to be \emph{isomorphic}.
+}
+	
+\label{def:ringhomomorphism}		
+}
+
+For the rest of this subsection we take a look at some basic properties of \ZZ~ and polynomial rings.
+
+\insertDefinitionEnvironment{
+	Let $R$ be a commutative ring with $1$, and let $f(x)\in R[x]$ be a nonzero polynomial. Then the  then the \emph{degree} of $f(x)$ is $n$, if $f(x)=a_0+a_1x+\cdots+a_nx^n$.  Also the polynomial is called \emph{monic} if the coefficient of its highest-degree
+	term is equal to $1$.
+\label{def:commutativerings}
+}
+
+
+\subsection{Fields}
+\label{ssec:ch01.fields}
+
+%Let us turn our attention to fields (particular kinds of rings). From field theory we are particularly interested in investigating field extensions of a field \FF. Under "extension" (denoted as \EE )  of an \FF~ field we mean another field \EE~ which contains \FF~ as well. 
+
+
+\insertDefinitionEnvironment{
+Using \refDef{def:commutativering}, a field \FieldF~ is a commutative ring with multiplicative identiy in which every nonzero element is invertible, denoted as  $\FieldF^* = \FF - \{0\}$ (such that every nonzero element of the field is a unit). For example, given $p$ prime, then $\ZZ_{p} = \{ 0, 1, \ldots p-1\}$ is a field with addition $(\bmod p)$, and multiplication $(\bmod p)$, hence we use notation $\FF_{p}$. 
+\label{def:fielddefinition}
+}
+
+
+\insertDefinitionEnvironment{
+ The \emph{characteristic} $\operatorname{char}(\FF)$ of given \FF~ field is the smallest positive integer $n$ such that $n \cdot 1 = 0 \in \FF$ or $0$  if no such positive integer exists. Using \textit{Lemma 4.1.6} from \cite{abstractalgebra} $\operatorname{char}(\FF)=0 ~ \text{or is a prime number.}$ For example, let $p$ denote a prime than $\FF_{p}$ is a field of characteristic of $p$.
+\label{def:characteristicoffield}
+}
+
+
+\insertDefinitionEnvironment{
+Let $F$ be a field. A homomorphism $\varphi : \FF \to \FF$ is called an \emph{endomorphism} of $\FF$. If $\varphi$ is an isomorphism, then it is called 	an \emph{automorphism} of $\FF$.
+\label{def:fieldendomorphism}	
+}
+
+
+\insertDefinitionEnvironment{
+Let $F$ be a field of characteristic $p$. The map $\Phi : \FF \to \FF$ given by $\Phi(a) = a^p ~ \text{for all } a \in \FF$ is an endomorphism of $\FF$ (called the Frobenius endomorphism, or automorphism, as the case may be).
+\label{def:frobeniusendomorphism}
+}
+
+Lastly we recall the definition of irreducible polynomial based on \textit{Theorem 4.2.3.} \cite{abstractalgebra} as follows:
+
+\insertDefinitionEnvironment{
+		Let $F$ be a field and let $p(x) \in \FF[x]$ be an irreducible polynomial.
+		Then the quotient ring $\FF[x]/ \langle p(x) \rangle$, where $ \langle p(x) \rangle$ is the ideal  (refer \textit{Section 3.2} in \cite{abstractalgebra}) generated
+		by $p(x)$ in $F[x]$, is a field.
+\label{def:irreduciblepol}
+}
+
+
+In the following \refSection{sec:ch01.finiteFieldArithmetic} we review the properties of finite field arithmetic in more detail.
+
+
+
+

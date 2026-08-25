@@ -1,0 +1,390 @@
+
+\section{Elliptic curves as pairing groups}
+\label{sec:ch1.ellipticcurvesaspairinggroups}
+%
+
+
+A bilinear map on an abelian group (refer \refDef{def:abelgroup}) $M$ can be represented as in \refEquation{eq:ch1.bilinermapgeneralequation}, by taking values in some other
+abelian group $R$. 
+
+\insertEquationEnvironmentWithLabel{
+	\langle \cdot, \cdot \rangle: M \times M \rightarrow R.
+}{eq:ch1.bilinermapgeneralequation}
+
+Suppose that the binary group operations in $M$ and $R$ are denoted by $+,\cdot $, then applying \refEquation{eq:ch1.bilinermapgeneralequation} bilinearity property of map for $x,y,z \in M$  means we have the map $\langle \cdot, \cdot \rangle$ linear in both inputs as follows:
+
+\insertEquationEnvironmentAligned{
+ \langle x +y, z \rangle & = \langle x,z \rangle  \cdot \langle y,z \rangle  \\
+\langle x,z+y \rangle & =  \langle x,y \rangle  \cdot \langle x,z \rangle .
+}
+
+Our primary objective in this section is to define the two suitable groups \mathFormulaObject{\GG_1} and \mathFormulaObject{\GG_2} for pairing.  However, for our purposes we also find it advantageous to slightly relax the condition that the two arguments in the map come from the same group, and allow them to come from cyclic groups of the same order (which are therefore isomorphic), the notation commonly used for the bilinear map is described as \refEquation{ch1:bilinearmapdefinition}: 
+
+\insertEquationEnvironmentAlignedWithLabel{
+	e: \GG_1 \times \GG_2 \rightarrow \GG_T
+}{ch1:bilinearmapdefinition}
+
+Let \mathFormulaObject{\FF_{q^k}} be some finite extension if \FieldFq with $k \leq 1$. The groups $\GG_1, \GG_2$ both (with the same order) defined in \mathFormulaEllipticCurvePar{E}{\FieldF_{q^k}} and the target group $\GG_T$ defined over the multiplicative group of $\FieldF_{q^k}^*$. In the following we write $\GG_1, \GG_2$ additively, while $\GG_T$ multiplicatively, as can be seen in \refEquation{ch1:generalpairingexamplemultiplicativeandadditivenotation}:
+
+\insertEquationEnvironmentAligned{
+	e(P+P', Q) & = e(P,Q) \cdot e(P', Q), \\
+	e(P,Q + Q')& = e(P,Q) \cdot e(P, Q')
+}
+
+\insertEquationEnvironmentWithLabel{
+	e([a]P, [b]Q) = e(P, [b]Q)^a = e([a]P,Q)^b = e(P,Q) ^{ab} = e([b]P, [a]Q)
+}{ch1:generalpairingexamplemultiplicativeandadditivenotation}
+
+
+
+
+\begin{example}[Pairing computation example]
+% Example 2.6.1
+	Let $q = 7691$ and let $E/\mathbb{F}_q : y^2 = x^3 + 1$. Suppose $\mathbb{F}_{q^2}$ is constructed $\mathbb{F}_{q^2} = \mathbb{F}_q(u)$ where $u^2 + 1 = 0$. Let $P = (2693, 4312) \in E(\mathbb{F}_q)$ and $Q = (633u + 6145,\, 7372u + 109) \in E(\mathbb{F}_{q^2})$. $\#E(\mathbb{F}_q) = 2^2 \cdot 3 \cdot 641$ and $\#E(\mathbb{F}_{q^2}) = 2^4 \cdot 3^2 \cdot 641^2 = \#E(\mathbb{F}_q)^2$.
+	
+	$P$ and $Q$ were especially chosen (we will see why later) to be in different subgroups of the same prime order $r = |\langle P \rangle| = |\langle Q \rangle| = 641$. The Weil pairing $e(\cdot, \cdot)$ of $P$ and $Q$ is $e(P, Q) = 6744u + 5677 \in \mathbb{F}_{q^2}^*.$
+	
+	In fact, $r \mid \#\mathbb{F}_{q^2}^*$, and $e(P, Q)$ actually lies in a subgroup of $\mathbb{F}_{q^2}$, namely the $r$-th roots of unity $\mu_r \subset \mathbb{F}_{q^2}$, meaning that $e(P, Q)^r = 1$. 
+	
+	We are now in a position to illustrate some examples of \textit{bilinearity}. Thus, take any $a \in \mathbb{Z}_r$ and $b \in \mathbb{Z}_r$, say $a = 403$ and $b = 135$, and see that
+	$[a]P = (4903, 2231) \quad \text{and} \quad [b]Q = (5806u + 1403,\, 6091u + 2370).$ We can compute $e([a]P,\, Q) = 3821u + 7025$ and verify that $e([a]P,\, Q) = 3821u + 7025 = (6744u + 5677)^{403} = e(P, Q)^a$.  On the other hand if we compute $e(P,\, [b]Q) = 248u + 5$, then we see that $e(P,\, [b]Q) = 248u + 5 = (6744u + 5677)^{135} = e(P, Q)^b$.
+		
+	Note that since $e(P, Q) \neq 1 \in \mu_r$, $e([a]P, [b]Q)$ will only be trivial if $r \mid ab$, which implies $r \mid a$ or $r \mid b$, meaning either (or both) of $[a]P$ or $[b]Q$ must be $\mathFormulaEllipticCurvePointAtInfinity$. Thus, $e(P, Q) \neq 1$ guarantees non-trivial pairings for non-trivial arguments; this is a cryptographically necessary property that is called \textit{non-degeneracy}.
+	
+	\label{example:pairingexample}
+\end{example}
+
+Following from \refExample{example:pairingexample} above, if a pairing $e$ is bilinear, non-degenerate and efficiently computable, $e$ is called an \emph{admissible pairing}. Currently, the only known instantiations of pairings suitable for cryptography are the \textit{Weil} and \textit{Tate} pairings (refer to \ref{ssec:ch2.weilpairing} and \refSection{ssec:ch2.tatepairing}) on divisor class groups of algebraic curves (recall from \refSubsection{ssec:ch1.divisiors.classgroupandriemanroch}), and in
+the simplest and most efficient cases, on elliptic curves. 
+
+For cryptographic applications we need more properties than the three which constitute
+an admissible pairing. The \textit{bilinearity} property represented in \refEquation{ch1:generalpairingexamplemultiplicativeandadditivenotation}~ gives
+pairing-based primitives increased functionality over traditional primitives and it is considered useless unless discrete logarithm related problems (refer to \refSection{sec:ch1.diffihellmannassumptionsellipticurvesecurity}) within all three groups remain
+intractable. 
+
+Secondly, \refExample{example:pairingexample} gives an admissible pairing, but because the small sizes of \mathFormulaObject{\GG_1} , \mathFormulaObject{\GG_2} and \mathFormulaObject{\GG_T} clearly offer no resistance in regards to their respective discrete logarithm problems, such pairing instance would never be used in practice. Let us consider \refExample{example:smappgroupnodlogresistance} as an illustration.
+
+\begin{example}[Bilinearity property]
+	Let $r > 1$ be an integer. Suppose $e : \GG_1 \times \GG_2 \to \GG_T$ has
+	$\GG_1 = \GG_T = \mathbb{Z}_r^{*}$ and $\GG_2 = \mathbb{Z}_{r-1}^{+}$, and is defined by $e : (g,\, a) \mapsto g^a$. 
+	
+	For $g, g' \in G_1$ we have $e(g \cdot g',\, a) = e(g,\, a) \cdot e(g',\, a),$
+	and for $a, a' \in \GG_2$ we have  $e(g,\, a + a') = e(g,\, a) \cdot e(g,\, a')$. Although $e$ is bilinear, the discrete logarithm problem in $\GG_2$
+	is easy, so the power of the bilinear map becomes somewhat redundant. Previously in \refSubsection{sec:ch1.diffihellmannassumptionsellipticurvesecurity}  we defined the discrete logarithm problem in terms of elliptic curves.  Now, if we set $r$ to be a large prime, then the standard discrete logarithm problem can be formulated for pairing groups: $g \in \GG_1$, $h \in \GG_T$, find $a \in \GG_2$ such that $e(g, a) = h$.
+	\label{example:smappgroupnodlogresistance}
+\end{example}
+
+
+\subsection{The $r$-torsion subgroup, embedding degree, Frobenius endomorphism}
+\label{ssec:ch1.ellipticcurvesaspairinggroups.rtorsion}
+
+We can now turn our focus towards defining the groups $\GG_1$ and $\GG_2$ more precisely.
+Having not yet seen how pairings are computed, we will need to make some
+statements regarding what we need out of $\GG_1$ and $\GG_2$ that will really only
+tie together when the definitions of the Weil and Tate pairings come in the
+following  \refSection{sec:ch2.weilandtatepairings}. 
+
+The main such statement is that computing the pairing
+$e(P, Q)$, in either the Weil or Tate sense, requires that $P$ and $Q$ come
+from disjoint cyclic subgroups (refer \refDef{def:cyclicgroup}) of the same prime order $r$. 
+
+At this point we can only hint towards Weil reciprocity (refer to \textit{Appendix \ref{apx_theory__pairing_properties_weilreciprocity}} ) and claiming that if $P$ and $Q$ are in the same cyclic subgroup, then the pairing computation essentially fails because supports of the associated divisors are forced to undesirably coincide.
+
+
+
+
+As outlined in \refExample{example:pairingexample} the way we obtain two distinct order-$r$ subgroups
+in general is  to find the smallest extension $\mathbb{F}_{q^k}$ of $\mathbb{F}_q$
+such that $E(\mathbb{F}_{q^k})$ captures more points of order $r$. The integer
+$k \geq 1$ that achieves this is called the \emph{embedding degree}, and it
+plays a crucial role in pairing computation due to it's properties (refer to \refSubsection{sec:curveselection}).  Let us introduce the entire group of points of order $r$ on $E(\mathbb{F}_q)$, called the \emph{$r$-torsion}, which is denoted $E[r]$ and defined in \refEquation{eq:rtorsion}. (We note, that in \refDef{def:torsionsubgroups} a generalized formula were given, from now on we would refer such subgroups as $r$-torsion if we are talking about pairings, specifically.)
+
+\begin{equation}
+	E[r] = \{ P \in E : [r]P = \BigO \}
+	\label{eq:rtorsion}
+\end{equation}
+
+The result in \refEquation{eq:rtorsion} is quite remarkable; it tells us not only the cardinality
+of $E[r]$, but its structure too. If $K$ is any field with characteristic zero
+or prime to $r$, we have
+
+\begin{equation}\label{eq:torsion-structure}
+	E[r] \cong \mathbb{Z}_r \times \mathbb{Z}_r.
+\end{equation}
+
+This means that in general $\#E[r] = r^2$. Furthermore, since the point at
+infinity overlaps into all order-$r$ subgroups,
+\refEquation{eq:torsion-structure} implies that (for prime $r$) the
+$r$-torsion consists of $r + 1$ cyclic subgroups of order $r$. The following
+equivalent conditions for the embedding degree $k$ also tell us precisely where
+$E[r]$ lies in its entirety. We note that the embedding degree is actually a
+function $k(q, r)$ of $q$ and $r$, but we simply write $k$ since the context
+is usually clear:
+\begin{itemize}
+	\item $k$ is the smallest positive integer such that $r \mid (q^k - 1)$;
+	\item $k$ is the smallest positive integer such that $\mathbb{F}_{q^k}$
+	contains all of the $r$-th roots of unity in $\overline{\mathbb{F}}_q$
+	(i.e.\ $\mu_r \subset \mathbb{F}_{q^k}$);
+	\item $k$ is the smallest positive integer such that
+	$E[r] \subset E(\mathbb{F}_{q^k})$.
+\end{itemize}
+
+%%%
+
+%%%
+
+If $r \| \#E(\mathbb{F}_q)$ (i.e.\ $r \mid \#E(\mathbb{F}_q)$ but
+$r^2 \nmid \#E(\mathbb{F}_q)$), then the $r$-torsion subgroup in
+$E(\mathbb{F}_q)$ is unique. In this case, $k > 1$ and
+\refEquation{eq:torsion-structure} implies that $\mathbb{F}_{q^k}$ is the smallest
+field extension of $\mathbb{F}_q$ which produces any more $r$-torsion points
+belonging to $E(\mathbb{F}_{q^k}) \setminus E(\mathbb{F}_q)$. 
+
+In other words, once the extension field is big enough to find one more point of order $r$ (that
+is not defined over the base field), then we actually find all of the points in
+$E[r] \cong \mathbb{Z}_r \times \mathbb{Z}_r$ as illustrated in \refExample{example:findtorsionsubgroups}
+
+\begin{example}[Find $r$-torsion subgroups ]\label{ex:4.1.1}
+	
+	%\todo{Example 4.1.1}
+	%http://www.craigcostello.com.au/pairings/beginners/4-1-1-ThreeTorsionFlower.txt
+	
+	Let $q = 11$, and consider $E/\mathbb{F}_q : y^2 = x^3 + 4$. $E(\mathbb{F}_q)$
+	has $12$ points, so take $r = 3$ and note (from Equation~\eqref{eq:torsion-structure})
+	that there are $9$ points in the $3$-torsion. Only $3$ of them are found in
+	$E(\mathbb{F}_q)$, namely $(0, 2)$, $(0, 9)$ and $\mathcal{O}$, which agrees
+	with the fact that the embedding degree $k \neq 1$, since
+	$(q^1 - 1) \not\equiv 0 \pmod{r}$. However, $(q^2 - 1) \equiv 0 \pmod{r}$,
+	which means that the embedding degree is $k = 2$, so we form
+	$\mathbb{F}_{q^2} = \mathbb{F}_q(u)$, with $u^2 + 1 = 0$. Thus, we are
+	guaranteed to find the whole $3$-torsion in $E(\mathbb{F}_{q^2})$, and it is
+	structured as $4$ cyclic subgroups of order $3$; $\BigO$ overlaps into
+	all of them. We point out that although $\BigO$ is in the $3$-torsion,
+	it does not have order $3$, but rather order $1$ --- points of order $d \mid r$
+	are automatically included in the $r$-torsion.
+	
+	Now pick points $P, Q \in E[3] \setminus \{\BigO\}$ that are not in the
+	same subgroup, neither of which are $\mathcal{O}$. The translation of
+	Equation~\eqref{eq:torsion-structure} is that any other point in $E[3]$ can be
+	obtained as $[i]P + [j]Q$, for $i, j \in \{0, 1, 2\}$. Fixing $P \neq
+	\BigO$ and letting $j$ run through $0, 1, 2$ lands $P + [j]Q$ in the
+	other three subgroups of $E[3]$ (that are not $\langle Q \rangle$ --- this
+	corresponds to $P = \BigO$).
+	\label{example:findtorsionsubgroups}
+\end{example}
+
+Since we are working over finite extension fields of $\mathbb{F}_q$, we can also rely on \textit{Galois theory} \cite{theory.pairings.for.beginners, }, namely, the \emph{trace map} of the point
+$P = (x, y) \in E(\mathbb{F}_{q^k})$ can be defined as follows (\refEquation{eq:tracemapofpointp}): 
+
+\insertEquationEnvironmentWithLabel{
+\mathrm{Tr}(P) = \sum_{\sigma \,\in\, \mathrm{Gal}(\mathbb{F}_{q^k}/\mathbb{F}_q)}
+\sigma(P)
+= \sum_{i=0}^{k-1} \pi^i(P)
+= \sum_{i=0}^{k-1} (x^{q^i},\, y^{q^i})
+}{eq:tracemapofpointp}
+%%%%
+where $\pi$ denotes the $q$-power Frobenius endomorphism, recall \refDef{def:frobeniusendomorphism} from \refSubsection{ssec:ch01.fields}. Galois theory tells us that $\mathrm{Tr} : E(\mathbb{F}_{q^k}) \to E(\mathbb{F}_q)$, so when
+$r \| \#E(\mathbb{F}_q)$ (which will always be the case from now on), this
+map --- which is actually a group homomorphism --- sends all torsion points
+into one subgroup of the $r$-torsion.
+
+\begin{example}[]
+%\todo{Example~4.1.3 will be important for PBC; return here later.}
+
+We take $q = 11$ again, but this time with $E/\mathbb{F}_q : y^2 = x^3 + 7x + 2$. $E(\mathbb{F}_q)$ has 7 points, so take $r = 7$. We already have $E(\mathbb{F}_q)[r]$, but to collect $E[r]$ in its entirety we need to extend $\mathbb{F}_q$ to $\mathbb{F}_{q^k}$. This time, the smallest integer $k$ such that $(q^k - 1) \mod 7 \equiv 0$ is $k = 3$, so we form $\mathbb{F}_{q^3} = \mathbb{F}_q(u)$ with $u^3 + u + 4 = 0$, and we are guaranteed that $E[7] \subset E(\mathbb{F}_{q^3})$. The entire 7-torsion has cardinality 49 and splits into 8 cyclic subgroups.
+
+To fit the points in, we use the power representation of elements in $\mathbb{F}_{q^3} = \mathbb{F}_q(u)$. In this case, for $P \in E(\mathbb{F}_{q^3})$, the trace map on $E$ is $\text{Tr}(P) = (x, y) + (x^q, y^q) + (x^{q^2}, y^{q^2})$. For the unique torsion subgroup $E(\mathbb{F}_q)[r]$, the Frobenius endomorphism is trivial ($\pi(P) = P$) so the trace map clearly acts as multiplication by $k$, i.e.\ $\text{Tr}(P) = [k]P$. 
+
+However, $\text{Tr}$ will send every other element in the torsion into $E(\mathbb{F}_q)[r]$. For example, for $Q = (u^{481}, u^{1049})$ (in the subgroup pointing upwards), we have $\text{Tr}(Q) = (8, 8)$; for $R = (u^{423}, u^{840})$ (the lower right subgroup), we have $\text{Tr}(R) = (10, 7)$; for $S = (u^{1011}, u^{1244})$, we have $\text{Tr}(S) = (8, 3)$. 
+
+There is one other peculiar subgroup in $E[7]$ however, for which the trace map sends each element to $O$. In our case this subgroup is the group containing $T = (u^{1315}, u^{1150})$, i.e.\ $\text{Tr}(T) = \BigO$, so $\text{Tr} : \langle T \rangle \to \{\BigO\}$. One final point to note is that the embedding degree $k = 3$ also implies that the (six) non-trivial 7-th roots of unity are all found in $\mathbb{F}_{q^3}$ (but not before), i.e.\ $\mu_7 \setminus \{1\} \in \mathbb{F}_{q^3} \setminus \mathbb{F}_{q^2}$.
+
+\label{example:413}
+\end{example}
+
+
+We now give a general depiction of the $r$-torsion $E[r]$. First, we have to
+to discuss a few assumptions that apply most commonly to the scenarios we will
+be encountering. We assume that $r \| \#E(\mathbb{F}_q)$ is prime and
+the embedding degree $k$ (with respect to $r$) satisfies $k > 1$. Thus, there
+is a unique subgroup of order $r$ in $E[r]$ which is defined over $\mathbb{F}_q$,
+called the \emph{base-field subgroup}, and  it will be denoted by $\mathsf{G}_1$. 
+
+Since the Frobenius endomorphism $\pi$ acts  on $\mathsf{G}_1$, but nowhere
+else in $E[r]$, it can be characterised as 
+\[
+\mathsf{G}_1 = E[r] \cap \ker(\pi - [1]),
+\]
+meaning, that $\mathsf{G}_1$ is the $[1]$-eigenspace of $\pi$ restricted to $E[r]$.There is another subgroup of $E[r]$ that can be expressed using an eigenspace
+of $\pi$. Namely, we can easily deduce that the other
+eigenvalue of $\pi$ is $q$, and we define another subgroup $\mathsf{G}_2$ of
+$E[r]$ as
+\[
+\mathsf{G}_2 = E[r] \cap \ker(\pi - [q]).
+\]
+
+It turns out that this subgroup is precisely the peculiar subgroup can be seen in \refExample{example:413}. We call $\mathsf{G}_2$ the \emph{trace zero subgroup}, since
+all $P \in \mathbb{G}_2$ satisfy $\mathrm{Tr}(P) = \BigO$, based on the results of \textit{Lemma~IX.16} from \cite{Gal05}.
+
+As we mentioned previously in the introduction of \refSection{sec:ch1.ellipticcurvesaspairinggroups}, our primary goal in this section is to find suitable groups to define our pairing. As $\GG_1$ and $\GG_2$ can be defined as any of the $r + 1$ groups in $E[r]$, they are promising candidates. However there are many reasons we would like to specifically set $\GG_1 = \mathsf{G}_1$ and 
+$\GG_2 = \mathsf{G}_2$.  
+
+One specific reason for that is the existence of maps to and from the different
+torsion subgroups affects certain functionalities that cryptographers desire in a pairing-based protocol. More specifically, from any subgroup in $E[r]$ that is not $\mathsf{G}_1$ or $\mathsf{G}_2$, we can always map into either $\mathsf{G}_1$ or $\mathsf{G}_2$ via the trace and anti-trace maps
+respectively. 
+
+If $E$ is ordinary (just like in our case as can be seen later in \refSubsection{sec:apx.ecc.curves.pairing}), we do not have computable maps out of
+$\mathsf{G}_1$ or $\mathsf{G}_2$; otherwise, if $E$ is supersingular then the
+distortion map $\varphi$ is a homomorphic map out of these two subgroups.
+
+%\info{General curves (non-singular) curves do not have distortion maps !! [Ver01,
+	%	Th. 11] }
+
+
+\subsection{Pairing types}
+\label{ssec:ch1.ellipticcurvesaspairinggroups.pairingtypes}
+
+%There are now four pairing types in the literature; Galbraith et al.\ originally
+%presented three, but a fourth type was added soon after by Shacham
+%\cite{Sha05}. 
+
+The distinguishability among pairing types arise from observing the practical
+implications of placing $\GG_1$ and $\GG_2$ in different subgroups of $E[r]$.  In 
+fact, as it turned out \cite{theory.pairings.for.beginners} it is always best to set
+$\GG_1 = \mathsf{G}_1$, so the four types of pairing will be tied to the definition of
+$\GG_2$. The main factors affecting primarily the classification are the ability to hash and/or randomly sample elements of $\GG_2$ and the existence of $\psi : \GG_2 \mapsto \GG_1$ isomorphism. The latter is often required to make security proofs work and (as always) issues concerning storage and efficiency (see \cite{GPS08} for more details).
+
+Historically, Galbraith et al. \cite{GPS08} were the first to identify that all of the potentially desirable properties in a protocol cannot be achieved simultaneously, thus they classified pairings into three certain types, but a fourth type was by Shacham \cite{Sha05}.
+
+Since we are using ordinary curve families later in this thesis, we are mentioning \textit{Type 1 pairings}, but not considering the introduction of it. The remaining three types are defined over ordinary elliptic curves, thus are no restrictions imposed on the choice of elliptic curve that lead to a loss of efficiency.
+
+In all situations we set $\GG_1 = \mathsf{G}_1$ and points of $P_1 = \mathsf{P}_1$ (where hashing is relatively easy), so we only need to discuss the choices for $\GG_2$ and $P_2$. Since the thesis is about \textit{BLS curves} (refer to \refChapter{ch:blscurvefamilies}) we will discuss the relevant pairing type for that particular curve family, on the other hand we note, that nowadays all of the state-of-the-art implementations of pairings take place on ordinary curves that assume the \textit{Type 3} scenario, where the only potential sacrifice is the map $\psi : \GG_2 \mapsto \GG_1$. 
+
+In \textit{Type 3} pairings we take $\GG_2 = \mathsf{G}_2$, the
+trace zero subgroup. The drawback in this case is that the only
+subgroup (besides $\mathbb{G}_1$) that we can hash into is also the only
+subgroup we cannot find a map out of. An isomorphism $\psi : \GG_2 \to \GG_1$
+trivially exists, we just do not have an efficient way to compute it. Thus,
+security proofs that rely on the existence of such a $\psi$ are no longer
+applicable, unless the underlying problem(s) remains hard when the adversary
+is allowed oracle access to $\psi$ \cite{SV07}.
+
+Before moving our focus to the algorithm for computing pairings, we have to discuss a way to represent elements in $\GG_2$, which is happens to be also the most efficient way to hash into. In the following \refSubsection{ssec:ch1.ellipticcurvespairinggroups.twistedcurves} the discussion brings up the notion of \emph{twists} of elliptic curves, which was first applied to pairings by Barreto et al.  in \cite{BLS03}.
+
+%%%%%% 
+\subsection{Twist of elliptic curves}
+\label{ssec:ch1.ellipticcurvespairinggroups.twistedcurves}
+
+%% pp/ 61
+
+%[BLS03]
+%P. S. L. M. Barreto, B. Lynn, and M. Scott. On the selection of
+%pairing-friendly groups. In M. Matsui and R. J. Zuccherato, editors,
+%Selected Areas in Cryptography, volume 3006 of Lecture Notes in
+%Computer Science, pages 17–25. Springer, 2003.
+
+%%%%
+
+%%%%
+
+%%%
+Given elliptic curve $E'/\mathbb{F}_q$ we observe that the map $\Psi^{-1}$ defined by \refEquation{eq:reversetwistmap}
+
+\insertEquationEnvironmentWithLabel{
+\Psi^{-1} : (x, y) \mapsto (-x,\, iy)
+}{eq:reversetwistmap}
+
+\noindent takes points from $E$ to $E'$, thus $\Psi^{-1} : E \to E'$. Restricting $\Psi^{-1}$ to $\GG_2$ therefire gives a map that takes elements defined over $\mathbb{F}_{q^2}$ to elements defined over $\mathbb{F}_q$. The convention in accordance with \cite{theory.pairings.for.beginners} is to write $\Psi$ for the reverse map $\Psi : E' \to E$, which in this case as follows (\refEquation{eq:twistmapdefinition}): 
+
+\insertEquationEnvironmentWithLabel{
+\Psi : (x', y') \mapsto (-x',\, y'/i) = (-x',\, -y'i)
+}{eq:twistmapdefinition}
+
+
+We call $E'$ a \emph{twist}  of elliptic curve $E$. Every twist has a degree $d$, which tells
+us the extension field of $\mathbb{F}_q$ over which $E$ and $E'$ become isomorphic. For our purposes, $d$ is also the degree of the field of definition of $E'$ as a subfield of $\mathbb{F}_{q^k}$, i.e.\ a degree $d$ twist $E'$ of $E$ will be defined over $\mathbb{F}_{q^{k/d}}$.
+In the general case, the twist will pull computations back into the subfield
+$\mathbb{F}_{q^{k/d}}$ of $\mathbb{F}_{q^k}$. For example, if the embedding
+degree is $k = 12$, then a quadratic twist ($d = 2$) would allow computations in
+$\GG_2$ to be performed in $\mathbb{F}_{q^6}$ rather than $\mathbb{F}_{q^{12}}$,
+whilst a sextic twist ($d = 6$) would allow us to instead work in
+$\mathbb{F}_{q^2}$. Thus, we prefer the degree $d$ of the twist to be as high as possible.  The following \refExample{example:workingwithtwists} shows how to work with twists introduced in \refEquation{eq:twistmapdefinition}.
+
+%%%
+\begin{example}[Twist of elliptic curve]
+	% Example 4.3.2
+	Let $q = 103$ and consider $E/\mathbb{F}_q : y^2 = x^3 + 72$, which has
+	$\#E(\mathbb{F}_q) = 84$, so let $r = 7$. The embedding degree (with respect
+	to $r$) is $k = 6$, so form $\mathbb{F}_{q^6} = \mathbb{F}_q(u)$ with
+	$u^6 + 2 = 0$. The trace zero subgroup $\mathbb{G}_2 = E[r] \cap \ker(\pi -
+	[q])$ is defined over $\mathbb{F}_{q^6}$, and is generated by
+	$(35u^4,\, 42u^3)$ (see Figure~4.12). We define the degree $d = 6$ sextic
+	twist $E'$ of $E$ as $E' : y^2 = x^3 + 72u^6$,  where the back-and-forth isomorphisms are defined as
+	\[
+	\Psi : E' \to E, \quad (x', y') \mapsto (x'/u^2,\, y'/u^3), 
+	\]
+	\[
+	\Psi^{-1} : E \to E', \quad (x, y) \mapsto (u^2 x,\, u^3 y).
+	\]
+	
+	We observe that $\Psi^{-1}$ maps elements in
+	$\GG_2 \in E(\mathbb{F}_{q^k})[r] = E(\mathbb{F}_{q^6})[r]$ to elements
+	in $E'(\mathbb{F}_{q^{k/d}})[r] = E'(\mathbb{F}_q)[r]$. Thus, when performing
+	group operations in $\mathsf{G}_2 = \mathbb{G}_2$, we gain the advantage of working over
+	$\mathbb{F}_q$ instead of $\mathbb{F}_{q^6}$, a huge improvement in computational complexity.
+	\label{example:workingwithtwists}
+\end{example}
+%%%%
+
+
+Recall in our case that the elliptic curve is given by $E : y^2 = x^3 + ax + b$, hence  the twist of it is given by
+\[
+E' : y^2 = x^3 + a\omega^4 x + b\omega^6,
+\]
+with $\Psi : E' \to E : (x', y') \mapsto (x'/\omega^2,\, y'/\omega^3)$, where
+$\omega \in \mathbb{F}_{q^k}$. Therefore we can only achieve specific degrees of $d$ through
+combinations of zero and non-zero values for $a$ and $b$, yielding us with four possibilities of twists (refer from \refDef{def:quadratictwist} up to \refDef{def:sextictwist})  based on the degree of $d$. 
+
+\insertDefinitionEnvironment{
+Quadratic twists (degree $d = 2$) are available on any elliptic curve, so if $E/\mathbb{F}_q : y^2 = x^3 + ax + b$, then a quadratic twist is given by $E'/\mathbb{F}_{q^{k/2}} : y^2 = x^3 + a\omega^4 x + b\omega^6$, with $\omega \in \mathbb{F}_{q^k}$ but $\omega^2 \in \mathbb{F}_{q^{k/2}}$. Since $\omega^3 \in \mathbb{F}_{q^k}$, the isomorphism $\Psi : E' \to E$ defined by $\Psi : (x', y') \mapsto (x'/\omega^2,\, y'/\omega^3)$ will take elements in $E'(\mathbb{F}_{q^{k/2}})$ to elements in $E(\mathbb{F}_{q^k})$, whilst $\Psi^{-1}$ will do the reverse.
+\label{def:quadratictwist}
+}
+
+\insertDefinitionEnvironment{
+Cubic twists (degree $d = 3$) twists can only occur
+when $a = 0$, so if $E/\mathbb{F}_q : y^2 = x^3 + b$, then
+$E'/\mathbb{F}_{q^{k/3}} : y^2 = x^3 + b\omega^6$, with
+$\omega^3, \omega^6 \in \mathbb{F}_{q^{k/3}}$, but
+$\omega^2 \in \mathbb{F}_{q^k} \setminus \mathbb{F}_{q^{k/3}}$. Thus, the
+isomorphism $\Psi : E' \to E$ (defined as usual) will take elements in
+$E'(\mathbb{F}_{q^{k/3}})$ to elements in $E(\mathbb{F}_{q^k})$, whilst
+$\Psi^{-1}$ does the opposite.
+\label{def:cubictwist}
+}
+
+\insertDefinitionEnvironment{
+Quartic twists (degree $d = 4$) twists are available
+when $b = 0$, so if $E/\mathbb{F}_q : y^2 = x^3 + ax$, then
+$E'/\mathbb{F}_{q^{k/4}} : y^2 = x^3 + a\omega^4 x$, with
+$\omega^4 \in \mathbb{F}_{q^{k/4}}$, $\omega^2 \in \mathbb{F}_{q^{k/2}}$
+and $\omega^3 \in \mathbb{F}_{q^k} \setminus \mathbb{F}_{q^{k/2}}$. Thus,
+$\Psi$ will move elements in $E'(\mathbb{F}_{q^{k/4}})$ up to elements in
+$E(\mathbb{F}_{q^k})$, whilst $\Psi^{-1}$ will move elements from
+$E(\mathbb{F}_{q^k})$ down to $E'(\mathbb{F}_{q^{k/4}})$.
+\label{def:quartictwist}
+}
+
+\insertDefinitionEnvironment{
+Sextic twists (degree $d=6$) are only available when
+$a = 0$, so if $E/\mathbb{F}_q : y^2 = x^3 + b$, then
+$E'/\mathbb{F}_{q^{k/6}} : y^2 = x^3 + b\omega^6$, with
+$\omega^6 \in \mathbb{F}_{q^{k/6}}$, $\omega^3 \in \mathbb{F}_{q^{k/3}}$
+and $\omega^2 \in \mathbb{F}_{q^{k/2}}$. Thus, $\Psi$ pushes elements in
+$E'(\mathbb{F}_{q^{k/6}})$ up to $E(\mathbb{F}_{q^k})$, whilst $\Psi^{-1}$
+pulls elements from $E(\mathbb{F}_{q^k})$ all the way down to
+$E'(\mathbb{F}_{q^{k/6}})$.
+\label{def:sextictwist}
+}
+
+As a remark a specific twist can only be applied if the curve is of the corresponding form above and the embedding degree $k$ has $d$ as a factor. Thus, attractive embedding degrees are those which have any of $d \in \{2, 3, 4, 6\}$ as factors, but preferably $d = 4$ or $d = 6$ (which is also the maximum for genus 1 curves) for increased performance. 
+

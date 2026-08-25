@@ -1,0 +1,518 @@
+%%%%%%
+
+
+\section{Pairing-friendly curve selection and the balancing act}
+\label{sec:curveselection}
+
+
+Let $E$ be an elliptic curve defined over a finite field $K$. Let $P \in E(K)$ be a point of prime order $r$ and $G = \langle P \rangle$, since we  intend to use cryptosystems that operate in $G$. Hence the field arithmetic will be performed in $K$ during the cryptographic operations, while the security of such resulting systems partly depends on the size of $r$ (which is a factor of $\#E(K)$). We focus on the cases when $\#E(K)$ is a small multiple of $r$, on the other hand relaxing this later condition permits us to use a wider variety of pairings, as we discuss later. 
+
+Recall the size of $K$ is roughly the size of $\#E(K)$, thus if both $r$ and $\#E(K)$ are about $l$-bits in length, we obtain a pairing-based cryptosystem with $l$-bit security (refer  to \refTable{tab:ch1.securitylevelsandfieldsize}) in $G$ whose running times depend on operations on $l$-bit numbers.
+
+%%
+Recall the Tate pairing (refer to \refSubsection{secs:ch2.theoretictate} ) must be computed in some field extension $L$ of $K$ that contains the $r$-th roots of unity (so $r$ divides $|L| - 1$). On the other hand, the Weil pairing (refer to \refSubsection{secs:ch2.theoreticweil}) is defined on $E[r]$, the $r$-torsion points of $E$, which lie in $E(L')$ for some field extension $L'$ of $K$. In order for the Tate pairing to be efficiently computable, operations must be efficient in $L$, and similarly, in the case of $L'$ for  the Weil pairing. Thus we have to seek fields ($L$ or $L'$) that are small enough so that field operations are still fast.
+
+It turns out that such a field $L'$ will always contain the $n$-th roots of unity, thus we always have $L \subseteq L'$. Although the converse is not true: it is possible for a field $L$ to contain the $r$-th roots of unity but at the same time to have $E[r]$ contained in $E(L')$ and not $E(L)$, consequently for some $L'$ strictly bigger than $L$, refer to \cite{BK98}  for more details.
+
+
+We recall the embedding degree definition from \refSubsection{ssec:ch1.ellipticcurvesaspairinggroups.pairingtypes},  which can be thought of as measuring the size of $L$ compared to the field $K$ (refer to \refTable{tab:ch1.securitylevelsandfieldsize}). Then, suppose $k > 1$ and $r \mid q^k - 1$, furthermore consider the subgroup $T$ of $E[r]$ consisting of all points of trace zero, that is
+$$T = \{Q \in E[r] : \text{tr}\, Q = Q + \Phi(Q) + \cdots + \Phi^{k-1}(Q) = \BigO\},$$
+
+where $\Phi$ denote the Frobenius map as introduced in \refDef{def:frobeniusendomorphism}. We note that the group $T$ may be explicitly constructed by using the map $P \mapsto P - \Phi(P)$ on points of $E(\mathbb{F}_{q^k})$. Now we have $\Phi(T) = T$ with $T$ not contained in $E(\mathbb{F}_q)$ by assumption. 
+
+%%%
+Recall from \refSubsection{ssec:ch1.ellipticcurvesaspairinggroups.rtorsion} and \cite{chapman17} that $\GG_2 \subset E(\mathbb{F}_{q^k})[r]$ is the eigenspace of the Frobenius endomorphism $\pi$ associated with the eigenvalue $q$, thus it is the complementary subspace of $\GG_1$ (which is the eigenspace for the eigenvalue $1$). As a result, $\GG_2$ is the image of the efficient endomorphism $\psi$ of $E(\mathbb{F}_{q^k})[r]$. Since the eigenvalues of $\Phi$ must be $1$ and $q$, consequently $T$ must be the $q$-eigenspace of $\Phi$ and hence $$\Phi^k(Q) = q^k Q = Q,$$
+since $r \mid q^k - 1$. Thus $T$, like $E(\mathbb{F}_q)$ is fixed under $\Phi^k$, and since these groups are linearly independent they generate all of $E[r]$, implying that all of $E[r]$ is fixed under $\Phi^k$. Hence $E[r] \subset E(\mathbb{F}_{q^k})$. In general, for a cyclic subgroup $G \subset \#E(\mathbb{F}_q)$ the embedding degree $k$ of $E(\mathbb{F}_q)$ may not be the smallest positive integer such that $r \mid q^k - 1$, but in practice, when $r$ is a large prime factor of $\#E(\mathbb{F}_q)$ the probability that $k$ is not the integer we seek is considered negligible.
+%%
+
+\subsection{The balancing act}
+\label{ssec:thebalancingact}
+
+Pairings are fundamentally different to traditional number-theoretic primitives, in that they require multiple groups that are defined in different settings. Namely, $\GG_1$ and $\GG_2$ are elliptic curve groups, whilst $\GG_T$ is a multiplicative subgroup of a finite field. 
+
+All three groups must be secure against the respective instances of the discrete logarithm problem, which means attackers can break the system by solving either the \acs{acronym.algorithmcomplexity.dlp} (refer to \refSubsection{ssec:ch1.dlogproblem}) in $\GG_T$ or the \acs{acronym.algorithmcomplexity.ecdlp} (refer to \refDef{def:acronym.algorithmcomplexity.ecdlp}) in $\GG_1$ or $\GG_2$. Therefore to  achieve
+the same security, a finite field group needs to have a much greater cardinality than an elliptic curve group.
+
+% inite fields; this is because the best attacks on the ECDLP remain generic at-
+%tacks like Pollard rho [Pol78] which have exponential complexity, whilst the best
+%attacks on the DLP have sub-exponential complexity.
+
+Let us consider the following example 
+
+
+\begin{example}[The balancing act. Motivated by \cite{theory.pairings.for.beginners}]
+	% Example 6.1.1
+	% http://www.craigcostello.com.au/pairings/beginners/6-1-1-k=9curve.txt
+	Let $E/\mathbb{F}_{q_1} : y^2 = x^3 + 14$ be the curve with order $\#E(\mathbb{F}_{q_1})$ having large prime factor $r$, where $q_1$ and $r_1$ are given as
+		\begin{align*}
+		q_1
+		&= 4\,219\,433\,269\,001\,672\,285\,392\,043\,949\,141\,038\,139\,415\,112\\
+		&\phantom{{}={}}
+		441\,532\,591\,511\,251\,381\,287\,775\,317\,505\,016\,692\,408\,034\\
+		&\phantom{{}={}}
+		796\,798\,044\,263\,154\,903\,329\,667\\
+		&\phantom{{}={}}\text{(369 bits)},\\[1ex]
+		r_1
+		&= 2\,236\,970\,611\,075\,786\,789\,503\,882\,736\,578\,627\,885\,610\,300\\
+		&\phantom{{}={}}
+		038\,964\,062\,133\,851\,391\,137\,376\,569\,980\,702\,677\,867\\
+		&\phantom{{}={}}\text{(271 bits)}.
+	\end{align*}
+	
+	The embedding degree is $k = 9$ ($q_1^9 - 1 \equiv 0 \pmod{r_1}$) thus, the two elliptic curve groups $\GG_1 \in E[r_1]$ and $\GG_2 \in E[r_1]$ have an order of 271 bits. Although $\GG_T$ is a subgroup of order $r$ (in $\mathbb{F}_{{q_1}^k}^*$), the attack complexity is determined by the full size of the field $\mathbb{F}_{{q_1}^9}$, which is 3248 bits in this case, therefore meeting the requirements for 128-bit security.
+	
+	In the second case, 
+	% Example 6.1.2
+	% http://www.craigcostello.com.au/pairings/beginners/6-1-2-BNcurve.txt
+	we choose $E/\mathbb{F}_{q_2} : y^2 = x^3 + 2$ be the curve with prime order $r_2 = \#E(\mathbb{F}_{q_2})$, where $q_2$ and $r_2$ are given as
+	
+
+\begin{align*}
+	q_2
+	&= 2\,875\,788\,016\,482\,373\,728\,402\,120\,498\,006\,552\,346\,737\\
+	&\phantom{{}={}}
+	721\,998\,351\,309\,856\,542\,751\,926\,351\,376\,964\,733\,335\,173,\\
+	r_2
+	&= 2\,875\,788\,016\,482\,373\,728\,402\,120\,498\,006\,552\,346\,737\\
+	&\phantom{{}={}}
+	668\,371\,977\,047\,909\,896\,314\,898\,406\,560\,560\,716\,472\,109.
+\end{align*}
+
+	
+	The embedding degree is $k = 12$, i.e.\ $q_2^{12} - 1 \equiv 0 \pmod{r_2}$, giving $\mathbb{F}_{q_2^{12}}$ as a 3248-bit field, which is the same size as the $k = 9$ curve above. 
+	\label{example:411}
+\end{example}
+
+
+As highlighted in \refExample{example:411} $\GG_1$, $\GG_2$ and $\GG_T$ have orders of the same bit-lengths, but using this curve instead means that arithmetic in $\mathbb{F}_q$ will be substantially faster; a 271-bit field in this case, compared to 369-bit field in the last. An important parameter associated with a curve that is suitable for pairings is the ratio between the field size $q$ and the large prime group order $r$, which we call the $\rho$-value and can be computed as in \refEquation{eq:rhocomputed}.
+
+The $\rho$-value indicates how much (ECDLP) security a curve offers for its field size, and since we generally prefer the largest prime divisor $r$ of $\#E$ to be as large as possible, $\rho = 1$ is as good as we can get.
+
+\begin{equation}
+	\rho = \frac{\log q}{\log r}
+	\label{eq:rhocomputed}
+\end{equation}
+
+Another metric commonly used in comparison of security levels is the ratio between group sizes: $\rho \cdot k$, for instance $\left(\frac{\log q^k}{\log r} = k \cdot \frac{\log q}{\log r}\right)$. Where $\rho \cdot k$  balances the attack complexities of the \acs{acronym.algorithmcomplexity.dlp} and \acs{acronym.algorithmcomplexity.ecdlp}  refer to \cite{theory.pairings.for.beginners,FanVerbauwhede2012} for details about attacks against \acs{acronym.definitions.ellipticcurve} cryptosystems.
+
+Lastly, referring to \cite{taxonomyofpbc} we say that a curve is pairing-friendly there is a prime $r \geq \sqrt{q}$ dividing $\#E(\mathbb{F}_q)$ (i.e.\ $\rho \leq 2$), and the embedding degree $k$ with respect to $r$ is less than $\log_2(r)/8$.
+ 
+In the following \refSubsection{ssec:constructionofpairingfirendly} we briefly review the complex multiplication method (\acs{acronym.algorithm.ellipticcurve.cm} for short) of Atkin and Morain \cite{AM93}, which can be used to find the elliptic curve equations provided the \acs{acronym.algorithm.ellipticcurve.cm} discriminant (denoted as $D$).
+
+
+ 
+\subsection{Review the construction of ordinary pairing-friendly curves}
+\label{ssec:constructionofpairingfirendly}
+
+
+The methods for elliptic curve constructions can be found in the literature are essentially following the same idea: Set $k$ to a fixed value then compute integers $t, r, q$ such that there is an elliptic curve $E/\mathbb{F}_q$ with trace of Frobenius $t$, with a subgroup of prime order $r$, and an embedding degree $k$. The complex multiplication method (CM method) of Atkin and Morain \cite{AM93} can then be used to find the equation of $E$. 
+The other two most general methods, are the \textit{Cocks-Pinch} \cite{CP01} and \textit{Dupont-Enge-Morain} \cite{DEM05} algorithms, which produce curves with $\rho=2$. However, we note that this output often not the desired one,  especially compared to the $\rho$-values obtained by the complex multiplication method. 
+In \refEquation{eq:cmmethoddistriminant} the \acs{acronym.algorithm.ellipticcurve.cm} discriminant (denoted as $D$) can be followed  of $E$ for some $f$ integer,  as the square-free part of $4q - t^2$:
+
+\begin{equation}
+	Df^2 = 4q - t^2
+	\label{eq:cmmethoddistriminant}
+\end{equation}
+
+
+In 2001, Miyaji, Nakabayashi and Takano \cite{MNT01} gave the first constructions of ordinary pairing-friendly elliptic curves, commonly referred in the literature by MNT criteria.  Their method has since been greatly extended and generalized.  In certain cases they found that if $k$ is the desired embedding degree, then $r \mid q^k - 1$ implies $r \mid \Phi_k(q)$, since the $k$-th cyclotomic polynomial $\Phi_k(x)$ is the factor of $x^k - 1$ that does not appear as a factor of any polynomial $(x^i - 1)$ with $i < k$  (refer to \textit{IX.15.2} \cite{Gal05}).
+
+For the mentioned special cases they parameterized the curves by writing $t$, $r$ and $q$ as polynomials $t(x)$, $r(x)$ and $q(x)$ in terms of a parameter. They primarily focused on embedding degrees $k = 3, 4, 6$ and assumed that the group order was to be prime, i.e.\ $r(x) = q(x) + 1 - t(x)$. Lately they proved that the only possibilities for $t(x)$ and $q(x)$ are:
+\begin{align*}
+	k = 3 &: t(x) = -1 \pm 6x \quad \text{and} \quad q(x) = 12x^2 - 1;\\
+	k = 4 &: t(x) = -x,\, x+1 \quad \text{and} \quad q(x) = x^2 + x + 1;\\
+	k = 6 &: t(x) = 1 \pm 2x \quad \text{and} \quad q(x) = 4x^2 + 1.
+\end{align*}
+
+We note that, in general parameterised families therefore, we use the degrees of $q(x)$ and $r(x)$ to state $\rho = \frac{\deg(q(x))}{\deg(r(x))}$ (refer to \refDef{eq:rhocomputed}).
+
+After the publication of MNT paper a number of works followed on the generalisation of their results.  In particular, we continue with the work by Barreto et al.\ \cite{howblswascreated}, Scott and Barreto \cite{SB06}, with mentioning Galbraith et al.\ \cite{GMV07}. All of the mentioned generalizations obtain more parameterised families by simply relaxing the condition regarding the group order, by fixing it as prime and allowing for small cofactors so that $\#E = hr$. 
+
+Now, we can recall observation made by Barreto et al.\ that somewhat simplifies the process is the following: $r \mid \Phi_k(q)$ and $q + 1 - t \equiv 0 \pmod{r}$ combine to give that $\Phi_k(t-1) \equiv 0 \pmod{r}$ \cite[Lemma 1]{howblswascreated}. Substituting $hr = q + 1 - t$ into the CM equation in \refEquation{eq:cmmethoddistriminant} yields us with:
+
+$$Df^2 = 4hr - (t-2)^2$$.
+
+In \cite{howblswascreated}, Barreto et al. obtained more parameterised families for various $k$ by considering a special case of the above equation with $t(x) = x+1$, $D = 3$. Since $r \mid \Phi_k(x)$) finding $f(x)$ and $m(x)$ to fit \refEquation{eq:cmforbls}.
+
+\begin{equation}
+	3f(x)^2 = 4m(x)\Phi_k(x) - (x-1)^2
+	\label{eq:cmforbls}
+\end{equation}
+
+
+In the following \refSubsection{ssec:choosingbetweenpairingfriendlycurves} we continue with the introduction of BLS curves families based on \cite{ecc.pairing.curves.bls,Costello2012, Scott2019PairingImplementationRevisited, CLN11}
+%%%%%%%%%%%%%%%%
+\subsection{Overview of Barreto-Lynn-Scott Curve family}
+\label{ssec:choosingbetweenpairingfriendlycurves}
+
+
+As we reviewed previously pairing is a kind of bilinear map defined over two elliptic curves $E$ and $E'$. A Barreto-Naehrig Curve (BN) curve is one of the instantiations of pairing-friendly curves proposed in 2005. Around the time BN curves were introduced, Schirokauer warned that the special form of $p$ may reduce the difficulty of the extension field
+discrete logarithm problem on which the security of these pairings are based.  In response to these developments many researchers have turned instead
+to the BLS curves, which were actually the first pairing friendly curves
+of this type to be discovered. Furthermore the BLS curves are in
+fact a “family of families”, that support members with embedding degrees
+of $12$, $24$ and $48$ (hereafter referred to as BLS12, BLS24 and BLS48 curves
+respectively), that are suitable at different security levels.
+
+In contrast to BN curves, $E(F_p)$ does not have a prime order, instead its order is divisible by a large parameterized prime $r$ and denoted by $h \cdot r$ with cofactor $h$. The pairing will be defined on the $r$-torsions points. More formally a BLS curve family considers elliptic curves $E$ and $E'$ parameterized by a well chosen integer $t$. $E$ is defined over a finite field $\FF_p$ by an equation of the form $E: y^2 = x^3 + b$, and its twisted curve, $E': y^2 = x^3 + b'$, where $b$ is an element of multiplicative group of order $p$.
+Similarly to BN curves BLS curves can also be categorized as D-type and M-type (refer to \cite{ecc.pairing.curves.bls}) whether $b' = b / m$ or $b' = b \cdot m$ respectively. 
+
+%In \cite{BLS03}, Barreto, Lynn and Scott propose polynomial parametrizationsspecific fixed embedding degrees. All curves belonging to one of these so-called cyclotomic families have CM discriminant $D = 3$ and can be given by a short Weierstra\ss{} equation $E : y^2 = x^3 + b$. 
+
+For embedding degree $k = 24$, the Barreto-Lynn-Scott (BLS) family is given by the following parametrization (refer to \cite{CLN11}):
+\begin{align*}
+	p(x) &= (x-1)^2(x^8 - x^4 + 1)/3 + x,\\
+	n(x) &= (x-1)^2(x^8 - x^4 + 1)/3,\\
+	f(x) &= (x-1)(2x-1)/3,\\
+	r(x) &= x^8 - x^4 + 1,\\
+	t(x) &= x + 1.
+\end{align*}
+
+
+Finding a specific BLS curve is achieved by running through integer values $x_0 \equiv 1 \pmod{3}$ until $p(x_0)$ and $r(x_0)$ are both prime (note that $x_0 \equiv 1 \pmod{3}$ leads to all involved parameters being integers). For each set of parameters, there exists an elliptic curve $E$ over $\mathbb{F}_p$ such that $\#E(\mathbb{F}_p) = n(x_0)$. The correct curve $E$ can be found by trying different values for $b$ (for example using different twists) and checking for the right group order. Since $r(x_0) \mid n(x_0)$, there is a subgroup of $E(\mathbb{F}_p)$ of prime order $r(x_0)$. The CM discriminant is $D = 3$ because $4p(x_0) - t(x_0)^2 = 3f(x_0)^2$. The family has a $\rho$-value of $\rho = \deg(p)/\deg(r) = 1.25$.
+
+The following \refTable{tab:bls-families}  summarizes the salient parameters of BLS12 and BLS24~families of elliptic curves. All these curves are parameterized by a positive integer $z$, are defined by an equation of the form $Y^2 = X^3 + b$, and have a twist of order $d = 6$ (refer to \refSubsection{def:sextictwist}). 
+
+\begin{table}[ht]
+	\centering
+	\caption{Important parameters for the BLS12 and BLS24 families.}
+	\label{tab:bls-families}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Curve Family} & $k$ & $\rho$ & \textbf{Parameters} \\ \hline
+		BLS12 &
+		12 &
+		$\approx 1.5$ &
+		$\begin{aligned}
+			p(z) &= \frac{(z-1)^2(z^4-z^2+1)}{3}+z,\\
+			r(z) &= z^4-z^2+1,\\
+			t(z) &= z+1
+		\end{aligned}$ \\ \hline
+		BLS24 &
+		24 &
+		$\approx 1.25$ &
+		$\begin{aligned}
+			p(z) &= \frac{(z-1)^2(z^8-z^4+1)}{3}+z,\\
+			r(z) &= z^8-z^4+1,\\
+			t(z) &= z+1
+		\end{aligned}$ \\ \hline
+	\end{tabular}
+\end{table}
+
+On the other hand \ref{tab:bls-curves} lists the important parameters of the particular curves suitable for implementing pairing-based protocols at the 192-bit security level. The requirements for this security level are that the bitlength of $r$ be at least 384 (in order to resist Pollard's rho attack (refer to \cite{FanVerbauwhede2012}) on the discrete logarithm problem in $\GG_1$), and that the bitlength of $p^k$ should be at least $7680$ (in order to resist the number field sieve attack \cite{AranhaFotiadisGuillevic2024} on the discrete logarithm problem in $\mathbb{F}^*_{p^k}$).
+
+
+\begin{table}[ht]
+	\centering
+	\caption{Important parameters for  BLS12 and BLS24 curves.}
+	\label{tab:bls-curves}
+	
+	\renewcommand{\arraystretch}{1.4} % Increase row height
+	
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|c|c|c|c|c|c|c|}
+			\hline
+			\textbf{Curve} & $k$ & $z$ & $\lceil \log_2 p \rceil$ &
+			$\lceil \log_2 r \rceil$ & $\rho$ &
+			$\lceil \log_2 q \rceil$ & $\lceil \log_2 p^k \rceil$ \\
+			\hline
+			BLS12 &
+			12 &
+			$-2^{107}+2^{105}+2^{93}+2^{5}$ &
+			638 &
+			427 &
+			1.49 &
+			1276 &
+			7656 \\
+			\hline
+			BLS24 &
+			24 &
+			$-2^{48}+2^{45}+2^{31}-2^{7}$ &
+			477 &
+			383 &
+			1.25 &
+			1914 &
+			11482 \\
+			\hline
+		\end{tabular}%
+	}
+\end{table}
+
+% =========================
+As pointed out in \refSubsection{ch3:millersalgorithm}, Miller functions are essential to the definition of most
+cryptographic pairings. Although all pairings can be defined individually in
+formal terms, it is more instructive to give the following constructive
+definitions in \refTable{tab:mostcommonpairings} based on \cite{AranhaBLR2013}, assuming an underlying curve $E/\mathbb{F}_q$ containing a group
+$E(\mathbb{F}_q)[n]$ of prime order $n$ with embedding degree $k$ and letting
+$z := (q^k - 1)/n$.
+
+
+%% here
+\begin{table}[ht]
+	\centering
+	\caption{Definitions of commonly used pairings on elliptic curves.}
+	\label{tab:mostcommonpairings}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Pairing} & \textbf{Definition} \\
+		\hline
+		Weil pairing &
+		$\displaystyle w(P,Q)=(-1)^n\frac{f_{n,P}(Q)}{f_{n,Q}(P)}$ \\
+		\hline
+		Tate pairing &
+		$\displaystyle \tau(P,Q)=f_{n,P}(Q)^z$ \\
+		\hline
+		Eta pairing &
+		$\displaystyle \eta(P,Q)=f_{\lambda,P}(Q)^z,$
+		where $\lambda^d \equiv 1 \pmod n$ \\
+		\hline
+		Ate pairing &
+		$\displaystyle a(P,Q)=f_{t-1,Q}(P)^z,$
+		where $t$ is the trace of Frobenius \\
+		\hline
+		Optimized Ate pairing &
+		$\displaystyle a_c(P,Q)=f_{(t-1)c \bmod n,Q}(P)^z,$
+		for some $0<c<k$ \\
+		\hline
+		Twisted Ate pairing &
+		$\displaystyle \eta_c(P,Q)=f_{\lambda c \bmod n,P}(Q)^z,$
+		for some $0<c<k$ \\
+		\hline
+		Optimal Ate pairing &
+		$\displaystyle a_{\mathrm{opt}}(P,Q)=f_{\ell,Q}(P)^z,$
+		where $\log_2\ell \approx \frac{\log_2 n}{\varphi(k)}$ \\
+		\hline
+	\end{tabular}
+\end{table}
+%%
+
+Optimal pairings achieve the shortest loop length among all of the pairings presented in \refTable{tab:mostcommonpairings}. To
+obtain unique values, most of these pairings (the Weil pairing is an exception)
+are reduced via the final exponentiation by $z$. We note that the computation of $z$ is the subject of research, refer to \cite{ScottEtAlPairing2009}.
+
+
+Before we dive into the computation of line function let us recall the optimal ate pairing on BLS curves (in this case for $k=24$) and the arithmetic that is involved in its computation. Let $E/\mathbb{F}_p$ be a BLS curve with parameters constructed as above given an integer $x_0 \equiv 1 \pmod{3}$, i.e.\ $p = p(x_0)$, $r = r(x_0)$ and so forth. Then there exists a unique twist $E'/\mathbb{F}_{p^4}$ with $r \mid \#E'(\mathbb{F}_{p^4})$ with twisting isomorphism $\psi : E' \rightarrow E$ over $\mathbb{F}_{p^4}$. Let us define the usual groups $G_1 = E(\mathbb{F}_p)[r]$ and $G_2 = \ker(\phi_p - [p]) \subset E(\mathbb{F}_{p^{24}})[r]$ as the $1$- and $p$-eigenspaces of the Frobenius endomorphism $\phi_p$ on $E[r]$. Let the group $G_2' = \psi^{-1}(G_2)$ be the preimage of $G_2$ under $\psi$. Let $T = t - 1$. Then we can either compute the original ate pairing
+$$a_T : G_2' \times G_1 \to \mathbb{F}_{p^{24}}^*, \quad (Q', P) \mapsto f_{T,\psi(Q')}(P)^{\frac{p^{24}-1}{r}},$$
+by ``untwisting'' $Q'$ for the computation of $f_{T,\psi(Q')}$; or we can compute
+$$a_T' : G_2' \times G_1 \to \mathbb{F}_{p^{24}}^*, \quad (Q', P) \mapsto f_{T,Q'}(\psi^{-1}(P))^{\frac{p^{24}-1}{r}},$$
+i.e.\ compute entirely on the twist by ``twisting'' $P$ to $E'$.
+
+A function $f_{T,R}(S)$ for points $R$, $S$ on $E$ or $E'$ as above is computed
+with Miller's algorithm. It involves curve arithmetic in $\mathbb{G}'_2$, i.e.\
+doubling and addition of points on the curve $E'$ over the field $\mathbb{F}_{p^4}$
+and the computation of line functions from points in $\mathbb{G}'_2$ evaluated at
+a point in $\mathbb{G}_1$ or its preimage under $\psi$.
+
+The function $f_{T,R}(S)$ is built up by accumulating the line function values.
+This requires efficient squaring and multiplication-by-line-function operations in
+the full extension field $\mathbb{F}_{p^{24}}$. The final exponentiation on elements
+in $\mathbb{F}^*_{p^{24}}$ has a fixed exponent and it is possible to use specialized
+more efficient squaring operations as well as other optimizations. Full extension field arithmetic needs to be particularly efficient as pairing efficiency strongly depends on it. It is therefore important to work with a well-chosen extension field tower, refer to \cite{CLN11}. 
+
+
+\subsection{Line function}
+\label{ssec:linefunction}
+
+The optimal ate pairing definition from \refTable{tab:mostcommonpairings}. Such pairing calculates $w = e(Q, P)$, where $Q \in \mathbb{G}_2$, $P \in \mathbb{G}_1$ are points in elliptic curve groups of order $r$, and
+$w \in \mathbb{G}_T$ is an element in the $k$-th degree extension, in this case
+$\mathbb{F}_{p^{12}}$, also of order $r$. The elliptic curve groups $\mathbb{G}_1$
+and $\mathbb{G}_2$ must be distinct groups of order $r$, taken over the extension
+$\mathbb{F}_{p^{12}}$. However a common optimization is to choose $\mathbb{G}_1$
+as the group on the curve $E(\mathbb{F}_p)$ taken over the base field $\mathbb{F}_p$,
+and $\mathbb{G}_2$ is represented on $E'(\mathbb{F}_{p^2})$ as the sextic twist of
+the trace-zero group, which can be instantly untwisted when needed to a point on
+$E(\mathbb{F}_{p^{12}})$.
+
+As we presented before the Miller loop (refer to \refAlgo{alg:millersalgorithmpractice}) needs to evaluate so-called line functions. These are elements in $\mathbb{F}_{p^{12}}$ that arise during the multiplication of $Q$  by $u$ using a standard double-and-add algorithm, and can be considered as a
+distance metric between these multiples of $Q$ and the second stationary point $P$.
+
+Assume $Q$ is represented using homogeneous projective coordinates, and that its
+current multiple has coordinates $(X, Y, Z)$, and assume that the coordinates of
+the fixed point $P$ are provided in affine form as $(x_P, y_P)$. The Miller loop
+calculates what is essentially the product of many line function evaluations. Refer to \cite{Scott2019PairingImplementationRevisited} for more about the sparsity exploitation.
+	
+\begin{algorithm}
+	\label{alg:atepairingoverbls12curve}
+	\caption{Ate pairing on BLS12 curve, refer to \cite{Scott2019PairingImplementationRevisited}}
+	\KwIn{$Q \in \mathbb{G}_2$, $P \in \mathbb{G}_1$, curve parameter $u$}
+	\KwOut{$f \in \mathbb{F}_{p^{12}}$}
+	$f \leftarrow 1$\;
+	$T \leftarrow Q$\;
+	\For{$i \leftarrow \lfloor \log_2(u) \rfloor - 1$ \KwTo $0$}{
+		$f \leftarrow f^2$\;
+		$f \leftarrow f \cdot l_{T,T}(P)$, $T \leftarrow 2T$\;
+		\If{$u_i = 1$}{
+			$f \leftarrow f \cdot l_{T,Q}(P)$, $T \leftarrow T + Q$\;
+		}
+	}
+	$f \leftarrow f^{(p^6 - 1)(p^2 + 1)(p^4 - p^2 + 1)/r}$\;
+	\Return{$f$}
+\end{algorithm}
+	
+
+In \refAlgo{alg:atepairingoverbls12curve}, $T$ represents the multiples of $Q$ that arise, and $l_{T,S}$
+represents the line function that arises when adding point $S$ to point $T$. It is coordinates of $T$ and $P$ that are used to calculate these line functions. Now we consider line 6 of the algorithm when the $i$-th bit of $u$ equals 1, that is $u_i = 1$. In this loop iteration after squaring $f$, the value of $f$ is
+updated as $f \leftarrow f \cdot l_{T,T}(P) \cdot l_{2T,Q}(P)$. If calculated
+as described in this standard algorithm this would cost two dense-sparse
+multiplications, that is $26\mathsf{M}$. However by calculating
+$l_{T,T}(P) \cdot l_{2T,Q}(P)$ separately, and only then multiplying $f$ by
+this product, the cost will be only $23\mathsf{M}$, as the sparse-sparse
+multiplication costs $6\mathsf{M}$ and the multiplication of the dense $f$ by
+their product costs $17\mathsf{M}$.
+
+
+\section{Optimizations}
+\label{ssec:optimizations}
+
+As mentioned earlier, optimization techniques are currently the subject of intensive research in their own right; for this reason, in this section we will mention only a few methods based on \cite{theory.pairings.for.beginners}.
+
+
+\subsection{Denominator elimination}
+\label{ssec:denominatorelimination}
+
+Let us review a refined version of Miller's algorithm for pairings over large prime fields, which is mostly due to improvements suggested by Barreto, Kim, Lynn and Scott \cite{BKLS02}, often referred as BKLS-GHS method.
+They started with an observation that allows us to conveniently replace the divisor $D_Q$ with the point $Q$ in the Tate pairing definition (refer to \refSubsection{secs:ch2.theoretictate}). Consequently long as $k > 1$ and $P$ and $Q$ are linearly independent, then $f_{r,P}(D_Q)^{(q^k-1)/r} = f_{r,P}(Q)^{(q^k-1)/r}$.
+
+This saves us defining a divisor equivalent to $D_Q = (Q) - (\BigO)$ with support disjoint to $(f_{r,P})$, but more importantly it allows us to simply evaluate the intermediate Miller function at the point $Q$ (rather than two points) in each iteration of Algorithm \refAlgo{alg:millersalgorithmpractice}.
+
+\begin{example}
+% Example 2.4.6
+ Let $q = 47$, $E/\mathbb{F}_q : y^2 = x^3 + 21x + 15$, $\#E(\mathbb{F}_q) = 51$, $r = 17$, $k = 4$, $\mathbb{F}_{q^4} = \mathbb{F}_q(u)$ with $u^4 - 4u^2 + 5 = 0$, $P = (45, 23) \in G_1$ and $Q = (31u^2 + 29, 35u^3 + 11u) \in G_2$. Thus, the Tate pairing is $e(P, Q) = f_{r,P}(Q)^{(q^k-1)/r} = (32u^3 + 17u^2 + 43u + 12)^{287040} = 33u^3 + 43u^2 + 45u + 39$, which is the same value we got when instead computing $f_{r,P}(D_Q) = f_{r,P}([2]Q)/f_{r,P}(Q)$.
+
+	
+% Notice that the values $f_{r,P}(D_Q)$ and $f_{r,P}(Q)$ output after the Miller loops in both examples are not the same, but the final exponentiation maps them to the same element in $\mu_{17}$. This is because $f_{r,P}(D_Q)$ and $f_{r,P}(Q)$ lie in the same coset of $(\mathbb{F}_{q^k}^*)^r$ in $\mathbb{F}_{q^k}^*$, i.e.\ they are the same element in the quotient group $\mathbb{F}_{q^k}^*/(\mathbb{F}_{q^k}^*)^r$.
+\label{example:denominatorelimination}
+\end{example}
+
+
+Now we can describe optimisation regarding the denominator elimination. Barreto et al. \cite{BKLS02} noticed that $q - 1 \mid (q^k - 1)/r$, since if $r \mid q - 1$ then the embedding degree would be $k = 1$. This allows us to write the final exponent as $(q^k - 1)/r = (q-1) \cdot c$, which gives $f_{r,P}(Q)^{(q^k-1)/r} = (f_{r,P}(Q)^{q-1})^c$, meaning that any elements of $\mathbb{F}_q$ contributing to $f_{r,P}(Q)$ will be mapped to one under the final exponentiation. Thus, one can freely multiply or divide $f_{r,P}(Q)$ by an element of $\mathbb{F}_q$ without affecting the pairing value \cite[Corr.\ 1]{BKLS02}.
+
+Therefore, the vertical lines appearing on the denominators of Miller's algorithm for the Tate pairing are entirely defined over $\mathbb{F}_q$: the line is a function $x - x_R$ that depends on $P \in E(\mathbb{F}_q)[r]$, which is evaluated at $x_Q \in \mathbb{F}_q$. Thus, in this case the contribution of (each of) the denominators to $f_{r,P}(Q)$ ends up being mapped to $1$ under the final exponentiation, so these denominators (the $v$'s in the $\ell/v$'s refer to Steps 5 and 9 in \refAlgo{alg:millersalgorithmpractice}) can be removed from the Miller loop.
+
+\begin{example}
+	% Example 2.6.2
+	%http://www.craigcostello.com.au/pairings/scripts/2-6-2-TateDenomElim.txt
+	Again, we will continue on from \refExample{example:denominatorelimination} for the sake of a convenient comparison. We simply give an updated table that details the intermediate Miller functions and pairing values subject to denominator elimination. Therefore, $e(P, Q) = f_{r,P}(Q)^{(q^k-1)/r} = (9u^3 + 10u^2 + 32u + 36)^{(q^k-1)/r} = 33u^3 + 43u^2 + 45u + 39$, which agrees with the Tate pairing value.
+	\label{example:denomelimtate}
+\end{example}
+
+
+Lastly, we now refine Miller's algorithm for the Tate pairing computation subject to the BKLS-GHS improvements. The denominators that were on lines 5 and 9 have now gone (under the assumption that $k$ is even), and that the second input is now the point $Q$, rather than a divisor equivalent to $D_Q$. Furthermore we  have necessarily included the final exponentiation in Algorithm 2.2 since this is what facilitates the modifications. 
+We note that Type 3 pairing were assumed so the coordinates of $P$ and $Q$ lie in fields that allow for denominator elimination. Recall that the vertical line joining $(r-1)P = -P$ and $P$ in the last iteration can also be omitted. Thus, an optimised Tate pairing computation will execute the main loop from $i = n-2$ to $i = 1$ before performing a doubling-only iteration to finish; we left the main loop to $i = 0$ for simplicity as can be followed in \refAlgo{pseudo:millerbkls-ghs}.
+
+\begin{algorithm}
+	\caption{The BKLS-GHS version of Miller's algorithm for the Tate pairing.}
+	\KwIn{$P \in G_1$, $Q \in G_2$ (Type 3 pairing) and $r = (r_{n-1} \ldots r_1 r_0)_2$ with $r_{n-1} = 1$}
+	\KwOut{$f_{r,P}(Q)^{(q^k-1)/r} \leftarrow f$}
+	$R \leftarrow P$, $f \leftarrow 1$\;
+	\For{$i = n-2$ \KwTo $0$}{
+		Compute the sloped line function $\ell_{R,R}$ for doubling $R$\;
+		$R \leftarrow [2]R$\;
+		$f \leftarrow f^2 \cdot \ell_{R,R}(Q)$\;
+		\If{$r_i = 1$}{
+			Compute the sloped line function $\ell_{R,P}$ for adding $R$ and $P$\;
+			$R \leftarrow R + P$\;
+			$f \leftarrow f \cdot \ell_{R,P}(Q)$\;
+		}
+	}
+	\Return{$f \leftarrow f^{(q^k-1)/r}$}\;
+	\label{pseudo:millerbkls-ghs}
+\end{algorithm}
+
+
+
+\subsection{Low hamming weights}
+\label{ssec:lowhamming}
+
+Regardless of the pairing-based protocol, the loop length of the pairing is known
+publicly; therefore, unlike ECC where we try to avoid special choices of scalars
+that might give attackers unnecessary advantage, in PBC there is no problem in
+specialising the choice of the loop length. In this light, it is advantageous to use
+curves where the loop length has a low Hamming weight, thus minimising the
+number of additions incurred in Miller’s algorithm.
+
+\begin{example}[BLS curve low hamming weight. Motivated by \cite{theory.pairings.for.beginners}]
+	% http://www.craigcostello.com.au/pairings/scripts/2-6-10-BLShamming.txt
+	Both $x = 258419657403767392$ and $x = 144115188109674496$ are 58-bit values that result in $k = 24$ BLS curves suitable for pairings at the 224-bit security level. The former was found by kick-starting the search at a random value between $2^{57}$ and $2^{58}$, and as such, has a Hamming weight of 28, as we would expect. On the other hand, the second value is actually $2^{57} + 2^{25} + 2^{18} + 2^{11}$, which has Hamming weight 4. Thus, we would much prefer the second value since this would result in 24 less additions through the Miller loop. Another nice alternative that gives similar parameter sizes is $x = 2^{56} + 2^{40} - 2^{20}$, which does not have a low Hamming weight, but rather a low NAF-weight (weight in the signed binary representation), for which Miller's algorithm can be updated to take advantage of.
+	
+	\label{example:blshamming}
+\end{example}
+
+%\subsection{Towered extension fields}
+
+
+
+
+% ---------
+\subsection{Implementation Summary: Reduced Tate Pairing on BLS12-381}
+\label{ssec:tateimplemented}
+
+The SageMath implementation (refer to \refApxCode{apx:code.reducedtate}) realizes the reduced Tate pairing
+$\tau: \GG_1 \times \GG_2 \to \GG_T$ on the BLS12-381 curve, directly instantiating the theoretical constructions surveyed in the preceding sections. Therefore curve is defined by $E: y^2 = x^3 + 4$ over $\mathbb{F}_p$, with embedding degree $k = 12$, subgroup order $q = x^4 - x^2 + 1$,
+and BLS seed $x = -15132376222941642752$, satisfying the BLS12  polynomial family (refer to \refTable{tab:bls-families}). The $\rho$-value is $\rho \approx 1.5$, and the 381-bit prime field together with $k = 12$ yields a 4572-bit target group
+$\mathbb{F}_{p^{12}}^*$, meeting the requirements for 128-bit security outlined in \refTable{tab:ch1.securitylevelsandfieldsize}.  The implementation constructs the extension field tower $\mathbb{F}_p \subset \mathbb{F}_{p^2} \subset \mathbb{F}_{p^{12}}$ following the strategy reviewed in \refSubsection{ssec:choosingbetweenpairingfriendlycurves}. The group $G_1 = E(\mathbb{F}_p)[q]$ is the $\mathbb{F}_p$-rational $q$-torsion, while $G_2$ is represented on the sextic twist $E'(\mathbb{F}_{p^2})$ and lifted to $E(\mathbb{F}_{p^{12}})$ via the untwist isomorphism $\psi^{-1}(x', y') = (x'/w^2,\, y'/w^3)$, keeping $G_2$ arithmetic in the cheaper quadratic field as described in \refSubsection{ssec:linefunction}.
+
+We note that a further optimization regarding the Miller loop could be BKLS-GHS version outlined in
+\refAlgo{pseudo:millerbkls-ghs}. On the other the computation may be more efficienty by
+exploiting the low Hamming weight of $x$ (as discussed in \refSubsection{ssec:lowhamming}) deferring to the final exponentiation.
+
+The exponent $(p^{12}-1)/q$ is decomposed as $(p^6-1)(p^2+1) \cdot (p^4-p^2+1)/q$,
+separating the cheap \emph{easy part} (two Frobenius maps, one inversion, two multiplications) from the \emph{hard part}. The hard part is computed via a Frobenius-based decomposition
+$f^{(p^4-p^2+1)/q} = f^{\lambda_0} \cdot (f^{\lambda_1})^p \cdot 
+(f^{\lambda_2})^{p^2} \cdot (f^{\lambda_3})^{p^3}$, where each $\lambda_i$ is a polynomial in $x$, requiring only five short exponentiations by the BLS seed, a strategy corresponding
+to Algorithm~1 of \cite{AranhaBLR2013}. Both a trivial reference mode ($f^{(p^{12}-1)/q}$ directly) and the optimised two-phase mode are implemented and cross-validated, with the optimised result satisfying $\tau_{\mathrm{opt}}(P,Q) =\tau(P,Q)^3$, verified by the assertion \lstinline|mu\_r\_tate\_1**3 == mu\_r\_tate\_2|. Recall the pairing properties from \refSection{sec:ch1.ellipticcurvesaspairinggroups}, the implementation includes axiomatic test beyond the membership assertion $\tau(P,Q)^q = 1$,  to establishing all defining properties of the pairing as can be followed in \refPseudo{code:tateimplementok}: 
+\begin{itemize}
+	\item \textbf{Non-degeneracy}: $\tau(P,Q) \neq 1$ for independent generators $P \in \GG_1$, $Q \in \GG_2$.
+	\item \textbf{Bilinearity in $P$}: $\tau(aP, Q) = \tau(P,Q)^a$.
+	\item \textbf{Bilinearity in $Q$}: $\tau(P, aQ) = \tau(P,Q)^a$.
+	\item \textbf{Joint and cross bilinearity}: $\tau(aP, bQ) = \tau(P,Q)^{ab} = \tau(bP, aQ)$.
+\end{itemize}
+
+\begin{lstlisting}[caption={Axiomatic test initiated to ensure Tate pairing is correctly implemented. (refer to \refCodeSnippet{apx:code.tateimplementationtest})},label=code:tateimplementok]
+	# e(P, Q) must not be 1 for non-trivial independent generators
+	Non-degeneracy: OK
+	
+	Bilinearity in P:
+	e(aP,Q) == e(P,Q)^a  OK
+	
+	Bilinearity in Q:
+	e(P,aQ) == e(P,Q)^a  OK
+	
+	Joint bilinearity:
+	e(aP,bQ) == e(P,Q)^(ab)  OK
+	
+	Cross bilinearity:
+	e(aP,bQ) == e(bP,aQ)  OK
+\end{lstlisting}
+%  ------
+Although the reduced Tate pairing implementation presented above is experimentally verified, it leaves substantial room for optimization at the algorithmic level. Three principal directions are mentioned below, each reducing the dominant cost (the Miller loop length) by exploiting the 
+structure of the BLS12-381 parameters.  The first and most immediate improvement follows from replacing the Tate pairing loop scalar $q \approx 2^{255}$ with the trace of
+Frobenius $T = t - 1 = x$, where $|x| \approx 2^{63}$ for BLS12-381.
+The  \textit{ate pairing} (refer to \refTable{tab:mostcommonpairings}) is defined as
+\[
+a(Q, P) = f_{T,\,Q}(P)^{(p^{12}-1)/q},
+\]
+swapping the roles of $P$ and $Q$ so that the Miller loop iterates
+over $Q \in G_2$ with $P \in G_1$ as the evaluation point. Since $\log_2|T| \approx 63$ compared to $\log_2 q \approx 255$, the loop length is reduced by a factor of approximately $4\times$,
+giving a proportional reduction in the number of $\mathbb{F}_{p^{12}}$ squarings and line-function multiplications. The final exponentiation remains unchanged. Correctness follows from the identity
+$f_{T,Q}(P)^{(p^{12}-1)/q} = f_{q,P}(Q)^{(p^{12}-1)/q}$, which holds modulo the kernel of the final exponentiation map.
+
+The $r$-ate pairing generalizes the ate pairing by allowing the loop scalar to be any element of the lattice $\Lambda = \{ s \in \mathbb{Z} : s \equiv 0 \pmod{q},\, |s| < p^{k/2} \}$
+reduced modulo $q$. For BLS12-381 one may take $s = x^2 - 1$ or similar short
+combinations of powe rs of $x$, yielding loop lengths as short as $\log_2|s| \approx 126$ bits.
+The key theoretical requirement is that $s \not\equiv 0 \pmod{q}$ and that the resulting Miller function still lies in the correct coset of $(\mathbb{F}_{p^{12}}^*)^q$, which is guaranteed when $s$ belongs to the Optimal Ate admissibility conditions
+(refer to \cite{Hess2008PairingLattices}).
+
+The \emph{optimal Ate pairing} achieves the theoretical lower bound
+on loop length, namely $\log_2 \ell \approx \log_2(q)/\varphi(k)$
+(refer to \refTable{tab:mostcommonpairings}), where $\varphi(k) = 4$
+for $k = 12$, giving $\ell \approx 2^{64}$.
+For BLS12-381 this is realised by the scalar $\ell = x$, recovering
+precisely the BLS seed, so that the optimal Ate loop length coincides
+with that of the ate pairing. 
+Combined with the denominator elimination of \refSubsection{ssec:denominatorelimination}, sparse-sparse line function multiplication (saving $3\mathsf{M}$ per bit-1 iteration as
+noted in \refSubsection{ssec:linefunction}), and the lazy-reduction strategy for $\mathbb{F}_{p^{12}}$ arithmetic, the optimal Ate pairing on BLS12-381 represents the state-of-the-art implementation target, reducing the total Miller loop cost relative to the Tate implementation above by a factor exceeding $4\times$ before any field-level
+optimizations are applied. 
+
+
+

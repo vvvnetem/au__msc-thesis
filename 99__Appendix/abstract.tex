@@ -1,0 +1,67 @@
+
+% =============================================================================
+% ABSTRACT
+\pagestyle{plain}
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+% Intro to pairing based computation, ECC over Finite Field
+% Theoretical background (divisors, towering, different industrial curves)
+% Towering, exTNFS type attacks,  Specific attacks (kell ez ??)
+% BLS-381 curve and it's application (128bit, 192bit security levels), ha van itt meg curve akkor erdemes megemliteni 
+% Elliptic curves over C --> 
+% Generalization of pairing computations --> isogeny based signature schemes  
+% SageMath kodok examplenek, kiertekelesek.
+% Main goal: half survey like into transition, half implementation (using alredy made examples, some other examples on different curves)
+
+
+Pairing-based cryptography has emerged as a cornerstone of modern public-key cryptographic constructions, 
+since the seminal work of Joux\cite{joux2004one} introducing a one-round three-party Diffie-Hellman protocol using bilinear pairings. \cite{Menezes2009Pairing}
+
+%The general assumption was and has been proven in some cases (e.g., see \cite{denBoer1988diffie, maurer1999relationship}), that the Discrete Logarithm Problem (DLP) reduces in polynomial time to the Diffie-Hellman Problem (DHP).\cite{Menezes2009Pairing}
+
+
+%The underlying question was whether there exists a three-party one-round key  agreement protocol that is secure against eavesdroppers given a setting of Diffie-Hellman key aggreement protocol
+%building upon the Diffie-Hellman problem (DHP)
+
+
+Since the seminal work of Joux\cite{joux2004one}, subsequently, the field of pairings became a priority research area. 	
+At their core, pairings builds on bilinear maps defined on elliptic curves over finite fields, transferring hard problems from elliptic-curve groups to multiplicative subgroups of finite fields while preserving sufficient hardness assumptions for cryptographic security. 
+
+%For instance, the underlying Diffie-Hellman Problem believed to be intractable for specifically chosen groups over a finite field, such as the multiplicative group of a finite field or the group of points of an elliptic curve defined over a finite field. \cite{Menezes2009Pairing}
+
+
+In the last four decades such extensive research provided a fundamental tool for designing cryptosystems, 
+pairings such as the Weil and Tate-Lichtenbaum pairings have found widespread application in identity-based encryption\cite{BF01}, short digital signatures, zero-knowledge proof systems\cite{bitansky2012extractable}, and advanced privacy-preserving protocols. 
+
+%	However, developments in quantum computing have led to a generally accepted recognition that a future large-scale quantum computer would be able to break any public-key cryptosystem used today (e.g. based on ECC).\cite{AranhaFotiadisGuillevic2024}
+
+%In response to this, several globally recognized government agencies have taken steps to standardize post-quantum  cryptographic (PQC) systems , focusing primarily on digital signatures and key exchange/public key encryption systems.
+%Despite the current efforts, such existing solutions suffer from various disadvantages in terms of efficiency and compactness to gain the necessary trust in the academic and industrial domains. \cite{AranhaFotiadisGuillevic2024}
+
+%Therefore, it is believed that before transition to purely quantum-safe cryptography an intermediate step shall occur where current classically secure protocols and quantum-safe solutions will co-exist.\cite{AranhaFotiadisGuillevic2024} This is confirmed by the Commercial National Security Algorithm Suite 2.0 report\cite{nsa2022cnsa2}, which  makes the transition to quantum-resistant cryptographic algorithms mandatory by 2033 and recommends the use of 192-bit security level ECC until then.\cite{AranhaFotiadisGuillevic2024, nsa2022cnsa2}
+
+%%
+We begin with a concise theoretical foundation, covering elliptic curves over finite fields, divisors, and the mathematical structure underlying Weil and Tate-Lichtenbaum pairings. Special emphasis is placed on the concept of extension field towering, embedding degrees, and curve families used in industrial practice. \cite{theory.pairings.for.beginners, Washington2008ECC, costello.fast.formulas.thesis}
+
+
+This work provides a hybrid contribution that is both a survey and an example-oriented study on pairing constructions which enjoy industry interest, such as the BLS12-381 curve. As such, the practical component of this work includes SageMath \cite{tools.sagemath} implementations and experiments, illustrating pairing computations, subgroup operations, and performance characteristics using existing libraries and examples motivated by the referenced academic sources.
+
+%. As the main focus is on pairing computations the BLS12-381 curve is discussed as a 128-bit security benchmark, while higher-security curve families suitable for 192-bit security are reviewed and evaluated as time permits.
+%\cite{ecc.pairing.curves.bls,AranhaFotiadisGuillevic2024 }
+
+
+%We review the discrete logarithm problem and Diffie?Hellman problem as security primitives.
+
+%\todo{rephrase here}
+%\todo{rephrase after mention attacking}
+%With focus on security-efficiency trade-off in pairing-friendly curves under modern cryptoanalytic advances, we examine extension field variants of the Number Field Sieve, including exTNFS and Special TNFS-type attacks\cite{AranhaFotiadisGuillevic2024}, and discuss their implications for curve selection at higher security levels.
+
+%If the available time allows it, we explore the conceptual and computational connections between pairings and isogenies.\cite{defeo2017mathematicsisogenybasedcryptography} Isogenies serve as algebraic bridges between elliptic curves and play a fundamental role in both pairing computation and post-quantum cryptographic schemes.\cite{isogeny.pairings} We discuss how techniques developed for efficient pairing computation inform modern isogeny-based signature schemes such as SQISign\cite{sqisign2025spec}, and how Montgomery curve arithmetic and ladder-based scalar multiplication form a shared computational backbone.\cite{isogeny.pairings,defeo2017mathematicsisogenybasedcryptography}
+
+
+% =============================================================================
+
+%In addition, several large industrial companies have introduced a post-quantum migration policy for the transition period, which includes solutions such X25519MLKEM768\cite{ietf-tls-ecdhe-mlkem-03} that combines Elliptic Curve Diffie-Hellman (ECDH)\cite{rfc8418.ecdh}, a classic key exchange algorithm with Module-Lattice-Based Key-Encapsulation Mechanism (ML-KEM)\cite{NIST_FIPS_203_2024.ml-kem}, a public-key encryption and key-establishment algorithm. \cite{aws2024postquantum, intel2024postquantum}
+
+

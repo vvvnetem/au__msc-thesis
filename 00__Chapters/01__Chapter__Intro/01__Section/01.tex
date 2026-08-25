@@ -1,0 +1,142 @@
+
+\section{Overview of Finite Field Arithmetic}
+\label{sec:ch01.finiteFieldArithmetic}
+
+Finite field arithmetic plays an important role as in elliptic-curve based cryptosystems because curve operations  are performed using arithmetic operations in the underlying field.  In present section building upon the previous \refSection{sec:ch01.groupsringsandfields}, thus I review the formal definitions, theorems and lemmas related to finite fields: prime fields, binary fields and extension fields. 
+
+Please note, for this section I refer primarily \cite{menezes2004ECC}, with the exception of those subsections where additional references are also cited. 
+
+
+\subsection{Introduction to finite fields}
+\label{ssec:ch1.introtofinitefields}
+Building upon \refSubsection{ssec:ch01.fields} we can think about fields as abstractions of  number systems (such as the rational numbers $\mathbb{Q}$, the real numbers $\mathbb{R}$, and the complex numbers $\mathbb{C}$) and their essential properties. They consist of a set $\mathbb{F}$ together with two binary operations: addition (denoted by $+$) and multiplication (denoted by $\cdot$). Both operations satisfy the usual arithmetic properties as follows:
+
+\begin{enumerate}
+	\item $(\mathbb{F}, +)$ forms an abelian group with (additive) identity denoted by $0$.
+	\item $(\mathbb{F} \setminus \{0\}, \cdot)$ forms an abelian group with (multiplicative) identity denoted by $1$.
+	\item The distributive law can expressed as: $(a + b) \cdot c = a \cdot c + b \cdot c$ for all $a, b, c \in \mathbb{F}$.
+\end{enumerate}
+
+If the set $\mathbb{F}$ is finite, then the we call the field \textit{finite}.
+
+%% SOURCE MENEZES 2204
+\subsubsection{Field Operations}
+\label{sssec:ch01.fieldOperations}
+
+As I mentioned before, the  field $\mathbb{F}$ is equipped with two binary operations, addition and multiplication. This also opens up the possibility to express subtraction of field elements in terms of addition: For $a, b \in \mathbb{F}$,  $a - b = a + (-b)$  where $-b$ is the unique element in $\mathbb{F}$ such that $b + (-b) = 0$, where  $-b$ is also called the \textit{negative} of $b$. 
+
+Similarly, division of field elements is defined in terms of multiplication: for $a, b \in \mathbb{F}$ with $b \neq 0$,
+$a / b = a \cdot b^{-1}$, where $b^{-1}$ is the unique element in $\mathbb{F}$ such that $b \cdot b^{-1} = 1$. In the expression $b^{-1}$ is called the \textit{inverse} of $b$. 
+
+\subsubsection{Existence and Uniqueness criteria and Field Characteristics}
+\label{sssec:ch01.existenceUniqueness}
+
+The \textit{order} of a finite field is the number of elements in the field. Then, there exists a finite field $\mathbb{F}$ of order $q$ if and only if $q$ is a prime power i.e., $q = p^m$ where $p$ is a prime number and $m$ is a positive integer. If $m = 1$, then $\mathbb{F}$ is called a \textit{prime field}, while $m \geq 2$, then $\mathbb{F}$ is called an \textit{extension field}. 
+
+% p is a prime number called the \textit{characteristic} of $\mathbb{F}$ (refer to \refDef{def:characteristicoffield}), 
+
+
+For any prime power $q$, there is only one finite field of order $q$.  On the other hand, this means that any two finite fields of order $q$ are structurally the same, with the exception that the labeling used to represent the field elements may differ. We also say that any two finite fields of order $q$ are \textit{isomorphic} and denote such a field by $\mathbb{F}_q$.
+
+\subsubsection{Prime fields, Binary fields, Extension fields}
+\label{sssec:ch01.primefieldsbinaryfieldsextensionfield}
+
+
+Let $p$ be a prime number. The integers modulo $p$ (consisting of the integers $\{0, 1, 2, \ldots, p-1\}$) with addition and multiplication (performed modulo $p$), is a finite field of order $p$. We denote this field by $\mathbb{F}_p$, furthermore we call $p$ the \textit{modulus} of $\mathbb{F}_p$. Furthermore we introduce the operation \textit{reduction modulo} $p$ as follows: for any integer $a$, $a \mod p$ denote the unique integer remainder $r$, $0 \leq r \leq p-1$, obtained upon dividing $a$ by $p$. 
+
+Finite fields of order $2^m$ are called \textit{binary fields}, also known as \textit{characteristic-two finite fields}. One way to construct $\mathbb{F}_{2^m}$ is to use a polynomial basis representation. The elements of $\mathbb{F}_{2^m}$ are the binary polynomials (polynomials whose coefficients are in the field $\mathbb{F}_2 = \{0,1\}$) of degree at most $m-1$ as can be followed in \refEquation{eq:ch1.binaryField}:
+
+\begin{equation}
+	\mathbb{F}_{2^m} = \{ a_{m-1} z^{m-1} + a_{m-2} z^{m-2} + \cdots + a_2 z^2 + a_1 z + a_0 : a_i \in \{0, 1\} \}.
+	\label{eq:ch1.binaryField}
+\end{equation}
+
+We note that (based on \textit{Appendix A.1}\cite{menezes2004ECC}) an irreducible binary polynomial $f(z)$ of degree $m$
+exists for any $m$ and can be efficiently found. By irreducibility of $f(z)$ we mean that $f(z)$ cannot be factored as a product of binary polynomials each of degree less than $m$, similarly as we seen before in \refDef{def:irreduciblepol} .
+
+\begin{example}[Binary field $\mathbb{F}_{2^4}$]
+	\label{ex:ch01.binaryFieldF24}
+	Let us now follow with an example using \refEquation{eq:ch1.binaryField}. The elements of $\mathbb{F}_{2^4}$ are the 16 binary polynomials of degree at most 3, can be represented as follows \cite{menezes2004ECC}:
+	
+	\begin{equation}
+		\mathbb{F}_{2^4} = \left\{
+		\begin{array}{llll}
+			0,          & 1,              & z,          & z+1,          \\[4pt]
+			z^2,        & z^2+1,          & z^2+z,      & z^2+z+1,      \\[4pt]
+			z^3,        & z^3+1,          & z^3+z,      & z^3+z+1,      \\[4pt]
+			z^3+z^2,    & z^3+z^2+1,      & z^3+z^2+z,  & z^3+z^2+z+1   \\[4pt]
+		\end{array}
+		\right\}.
+		\label{eq:ch1.F24elements}
+	\end{equation}
+\end{example}
+
+Taking into consideration the operations, addition of field elements may performed as the usual addition of polynomials, with coefficient arithmetic performed modulo $2$. Multiplication of field elements on the other hand performed modulo the reduction 
+polynomial $f(z)$. For any binary polynomial $a(z)$, $a(z) \mod f(z)$  will denote therefore the unique remainder polynomial $r(z)$ of degree less than $m$ obtained upon long division of $a(z)$
+by $f(z)$. In the literature this operation is commonly referred as \textit{reduction modulo} $f(z)$.
+
+\begin{example}[Examples of arithmetic operations in $\mathbb{F}_{2^4}$]
+	\label{ex:ch01.arithmeticoperationsinf24}
+	Based on\cite{menezes2004ECC}, let the reduction polynomial be $f(z) = z^4 + z + 1$, then
+	\begin{itemize}
+		\item \textbf{Addition} performed as:  $(z^3 + z^2 + 1) + (z^2 + z + 1) = z^3 + z$.
+		\item \textbf{Subtraction}  performed as: $(z^3 + z^2 + 1) - (z^2 + z + 1) = z^3 + z$. We can use fact that $-1 = 1$ in $\mathbb{F}_2$, thus we have $-a = a$ for all $a \in \mathbb{F}_{2^m}$
+		\item  \textbf{Multiplication:} $(z^3 + z^2 + 1) \cdot (z^2 + z + 1) = z^2 + 1$. As a first step we $(z^3 + z^2 + 1) \cdot (z^2 + z + 1) = z^5 + z + 1$, than $(z^5 + z + 1) \mod (z^4 + z + 1) = z^2 + 1$.
+		\item \textbf{Inversion:} can be performed as: $(z^3 + z^2 + 1)^{-1} = z^2$, since $(z^3 + z^2 + 1) \cdot z^2 \mod (z^4 + z + 1) = 1$.
+	\end{itemize}
+\end{example}
+
+
+
+\subsubsection{Extension Fields}
+\label{sssec:ch01.extensionFields}
+
+We briefly mentioned field extensions at the end of \refSubSubsection{ssec:ch01.rings}, now let us continue with more precision. We will use the fact that the polynomial basis representation for any binary field can be generalized to all extension fields. 
+
+Let $p$ be a prime and $m \geq 2$. Then, we introduce the notation $\mathbb{F}_p[z]$, which denotes the set of all
+polynomials in the variable $z$ with coefficients from $\mathbb{F}_p$. Let $f(z)$, the \textit{reduction polynomial},
+be an irreducible polynomial (as we previously mentioned in \refSubsection{ssec:ch1.introtofinitefields}) of degree $m$ in $\mathbb{F}_p[z]$. The elements of $\mathbb{F}_{p^m}$ are the polynomials in $\mathbb{F}_p[z]$ of degree at most $m-1$ can be expressed in accordance with \refEquation{eq:ch1.extensionFieldElements}:
+
+\begin{equation}
+	\mathbb{F}_{p^m} = \{ a_{m-1}z^{m-1} + a_{m-2}z^{m-2} + \cdots + a_2 z^2 + a_1 z + a_0 : a_i \in \mathbb{F}_p \}.
+	\label{eq:ch1.extensionFieldElements}
+\end{equation}
+
+Furthermore the addition operation of field elements is the usual addition of polynomials, with coefficient arithmetic
+performed in $\mathbb{F}_p$. Multiplication of field elements is performed modulo the polynomial $f(z)$. 
+%%%%
+\subsubsection{Bases of a Finite Field}
+\label{sssec:ch01.basesFiniteField}
+
+The finite field $\mathbb{F}_{q^n}$ can be viewed as a vector space over its subfield $\mathbb{F}_q$. In this abstraction the  vectors are elements of $\mathbb{F}_{q^n}$, scalars are elements of $\mathbb{F}_q$.  Vector addition corresponds the addition operation in $\mathbb{F}_{q^n}$, while scalar multiplication  corresponds the multiplication in $\mathbb{F}_{q^n}$ of $\mathbb{F}_q$-elements with $\mathbb{F}_{q^n}$-elements.
+The vector space has dimension $n$ and has many bases.
+
+If $\mathcal{B} = \{b_1, b_2, \ldots, b_n\}$ is a basis, then $a \in \mathbb{F}_{q^n}$ can be uniquely represented
+by an $n$-tuple $(a_1, a_2, \ldots, a_n)$ of $\mathbb{F}_q$-elements where $a = a_1 b_1 + a_2 b_2 + \cdots + a_n b_n$.
+In such representation for instance the polynomial basis representation of the field $\mathbb{F}_{p^m}$ is an $m$-dimensional vector space over $\mathbb{F}_p$ and $\mathcal{B} = \{z^{m-1},\, z^{m-2},\, \ldots,\, z^2,\, z,\, 1\}$
+is a basis for $\mathbb{F}_{p^m}$ over $\mathbb{F}_p$.
+
+\begin{example}[Polynomial basis representation of $\mathbb{F}_{2^4}$]
+	\label{ex:ch01.polynomialBasisF24}
+	Let us consider the field $\mathbb{F}_{2^4}$ with reduction polynomial $f(z) = z^4 + z + 1$ based on \cite{menezes2004ECC}.
+	The polynomial basis over $\mathbb{F}_2$ is described as $\mathcal{B} = \{z^3,\, z^2,\, z,\, 1\}$.  With every element $a \in \mathbb{F}_{2^4}$ can be uniquely written as  $	a = a_3 z^3 + a_2 z^2 + a_1 z + a_0, \quad a_i \in \{0, 1\}$.
+	
+	For instance, the element $z^3 + z + 1$ has coordinate representation $(a_3, a_2, a_1, a_0) = (1, 0, 1, 1)$
+	with respect to $\mathcal{B}$, corresponding to the 4-bit string $1011$.
+\end{example}
+
+Before me move to \refSection{sec:ch01.motivationPairingCryptography} we close this introductory section with the  multiplicative group definition for a given finite field.  Let the nonzero elements of a $\mathbb{F}_q$ finite field  denoted as $\mathbb{F}_q^*$.  $\mathbb{F}_q^*$ the also form a cyclic group under multiplication, hence there exist elements $b \in \mathbb{F}_q^*$ called \textit{generators} such that 
+\begin{equation}
+	\mathbb{F}_q^* = \{ b^i : 0 \leq i \leq q-2 \}.
+	\label{eq:ch1.multiplicativeGroup}
+\end{equation}
+The \textit{order} of $a \in \mathbb{F}_q^*$ is the smallest positive integer $t$ such that $a^t = 1$.
+Since $\mathbb{F}_q^*$ is a cyclic group, it follows that $t$ is a divisor of $q - 1$. 
+
+%
+Before we dive into introduction of the elliptic curve operations over finite field (refer to  \refSection{sec:ch1.EllipticCurveCryptographicGroups}) in detail, we will briefly gave a context about the elliptic curve security assumptions related to \textit{Public-Key Cryptographic} systems.  
+
+\section{Public-key Cryptography using Elliptic Curves}
+\label{sec:ch01.motivationPairingCryptography}
+
+

@@ -1,0 +1,204 @@
+\section{Motivation}
+\label{sec:ch00.motivation}
+
+Pairing-based cryptography has emerged as a cornerstone of modern public-key cryptographic constructions, 
+since the seminal work of Joux\cite{joux2004one} introducing a one-round three-party Diffie-Hellman protocol using bilinear pairings. \cite{Menezes2009Pairing}
+The general assumption was and has been proven in some cases (e.g., see \cite{denBoer1988diffie, maurer1999relationship}), that the Discrete Logarithm Problem (DLP) reduces in polynomial time to the Diffie-Hellman Problem (DHP).\cite{Menezes2009Pairing}
+Thus, the underlying Diffie-Hellman Problem believed to be intractable for specifically chosen groups over a finite field, such as the multiplicative group of a finite field or the group of points of an elliptic curve defined over a finite field. \cite{Menezes2009Pairing}
+
+%The underlying question was whether there exists a three-party one-round key  agreement protocol that is secure against eavesdroppers given a setting of Diffie-Hellman key aggreement protocol
+%building upon the Diffie-Hellman problem (DHP)
+
+
+Since the seminal work of Joux\cite{joux2004one}, subsequently, the field of pairings became a priority research area. 	
+At their core, pairings builds on bilinear maps defined on elliptic curves over finite fields, transferring hard problems from elliptic-curve groups to multiplicative subgroups of finite fields while preserving sufficient hardness assumptions for cryptographic security.
+
+In the last four decades such extensive research provided a fundamental tool for designing cryptosystems, 
+pairings such as the Weil and Tate-Lichtenbaum pairings have found widespread application in identity-based encryption\cite{BF01}, short digital signatures, zero-knowledge proof systems\cite{bitansky2012extractable}, and advanced privacy-preserving protocols.However, developments in quantum computing have led to a generally accepted recognition that a future large-scale quantum computer would be able to break any public-key cryptosystem used today (e.g. based on ECC).\cite{AranhaFotiadisGuillevic2024}
+
+In response to this, several globally recognized government agencies have taken steps to standardize post-quantum  cryptographic (PQC) systems , focusing primarily on digital signatures and key exchange/public key encryption systems.
+Despite the current efforts, such existing solutions suffer from various disadvantages in terms of efficiency and compactness to gain the necessary trust in the academic and industrial domains \cite{AranhaFotiadisGuillevic2024}.  Therefore, it is believed that before transition to purely quantum-safe cryptography an intermediate step shall occur where current classically secure protocols and quantum-safe solutions will co-exist.\cite{AranhaFotiadisGuillevic2024} This is confirmed by the Commercial National Security Algorithm Suite 2.0 report\cite{nsa2022cnsa2}, which  makes the transition to quantum-resistant cryptographic algorithms mandatory by 2033 and recommends the use of 192-bit security level ECC until then.\cite{AranhaFotiadisGuillevic2024, nsa2022cnsa2}
+
+\subsection{Objectives}
+\label{ssec:ch00.objectives}
+
+This work provides a hybrid contribution that is both a survey and an example-oriented study on pairing constructions which enjoy industry interest, such as pairing over BLS curves.\cite{ecc.pairing.curves.bls,AranhaFotiadisGuillevic2024}
+
+%such as Optimal ate pairing over curve BLS12-381.\cite{ecc.pairing.curves.bls,AranhaFotiadisGuillevic2024}
+
+Therefore we begin with a concise theoretical foundation, covering elliptic curves over finite fields, divisors, and the mathematical structure underlying Weil and Tate-Lichtenbaum pairings. Special emphasis is placed on the concept of extension field towering, embedding degree, and how one can choose parameters securely which are aligned industrial best practices. \cite{theory.pairings.for.beginners, Washington2008ECC, costello.fast.formulas.thesis}
+
+\section{Organization of the document}
+\label{ssec:ch00.organizationofdocument}
+
+\subsection*{Chapter 1}
+
+The introductory chapter of my thesis introduces my motivation ( \refSubsection{sec:ch00.motivation}), describes the objectives ( \refSubsection{ssec:ch00.objectives}). Within \refSubsection{ssec:ch00.organizationofdocument} the Reader get an overview of the organization the document itself, lastly the chapter ends with \refSubsection{ssec:ch00.contributions} outlining my contributions to the subject matter. 
+
+
+
+\subsection*{Chapter 2}
+
+Accordingly for a more straightforward didactic structure and  in accordance with the objectives of  \refSubSubsection{ssec:ch00.objectives}, 
+\refChapter{ch:prelim}
+starts with a brief introduction to groups, rings and fields in \refSubsection{sec:ch01.groupsringsandfields}. The subsection then closes with the justification for Galois field and why is it essential for cryptographic applications, such as pairings.
+
+
+For the sake of efficient computation, it is of paramount importance that the chosen finite field possess good arithmetic properties. Therefore  
+ \refSubsection{sec:ch01.finiteFieldArithmetic} follows with the overview of finite field arithmetic, including field operations, the existence and uniqueness criteria and field characteristics.
+  
+
+\refSection{sec:ch01.motivationPairingCryptography} provides the connection between pairing-based cryptography and elliptic curve based cryptosystems with respect to the related security assumptions . Specifically, we review several assumptions based on discrete log problem that play a critical role in pairing based cryptosystem security.
+
+Within \refSection{sec:ch1.EllipticCurveCryptographicGroups}
+we review the elliptic curve operations over finite fields, which are
+serves us the building blocks for pairing computation. 
+The simplification of the Weierstrass Equation introduced in  \refEquation{eq:ch1.weierstrass}
+provides us the ability to differentiate between three distinct cases
+in relation with field characteristics. Yields us with the notation
+of non-supersingular (ordinary) and supersingular elliptic curves.
+
+Depending on whether we choose a supersingular or a standard elliptic curve, additional options become available for making the calculations more efficient in terms of point representation. 
+\refSubsection{ssec:ch1.EllipticCurvePointRepresentations} introduces the techniques for point mapping  based on the given formulas, thereby establishing a connection between point mapping in affine and projective spaces.
+
+Based on the methodology presented in \ref{ssec:ch1.EllipticCurveGroupLaw} and \ref{ssec:ch01.PointAtInfinityInProjectiveSpace},
+the subsections analyze how point addition and doubling operations can be performed,
+taking into account the distinguished point at infinity.
+
+In practical cryptographic applications we have to deal with rational function. 
+However, instead of working with $f$ directly, we can uniquely determine it by its divisor $div(f)$ as introduced in \refSection{sec:ch1.divisiors}, followed by some important properties outlined within \refSubsection{ssec:ch1.divisiors.classgroupandriemanroch}.
+
+\refSection{sec:ch1.ellipticcurvesaspairinggroups} focuses on elliptic curves as pairing groups with the primary objective on how to define them for pairing purposes. In \refSubsection{ssec:ch1.ellipticcurvesaspairinggroups.rtorsion} we focus on $r$-torsion subgroups and their structures, leading us with the definition of the embedded degree. 
+
+% pairing types
+As it turns out in \refSubsection{ssec:ch1.ellipticcurvesaspairinggroups.pairingtypes} the placing of $\GG_1$ and $\GG_2$ in different subgroups of $E[r]$ will have practical implications, therefore we can distinguish between four pairing types.  Lastly in \refSubsection{ssec:ch1.ellipticcurvespairinggroups.twistedcurves} we  discuss the notion of \emph{twists} of elliptic curves,  which can be used pull computations back into the subfield
+$\mathbb{F}_{q^{k/d}}$ of $\mathbb{F}_{q^k}$. 
+
+\subsection*{Chapter 3}
+
+In \refChapter{ch:pairingsbasics} we review the theoretical foundations of Weil and Tate
+pairings with regards to Miller’s algorithm on how to compute them.  First we start with the Theoretical overview of the Weil pairing in \refSubsection{secs:ch2.theoreticweil},
+however we note that finding explicit expressions  presented in \refEquation{eq:frationalpqweil} is infeasible for cryptographically useful pairings, hence we will use Miller’s algorithm.
+
+In the followup \refSubsection{secs:ch2.theoretictate} we review we consider the Tate pairing. Recall we wish to compute $f_P (Q)$ where $f_P$ has divisor $(P)r$ . We can view our current situation as a special case of the above with $R = \BigO$.
+
+% Merging the Theory with Practice
+We conclude the chapter with  \refSection{ssec:weilandtatepairingpractice} reviewing some examples motivated by the  applications of pairings based on \cite{theory.pairings.for.beginners}.
+
+
+\subsection*{Chapter 4}
+In the last chapter we review the process behing selecting pairing friendly curves, namely the balancing act (refer to \refSubsection{ssec:thebalancingact}). 
+
+We revisit the $\rho$-value calculation, which indicates how much (ECDLP) security a curve offers for its field size. The reason behind it is the fact that pairings are fundamentally different to traditional number-theoretic primitives, in that they require multiple groups that are defined in different settings.
+Which means that all three groups must be secure against the respective instances of the discrete 
+logarithm problem.
+
+In the following subsection \refSubsection{ssec:constructionofpairingfirendly} we briefly review the complex multiplication method (CM for short) of Atkin and Morain \cite{AM93}, which can be used to find the elliptic curve equations provided the CM discriminant.  Building upon the technique presented in \refSubsection{ssec:constructionofpairingfirendly}, we review the constructions or ordinary pairing-friendly curves, following up with the overview of BLS Curve Family (\refSubsection{ssec:choosingbetweenpairingfriendlycurves}) 
+
+Lastly, in \refSubsection{ssec:tateimplemented} we conclude the chapter with the implementation of  Reduced Tate pairing over BLS12-381 curve, with further optimization possibilities outlined in \refSubsection{ssec:optimizations}
+
+
+\subsection*{Appendix}
+
+Due to the breadth of the subject matter, it is not possible to include every example here for reasons of space constraints therefore, illustrative examples and definitions that aid in understanding each topic have been included within the Appendix as can be followed in the subsequent \refSection{ssec:ch00.contributions}.
+
+\section{Contributions}
+\label{ssec:ch00.contributions}
+%We review the discrete logarithm problem and Diffie?Hellman problem as security primitives.
+The practical component of this work includes SageMath-based\cite{tools.sagemath} implementations and experiments, illustrating pairing computations, subgroup operations, and performance characteristics using existing libraries and selected examples motivated by the referenced materials.
+
+\insertListEnvironment{
+	\addListItem{\refChapter{ch:prelim}, \refSection{sec:ch01.groupsringsandfields} Code Examples: 
+		\insertListEnvironment{
+			\addListItem{\textbf{\refDef{def:group}}, \textbf{\refDef{def:abelgroup}}, \textbf{\refDef{def:orderofgroup}:} Refer to \refCodeSnippet{code:ch01.groups.definition.211212213} in \refApxCode{apx_implementation:ch01.groups}
+			}
+			\addListItem{\textbf{\refDef{def:directproductofgroups}}, \textbf{\refDef{def:productofabgroups}}, \textbf{\refDef{def:groupassociativity}:} Refer to \refCodeSnippet{code:ch01.groups.definition.214215216} in \refApxCode{apx_implementation:ch01.groups}
+			}
+			\addListItem{\textbf{\refDef{def:grouphomomorphism}}, \textbf{\refDef{def:grouphomomorphismsisisomorphism}: } Refer to \refCodeSnippet{code:ch01.groups.definition.217218} in \refApxCode{apx_implementation:ch01.groups}}
+			\addListItem{\textbf{\refDef{def:cyclicgroup}}, \textbf{\refDef{def:torsionsubgroups}}, \textbf{\refDef{def:finitesubgroup}:} Refer to \refCodeSnippet{code:ch01.groups.definition.21921102111} in \refApxCode{apx_implementation:ch01.groups}
+			}
+			\addListItem{\textbf{\refDef{def:imageandkernel}: }Refer to \refCodeSnippet{code:ch01.groups.definition.2112} in \refApxCode{apx_implementation:ch01.groups}
+			}
+			\addListItem{\textbf{\refDef{def:commutativering}}, \textbf{\refDef{def:ringsubset}: }Refer to \refCodeSnippet{code:ch01.groups.definition.21132114} in \refApxCode{apx_implementation:ch01.rings}}
+			\addListItem{\textbf{\refDef{def:ringhomomorphism}: }Refer to \refCodeSnippet{code:ch01.groups.definition.2115} in \refApxCode{apx_implementation:ch01.rings}}
+			\addListItem{\textbf{\refDef{def:commutativerings}: }Refer to \refCodeSnippet{code:ch01.groups.definition.2116} in \refApxCode{apx_implementation:ch01.rings}}
+			\addListItem{\textbf{\refDef{def:fielddefinition}}, \textbf{\refDef{def:characteristicoffield}}, \textbf{\refDef{def:fieldendomorphism}: }Refer to \refCodeSnippet{code:ch01.fields.definition.211721182119} in \refApxCode{apx_implementation:ch01.fields}
+			}
+			\addListItem{\textbf{\refDef{def:frobeniusendomorphism}: }Refer to \refCodeSnippet{code:ch01.fields.definition.2120} in \refApxCode{apx_implementation:ch01.fields}}
+			\addListItem{\textbf{\refDef{def:irreduciblepol}: }Refer to \refCodeSnippet{code:ch01.fields.definition.2121} in \refApxCode{apx_implementation:ch01.fields}}
+			\addListItem{\textbf{\refExample{ex:ch01.binaryFieldF24}: }Refer to \refCodeSnippet{code:ch01.fields.definition.221} in \refApxCode{apx_implementation:ch01.fields}}
+			\addListItem{\textbf{\refExample{ex:ch01.arithmeticoperationsinf24}: }Refer to \refCodeSnippet{code:ch01.fields.definition.222} in \refApxCode{apx_implementation:ch01.fields}}
+			\addListItem{\textbf{\refExample{ex:ch01.polynomialBasisF24}: }Refer to \refCodeSnippet{code:ch01.fields.definition.223} in \refApxCode{apx_implementation:ch01.fields}}
+		}
+	}
+	\addListItem{\refChapter{ch:prelim}, \refSection{ssec:ch2.introductiontoellipticcurves} Code Examples: 
+		\insertListEnvironment{
+			\addListItem{\textbf{\refExample{example:finitefieldfover11}: }Refer to \refCodeSnippet{code:ch2.introductiontoellipticcurves.241} in \refApxCode{apx_implementation:ch2.introductiontoellipticcurves}}
+			\addListItem{\textbf{\refExample{ex:ch03.standardProjectiveCoordinates}: }Refer to \refCodeSnippet{code:ch1.EllipticCurvePointRepresentations.242} in \refApxCode{apx_implementation:ch1.EllipticCurvePointRepresentations}}
+			\addListItem{\textbf{\refExample{ex:ch03.jacobianCoordinates}: }Refer to \refCodeSnippet{code:ch1.EllipticCurvePointRepresentations.243} in \refApxCode{apx_implementation:ch1.EllipticCurvePointRepresentations}}
+			\addListItem{\textbf{\refExample{example:doubleandaddbinaryrepresentation}: }Refer to \refCodeSnippet{code:ch1.EllipticCurvePointRepresentations.244} in \refApxCode{apx_implementation:ch1.EllipticCurvePointRepresentations}}
+			\addListItem{\textbf{\refExample{example:costofgrouplaw}: }Refer to \refCodeSnippet{code:ch1.EllipticCurvePointRepresentations.245} in \refApxCode{apx_implementation:ch1.EllipticCurveGroupLaw}}
+		}
+	}
+	\addListItem{\refChapter{ch:prelim}, \refSection{sec:ch1.divisiors} Code Examples: 
+		\insertListEnvironment{
+			\addListItem{\textbf{\refExample{example:costofuniformizingparam}: }
+				Refer to \refCodeSnippet{code:example.uniformizingparameter} in \refApxCode{apx_implementation:ch1.divisiors}  }
+			\addListItem{\textbf{\refExample{example:divisorbasedondrawing}:}Refer to \refCodeSnippet{code:divisorlintersectsppointdoubling} in \refApxCode{apx_implementation:ch1.divisiors}}
+			\addListItem{
+				\textbf{\refExample{example:polecountinginprojectivespace}: }Refer to \refCodeSnippet{code:polecountinginprojectivespace} in \refApxCode{apx_implementation:ch1.divisiors}
+			}
+			\addListItem{
+				\textbf{\refExample{example:grouplawwithdivisors}: }Refer to \refCodeSnippet{code:divisorlintersectsppointdoubling} in \refApxCode{apx_implementation:ch1.divisiors}
+			}
+			\addListItem{
+				\textbf{\refExample{example:divisorreductionwithriemanroch}: }Refer to
+				\refCodeSnippet{code:divisorlintersectsppointdoubling} in \refApxCode{apx_implementation:ch1.divisiors}
+			}
+			\addListItem{
+				\textbf{\refExample{example:324}: }Refer to \refCodeSnippet{code:divisorlintersectsppointdoubling} in \refApxCode{apx_implementation:ch1.divisiors}
+			}
+		}
+	}
+	\addListItem{\refChapter{ch:prelim}, \refSection{sec:ch1.ellipticcurvesaspairinggroups} Code Examples: 
+		\insertListEnvironment{
+			\addListItem{\textbf{\refExample{example:pairingexample}: } Refer to \refCodeSnippet{code:example.pairingexample} in \refApxCode{apx_implementation:} }
+			\addListItem{
+				\textbf{\refExample{example:smappgroupnodlogresistance}: }Refer to
+				\refCodeSnippet{code:example.smappgroupnodlogresistance} in \refApxCode{apx_implementation:ch1.ellipticcurvesaspairinggroups}
+			}
+			\addListItem{
+				\textbf{\refExample{ex:4.1.1}: }Refer to
+				\refCodeSnippet{code:ex.4.1.1} in \refApxCode{apx_implementation:ch1.ellipticcurvesaspairinggroups}
+			}
+			\addListItem{
+				\textbf{\refExample{example:413}: }Refer to
+				\refCodeSnippet{code:example.413} in \refApxCode{apx_implementation:ch1.ellipticcurvesaspairinggroups}
+			}
+		}
+	}
+	\addListItem{\refChapter{ch:pairingsbasics}, \refSection{ssec:weilandtatepairingpractice} Code Examples: 
+		\insertListEnvironment{
+			\addListItem{
+				\textbf{\refExample{example:weilparingsage}: }Refer to
+				\refCodeSnippet{code:example.weilparingsage} in \refApxCode{apx_implementation:}
+			}
+			\addListItem{
+				\textbf{\refExample{ex:ch3.tatealap}: }Refer to
+				\refCodeSnippet{code:ex.ch3.tatealap} in \refApxCode{apx_implementation:}
+			}
+		}
+	}
+	\addListItem{\refChapter{ch:blscurvefamilies}, \refSection{sec:curveselection} Code Examples: 
+		\insertListEnvironment{
+			\addListItem{
+				\textbf{\refExample{example:denominatorelimination}: }Refer to
+				\refCodeSnippet{code:example.411} in \refApxCode{apx_implementation:}
+			}
+			\addListItem{
+				\textbf{\refExample{example:blshamming}: }Refer to
+				\refCodeSnippet{code:example.blshamming} in \refApxCode{apx_implementation:}
+			}
+		}
+	}
+}

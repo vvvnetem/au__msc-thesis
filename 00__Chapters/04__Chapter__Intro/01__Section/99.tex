@@ -1,0 +1,23 @@
+%###
+In this thesis, we have studied pairing computations over elliptic curves of the BLS family, with a particular focus on the Weil and Tate pairings. We began by reviewing the theoretical foundations in, which established the algebraic hierarchy of groups, rings, and fields, with special attention to Galois fields and their indispensable role in cryptographic applications. Finite field arithmetic was examined in the following subsection with respect to the properties that make it amenable to efficient computation, including the existence and uniqueness
+of field extensions and the significance of field characteristics. The connection between pairing-based cryptography and elliptic curve cryptosystems was formalised through the review of discrete logarithm-based hardness assumptions to ensure the secure application of pairing-based protocols. 
+
+In the following section elliptic curve arithmetic over finite fields was covered noticing the difference between ordinary and supersingular curves, with regard to affine and projective point representations, and the operations of point addition and doubling. The theory of divisors provided us the algebraic language to handle rational
+functions on curves, culminating in the definition of the $r$-torsion
+subgroup, the embedding degree, and the four standard pairing type
+classifications.  The notion of elliptic curve twists was introduced as the mechanism by which computations over the full extension field $\mathbb{F}_{q^k}$ can be pulled back into the subfield $\mathbb{F}_{q^{k/d}}$, yielding significant savings in field arithmetic.
+
+The theoretical framework was translated into computational procedures in the following chapter,  in which the Weil and Tate pairing were introduced first through their defining divisor-theoretic expressions.  We noted that the infeasibility of computing explicit rational function expressions for cryptographically sized inputs motivated the adoption of Miller's algorithm throughout, and the chapter concluded with worked examples illustrating the pairing properties of bilinearity and non-degeneracy in concrete group settings.
+
+The last chapter started by addressing the problem of pairing-friendly curves selection, framing
+it as a balancing act among three simultaneous security requirements: the
+ECDLP hardness in $\mathbb{G}_1$ and $\mathbb{G}_2$, and the DLP hardness
+in the target group $\mathbb{G}_T \subset \mathbb{F}_{p^k}^*$. The
+$\rho$-value was revisited as a measure of the efficiency of a curve's
+group order relative to its field size. The complex multiplication method
+of Atkin and Morain was reviewed as the principal technique for constructing
+ordinary pairing-friendly curves from a prescribed CM discriminant, and the
+BLS curve family was derived as a leading instantiation of this methodology.
+The BLS12-381 curve, with embedding degree $k = 12$ and a 381-bit prime
+field, was selected as the implementation of the reduced Tate pairing with
+balance between security and efficiency at the 128-bit security level.

@@ -1,0 +1,2086 @@
+% =====================================
+% Forrasok: MSc Thesis
+% =====================================
+
+% -------------------------------------
+% Visual Algebra/Visual Group Theory
+
+
+%% Visual Group Theory Book + Slides from YT-channel
+
+%% Visual Group Theory Book
+@book{visualgrouptheorynotyt,
+	title     = {Visual Group Theory},
+	author    = {Carter, Nathan C.},
+	year      = {2009},
+	publisher = {Mathematical Association of America},
+	isbn      = {978-0-88385-757-1},
+	lccn      = {2009923532}}
+
+
+% .....................................
+% Racket
+% -------------------------------------
+
+
+% TechReport, kimutatas, ipar
+% -------------------------------------
+@techreport{nsa2022cnsa2,
+	author      = {{National Security Agency}},
+	title       = {Commercial National Security Algorithm Suite 2.0 Cybersecurity Advisory},
+	type        = {Technical Report},
+	institution = {U.S. National Security Agency},
+	year        = {2022},
+	month       = sep,
+	note        = {Cybersecurity Advisory outlining quantum-resistant algorithm requirements for National Security Systems},
+	url         = {https://media.defense.gov/2025/May/30/2003728741/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS.PDF}
+}
+
+%% Migration to PQC policies
+% -------------------------------------
+
+%%% [AWS] https://aws.amazon.com/blogs/security/aws-post-quantum-cryptography-migration-plan/
+@misc{aws2024postquantum,
+	author       = {Matthew Campagna and Melanie Goldsborough and Peter O'Donnell},
+	title        = {AWS Post-Quantum Cryptography Migration Plan},
+	howpublished = {AWS Security Blog},
+	month        = {Dec},
+	year         = {2024},
+	url          = {https://aws.amazon.com/blogs/security/aws-post-quantum-cryptography-migration-plan/},
+	note         = {Accessed: 2026-01-13}
+}
+
+%%% [Intel]
+@misc{intel2024postquantum,
+	author       = {Elena Tyuleneva and Robert Mueller-Albrecht},
+	title        = {Be Ready for Post-Quantum Security with Intel\textregistered{} Cryptography Primitives Library},
+	howpublished = {Intel Developer Articles - Technical},
+	month        = {October},
+	day          = {30},
+	year         = {2024},
+	url          = {https://www.intel.com/content/www/us/en/developer/articles/technical/post-quantum-cryptography.html},
+	note         = {Accessed: 2026-01-13}
+}
+
+
+% Standardok, specifikaciok
+% -------------------------------------
+
+%% SQIsign
+@techreport{sqisign2025spec,
+	author      = {Marius A. Aardal and Gora Adj and Diego F. Aranha and Andrea Basso and Isaac Andr\'es Canales Mart\'inez and Jorge Ch\'avez-Saab and Maria Corte-Real Santos and Pierrick Dartois and Luca De Feo and Max Duparc and Jonathan Komada Eriksen and Tako Boris Fouotsa and D\'ecio Luiz Gazzoni Filho and Basil Hess and David Kohel and Antonin Leroux and Patrick Longa and Luciano Maino and Michael Meyer and Kohei Nakagawa and Hiroshi Onuki and Lorenz Panny and Sikhar Patranabis and Christophe Petit and Giacomo Pope and Krijn Reijnders and Damien Robert and Francisco Rodr\'iguez Henr\'iquez and Sina Schaeffler and Benjamin Wesolowski},
+	title       = {{SQIsign: Algorithm specifications and supporting documentation, Version 2.0.1}},
+	institution = {SQIsign Standardization Team},
+	type        = {Technical report},
+	address     = {sqisign.org},
+	month       = {July},
+	year        = {2025},
+	note        = {Version 2.0.1},
+	url         = {https://sqisign.org/spec/sqisign-20250707.pdf}
+}
+
+
+%% Hybrid-MLKEM+ECDHE for TLS 1.3
+@techreport{ietf-tls-ecdhe-mlkem-03,
+    number =    {draft-ietf-tls-ecdhe-mlkem-03},
+    type =      {Internet-Draft},
+    institution =   {Internet Engineering Task Force},
+    publisher = {Internet Engineering Task Force},
+    note =      {Work in Progress},
+    url =       {https://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem/03/},
+    author =    {Kris Kwiatkowski and Panos Kampanakis and Bas Westerbaan and Douglas Stebila},
+    title =     {{Post-quantum hybrid ECDHE-MLKEM Key Agreement for TLSv1.3}},
+    pagetotal = 11,
+    year =      2025,
+    month =     nov,
+    day =       21,
+    abstract =  {This draft defines three hybrid key agreements for TLS 1.3: X25519MLKEM768, SecP256r1MLKEM768, and SecP384r1MLKEM1024 which combine a post-quantum KEM with an elliptic curve Diffie-Hellman (ECDHE).},
+}
+
+%% ML-KEM
+@techreport{NIST_FIPS_203_2024.ml-kem,
+  author       = {{National Institute of Standards and Technology}},
+  title        = {Module-Lattice-Based Key-Encapsulation Mechanism Standard (FIPS 203)},
+  institution  = {U.S. Department of Commerce, National Institute of Standards and Technology},
+  type         = {Federal Information Processing Standards Publication},
+  number       = {FIPS 203},
+  year         = {2024},
+  month        = {August 13},
+  address      = {Gaithersburg, MD, USA},
+  doi          = {10.6028/NIST.FIPS.203},
+  url          = {https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf},
+}
+
+%% ECDH
+@misc{rfc8418.ecdh,
+    number =    8418,
+    howpublished =  {RFC 8418},
+    publisher = {RFC Editor},
+    doi =       {10.17487/RFC8418},
+    url =       {https://www.rfc-editor.org/info/rfc8418},
+    author =    {Russ Housley},
+    title =     {{Use of the Elliptic Curve Diffie-Hellman Key Agreement Algorithm with X25519 and X448 in the Cryptographic Message Syntax (CMS)}},
+    pagetotal = 18,
+    year =      2018,
+    month =     aug,
+    abstract =  {This document describes the conventions for using the Elliptic Curve Diffie-Hellman (ECDH) key agreement algorithm with curve25519 and curve448 in the Cryptographic Message Syntax (CMS).},
+}
+
+% Comparing rsa with ecc with bit security
+@misc{NIST80057,
+	author       = {{National Institute of Standards and Technology}},
+	title        = {Recommendation for Key Management: Part 1 -- General},
+	howpublished = {NIST Special Publication 800-57 Part 1 Rev. 5},
+	year         = {2020},
+	note         = {Security strength equivalences for cryptographic algorithms}
+}
+
+
+
+
+% SQISign
+%% Specification: https://sqisign.org/spec/sqisign-20250205.pdf
+
+% Isogeny-based cryptography (abstraction of pairings) <-- Ezzel kapcsolodik ossze a pairing-based cryptography es a PQC (isogeny-based)
+% -------------------------------------
+%% https://eprint.iacr.org/2023/858.pdf
+
+@misc{isogeny.pairings,
+      author = {Krijn Reijnders},
+      title = {Effective Pairings in Isogeny-based Cryptography},
+      howpublished = {Cryptology {ePrint} Archive, Paper 2023/858},
+      year = {2023},
+      url = {https://eprint.iacr.org/2023/858}
+}
+
+% HMAC
+
+@techreport{nist.fips198,
+	author       = {{National Institute of Standards and Technology}},
+	title        = {{The Keyed-Hash Message Authentication Code (HMAC)}},
+	institution  = {National Institute of Standards and Technology},
+	number       = {FIPS PUB 198-1},
+	year         = {2008},
+	month        = {July},
+	doi          = {10.6028/NIST.FIPS.198-1},
+	url          = {http://csrc.nist.gov/publications/fips/fips198-1/FIPS-198-1_final.pdf}
+}
+
+% AES
+@misc{nist.fips197,
+	author       = {{National Institute of Standards and Technology}},
+	title        = {Advanced Encryption Standard (AES)},
+	howpublished = {\url{https://csrc.nist.gov/pubs/fips/197/final}},
+	year         = {2023},
+	note         = {FIPS PUB 197, updated May 9, 2023},
+	doi          = {10.6028/NIST.FIPS.197-upd1}
+}
+
+
+
+
+%% Mathematics for Isogeny-Based Cryptography
+%%% https://github.com/defeo/MathematicsOfIBC
+@misc{defeo2017mathematicsisogenybasedcryptography,
+	title={Mathematics of Isogeny Based Cryptography},
+	author={Luca De Feo},
+	year={2017},
+	eprint={1711.04062},
+	archivePrefix={arXiv},
+	primaryClass={cs.CR},
+	url={https://arxiv.org/abs/1711.04062},
+}
+
+
+
+
+% Forrasok: BLS-381
+
+%% https://hackmd.io/@benjaminion/bls12-381 <- BLS curve implementacio + elmelet
+
+% Forrasok: Computing Cryptographic Pairings
+% -------------------------------------
+
+
+%% A short-list of pairing-friendly curves resistant to the Special TNFS algorithm at the 192-bit security level
+@article{AranhaFotiadisGuillevic2024,
+  author       = {Diego F. Aranha and Georgios Fotiadis and Aurore Guillevic},
+  title        = {A short-list of pairing-friendly curves resistant to the Special TNFS algorithm at the 192-bit security level},
+  journal      = {IACR Communications in Cryptology},
+  year         = {2024},
+  volume       = {1},
+  number       = {3},
+  pages        = {44},
+  doi          = {10.62056/angyl86bm},
+  note         = {hal-04666521v2}
+}
+
+
+%% Craig Costello: Fast Formlas for Pairing-Based Cryptography (PhD Thesis)
+%https://eprints.qut.edu.au/61037/1/Craig_Costello_Thesis.pdf
+@online{costello.fast.formulas.thesis,
+    title = { Fast Formulas for Computing Cryptographic Pairings},
+    author = { Craig Costello },
+    year = { 2012 },
+    note = {[Online; accessed 17. January. 2026]},
+    url = { https://eprints.qut.edu.au/61037/1/Craig_Costello_Thesis.pdf }
+}
+
+%%
+@inproceedings{ScottEtAlPairing2009,
+	author    = {Michael Scott and Naomi Benger and Manuel Charlemagne and
+	Luis J. Dom{\'\i}nguez P{\'e}rez and Ezekiel J. Kachisa},
+	title     = {On the Final Exponentiation for Calculating Pairings on Ordinary Elliptic Curves},
+	booktitle = {Pairing-Based Cryptography -- Pairing 2009},
+	series    = {LNCS},
+	volume     = {5671},
+	pages      = {78--88},
+	publisher  = {Springer},
+	year       = {2009},
+	doi        = {10.1007/978-3-642-03298-1_6}
+}
+
+
+%% Realm of pairings
+@misc{AranhaBLR2013,
+	author       = {Diego F. Aranha and
+	Paulo S. L. M. Barreto and
+	Patrick Longa and
+	Jefferson E. Ricardini},
+	title        = {The Realm of the Pairings},
+	howpublished = {Cryptology ePrint Archive, Paper 2013/722},
+	year         = {2013},
+	note         = {\url{https://eprint.iacr.org/2013/722}}
+}
+
+%% Craig Costello: Fast Formlas for Pairing-Based Cryptography (Seminar)
+@online{costello.fast.formulas.seminar,
+    title = { Fast Formulas for Computing Cryptographic Pairings, Seminar },
+    author = { Craig Costello },
+    year = { 2012 },
+    note = {[Online; accessed 17. January. 2026]},
+    url = { https://static1.squarespace.com/static/5fdbb09f31d71c1227082339/t/5ff3818e289de731b31cf32c/1609793943615/2011-PhDFinalSeminar.pdf }
+}
+
+% Article's pairing-hez
+
+%% Menezes
+%https://www.math.uwaterloo.ca/~ajmeneze/publications/pairings.pdf
+@incollection{Menezes2009Pairing,
+  author       = {Alfred Menezes},
+  title        = {An Introduction to Pairing-Based Cryptography},
+  booktitle    = {Recent Trends in Cryptography},
+  editor       = {I. Luengo},
+  series       = {Contemporary Mathematics},
+  volume       = {477},
+  pages        = {47--65},
+  publisher    = {American Mathematical Society and Real Sociedad Matem-tica Espa-ola},
+  year         = {2009},
+  url          = {https://www.math.uwaterloo.ca/~ajmeneze/publications/pairings.pdf},
+}
+
+%% Pairing's Implementaton
+
+
+
+%%% Galbraight: Pairings for Cryptographers
+@misc{Gal06,
+	author = {S. D.  Galbraith and K. G.  Paterson and N. P.  Smart},
+	title = {Pairings for Cryptographers},
+	howpublished = {Cryptology {ePrint} Archive, Paper 2006/165},
+	year = {2006},
+	url = {https://eprint.iacr.org/2006/165}
+}
+
+%% miller unpublished
+@unpublished{Miller1986,
+	author = {Victor S. Miller},
+	title = {Short Programs for Functions on Curves},
+	note = {Unpublished manuscript},
+	year = {1986}
+}
+
+%%% Miller: The Weil Pairing, and Its Efficient Calculation
+@article{Miller04,
+	title={The Weil Pairing, and Its Efficient Calculation},
+	journal={J. Cryptology},
+	volume={17},
+	pages={235-261},
+	doi={10.1007/s00145-004-0315-8},
+	author={Victor S. Miller},
+	year=2004
+}
+
+@misc{Sco04,
+	author       = {Michael Scott},
+	title        = {Understanding the Tate Pairing},
+	year         = {2004},
+	howpublished = {Personal webpage},
+	url          = {http://www.computing.dcu.ie/~mike/tate.html},
+	note         = {Accessed online}
+}
+
+
+% Elliptic Curves
+% -------------------------------------
+
+%
+@article{SV07,
+author       = {Nigel P. Smart and Frederik Vercauteren},
+title        = {On Computable Isomorphisms in Efficient Asymmetric Pairing-Based Systems},
+journaltitle = {Discrete Applied Mathematics},
+year         = {2007},
+volume       = {155},
+number       = {4},
+pages        = {538--547},
+doi          = {10.1016/j.dam.2006.03.022},
+}
+
+%
+@phdthesis{Sha05,
+	author = {Hovav Shacham},
+	title  = {New Paradigms in Signature Schemes},
+	school = {Stanford University},
+	year   = {2005},
+	month  = dec,
+}
+
+%
+@article{GPS08,
+	author       = {Steven D. Galbraith and Kenneth G. Paterson and Nigel P. Smart},
+	title        = {Pairings for Cryptographers},
+	journaltitle = {Discrete Applied Mathematics},
+	year         = {2008},
+	volume       = {156},
+	number       = {16},
+	pages        = {3113--3121},
+	doi          = {10.1016/j.dam.2007.12.010},
+}
+
+% Deu41
+@article{Deu41,
+	author  = {Max Deuring},
+	title   = {Die Typen der Multiplikatorenringe elliptischer Funktionenk{\"o}rper},
+	journal = {Abhandlungen aus dem Mathematischen Seminar der Universit{\"a}t Hamburg},
+	volume  = {14},
+	year    = {1941},
+	pages   = {197--242},
+	url     = {https://download.uni-mainz.de/mathematik/Algebraische%20Geometrie/Lehre/WS23.Padische.1941.Deuring.pdf}
+}
+
+% ACD05
+@book{ACD05,
+	author    = {Roberto Maria Avanzi and Henri Cohen and Christophe Doche and Gerhard Frey and Tanja Lange and Kim Nguyen and Frederik Vercauteren},
+	title     = {The Handbook of Elliptic and Hyperelliptic Curve Cryptography},
+	publisher = {CRC Press},
+	year      = {2005},
+	address   = {Boca Raton, FL},
+	isbn      = {978-1584885184}
+}
+
+% Elliptic curve Explicit-formulas database
+@online{ellipticcurve.efdb,
+	title = { Expicit-formulas datbase},
+	author = { D. J. Bernstein, T. Lange  },
+	year = { 2007 },
+	note = {[Online; accessed 17. February. 2026]},
+	url = { http://www.hyperelliptic.org/EFD }
+}
+
+%% Explicit formula database EFD
+@online{BL07a,
+	title = { Expicit-formulas datbase},
+	author = { D. J. Bernstein, T. Lange  },
+	year = { 2007 },
+	note = {[Online; accessed 17. February. 2026]},
+	url = { http://www.hyperelliptic.org/EFD }
+}
+
+
+
+@book{HandbookOfHyperECC,
+	title     = {Handbook of Elliptic and Hyperelliptic Curve Cryptography},
+	author    = {Henri Cohen,  Gerhard Frey},
+	series    = {Discrete Mathematics and Its Applications},
+	publisher = {CRC Press, Taylor \& Francis Group},
+	address   = {Boca Raton, FL},
+	year      = {2006},
+	isbn      = {978-1-58488-518-4},
+	pages     = {19-38}
+}
+
+
+%% Washington, Elliptic Curves: Number Theory and Cryptography
+%%% Coorections are on the site: [www.math.umd.edu/-lcw/ellipticcurves.html]
+@book{Washington2008ECC,
+  title     = {Elliptic Curves: Number Theory and Cryptography},
+  author    = {Washington, Lawrence C.},
+  edition   = {2},
+  series    = {Discrete Mathematics and Its Applications},
+  publisher = {CRC Press, Taylor \& Francis Group},
+  address   = {Boca Raton, FL},
+  year      = {2008},
+  isbn      = {978-1-4200-7146-7},
+  pages     = {536},
+  note      = {Second edition},
+}
+
+%% Menezes, Guide to Elliptic Curve Cryptography
+@book{menezes2004ECC,
+  title     = {Guide to Elliptic Curve Cryptography},
+  author    = {Hankerson, Darrel and Menezes, Alfred and Vanstone, Scott},
+  series    = {Springer Professional Computing},
+  publisher = {Springer},
+  address   = {New York, NY},
+  year      = {2004},
+  edition   = {46-65,76-86, 171-172},
+  pages     = {1-6},
+  doi       = {10.1007/b97644},
+  isbn      = {978-0-387-95273-4},
+  note      = {eBook ISBN: 978-0-387-21846-5; Softcover ISBN: 978-1-4419-2929-7}
+}
+
+@book{Menezes1993,
+	author    = {Alfred Menezes},
+	title     = {Elliptic Curve Public Key Cryptosystems},
+	series     = {The Springer International Series in Engineering and Computer Science},
+	publisher  = {Springer},
+	address    = {New York, NY},
+	year       = {1993},
+	edition    = {1},
+	isbn       = {978-0-7923-9368-9},
+	doi        = {10.1007/978-1-4615-3198-2},
+	pages      = {30-32}
+}
+
+
+% Faster group operations
+@misc{His10,
+	author = {Huseyin Hisil and Kenneth Koon-Ho Wong and Gary Carter and Ed Dawson},
+	title = {Faster Group Operations on Elliptic Curves},
+	howpublished = {Cryptology {ePrint} Archive, Paper 2007/441},
+	year = {2007},
+	url = {https://eprint.iacr.org/2007/441}
+}
+
+
+%% Costello: PairingsForBeginners.pdf
+%%% https://static1.squarespace.com/static/5fdbb09f31d71c1227082339/t/5ff394720493bd28278889c6/1609798774687/PairingsForBeginners.pdf
+@online{theory.pairings.for.beginners,
+    title = { Pairings for Beginners },
+    author = { Craig Costello },
+    year = { 2012 },
+    note = {[Online; accessed 17. January. 2026]},
+    url = { https://static1.squarespace.com/static/5fdbb09f31d71c1227082339/t/5ff394720493bd28278889c6/1609798774687/PairingsForBeginners.pdf }
+}
+
+
+%% Joux modszere: bilinear pairing <-- Menezes2004-ben emlitve
+@article{joux2004one,
+	author  = {Antoine Joux},
+	title   = {A One Round Protocol for Tripartite Diffie--Hellman},
+	journal = {Journal of Cryptology},
+	volume  = {17},
+	number  = {3},
+	pages   = {263--276},
+	year    = {2004},
+	publisher = {Springer}
+}
+
+%% Menezes2004-ben emlitve
+@inproceedings{denBoer1988diffie,
+	author    = {Bert den Boer},
+	title     = {Diffie-Hellman is as Strong as Discrete Log for Certain Primes},
+	booktitle = {Advances in Cryptology --- CRYPTO '88, 8th Annual International Cryptology Conference, Santa Barbara, California, USA, August 21-25, 1988, Proceedings},
+	series    = {Lecture Notes in Computer Science},
+	volume    = {403},
+	pages     = {530--539},
+	year      = {1988},
+	publisher = {Springer},
+	doi       = {10.1007/0-387-34799-2\_38}
+}
+
+%% 44-ben emlitve
+@article{maurer1999relationship,
+	author  = {Ueli M. Maurer and Stefan Wolf},
+	title   = {The Relationship Between Breaking the {D}iffie-{H}ellman Protocol and Computing Discrete Logarithms},
+	journal = {SIAM Journal on Computing},
+	volume  = {28},
+	number  = {5},
+	pages   = {1689--1721},
+	year    = {1999},
+	doi     = {10.1137/S0097539796302749}
+}
+
+%%
+@misc{magma2006,
+	author       = {Florian Hess},
+	title        = {Computational aspects of pairings in cryptography},
+	url 		 = {https://magma.maths.usyd.edu.au/conferences/magma2006/talks/hess-magma2006.pdf},
+	year         = {2006},
+	note         = {Accessed: 2026-01-13}
+}
+
+
+%% zk-SNARK
+@inproceedings{bitansky2012extractable,
+	author    = {Nir Bitansky and Ran Canetti and Alessandro Chiesa and Eran Tromer},
+	title     = {From Extractable Collision Resistance to Succinct Non-Interactive Arguments of Knowledge, and Back Again},
+	booktitle = {Proceedings of the 3rd Innovations in Theoretical Computer Science Conference (ITCS 2012)},
+	pages     = {326--349},
+	year      = {2012},
+	organization = {ACM},
+	doi       = {10.1145/2090236.2090263},
+	url       = {https://doi.org/10.1145/2090236.2090263}
+}
+
+% Tools
+
+%% SageMath
+@misc{tools.sagemath,
+	title        = {{SageMath: Open-Source Mathematics Software}},
+	author       = {{The Sage Developers}},
+	howpublished = {\url{https://www.sagemath.org/}},
+	year         = {2026},
+	note         = {Accessed: 2026-01-13}
+}
+
+%%
+@inproceedings{BKLS02,
+	author    = {Paulo S. L. M. Barreto and
+	Hae Y. Kim and
+	Ben Lynn and
+	Michael Scott},
+	title     = {Efficient Algorithms for Pairing-Based Cryptosystems},
+	booktitle = {Advances in Cryptology -- CRYPTO 2002},
+	editor    = {Moti Yung},
+	series    = {Lecture Notes in Computer Science},
+	volume     = {2442},
+	pages      = {354--368},
+	publisher  = {Springer},
+	address    = {Berlin, Heidelberg},
+	year       = {2002},
+	doi        = {10.1007/3-540-45708-9_23},
+	isbn       = {978-3-540-44050-5}
+}
+
+%% Mathematical Basis:
+@book{Koblitz1994NumberTheoryCryptography,
+	author    = {Koblitz, Neal},
+	title     = {A Course in Number Theory and Cryptography},
+	series    = {Graduate Texts in Mathematics},
+	volume    = {114},
+	edition   = {2},
+	publisher = {Springer},
+	address   = {New York, NY},
+	year      = {1994},
+	pages     = {235},
+	doi       = {10.1007/978-1-4419-8592-7},
+	isbn      = {0-387-94293-9},
+	keywords  = {Number Theory, Cryptography}
+}
+
+@book{JohnFraleAbstractAlgebraCourse,
+	author    = {John B. Frale},
+	title     = {A First Course in Abstract Algebra},
+	edition   = {7th},
+	publisher = {Pearson},
+	address   = {New York, NY},
+	year      = {2014},
+	pages     = {11},
+	isbn      = {978-0201763904},
+	keywords  = {Number Theory, Cryptography}
+}
+
+%% pp. +54 utan
+@book{abstractalgebra,
+	author    = {Steven H. Weintraub},
+	title     = {An Introduction to Abstract Algebra: Sets, Groups, Rings, and Fields},
+	publisher = {World Scientific Publishing},
+	address   = {Singapore},
+	year      = {2022},
+	isbn       = {978-981-124-755-2},
+	pages = {29-54 }
+}
+
+
+@incollection{BLS03,
+	author       = {Paulo S. L. M. Barreto and Ben Lynn and Michael Scott},
+	title        = {On the Selection of Pairing-Friendly Groups},
+	editor       = {Mitsuru Matsui and Robert J. Zuccherato},
+	booktitle    = {Selected Areas in Cryptography},
+	series       = {Lecture Notes in Computer Science},
+	volume       = {3006},
+	pages        = {17--25},
+	publisher    = {Springer},
+	year         = {2004},
+	doi          = {10.1007/978-3-540-24654-1_2}
+}
+
+% BLS curve creation + elmeleti hatter a presribed embedding degree rol: --> cyclotomic polynomials
+%@misc{howblswascreated,
+%	author = {Paulo S.  L.  M.  Barreto and Ben Lynn and Michael Scott},
+%	title = {Constructing Elliptic Curves with Prescribed Embedding Degrees},
+%	howpublished = {Cryptology (ePrint) Archive, Paper 2002/088},
+%	year = {2002},
+%	url = {https://eprint.iacr.org/2002/088}
+%}
+
+@article{BK98,
+	author       = {R. Balasubramanian and Neal Koblitz},
+	title        = {The Improbability That an Elliptic Curve Has Subexponential
+	Discrete Log Problem under the Menezes-Okamoto-Vanstone Algorithm},
+	journal      = {Journal of Cryptology},
+	year         = {1998},
+	volume       = {11},
+	number       = {2},
+	pages        = {141-145}
+}
+
+@article{GMV07,
+	author  = {Galbraith, Steven D. and McKee, James F. and Valen{\c{c}}a, Paulo C.},
+	title   = {Ordinary abelian varieties having small embedding degree},
+	journal = {Finite Fields and Their Applications},
+	year    = {2007},
+	volume  = {13},
+	number  = {4},
+	pages   = {800--814},
+	doi     = {10.1016/j.ffa.2006.12.004}
+}
+
+
+@inproceedings{BN05,
+	author    = {Paulo S. L. M. Barreto and Michael Naehrig},
+	title     = {Pairing-Friendly Elliptic Curves of Prime Order},
+	booktitle = {Selected Areas in Cryptography -- SAC 2005},
+	editor    = {Bart Preneel and Stafford Tavares},
+	series     = {Lecture Notes in Computer Science},
+	volume     = {3897},
+	pages      = {319--331},
+	publisher  = {Springer},
+	year       = {2006},
+	doi        = {10.1007/11693383_22},
+	url        = {https://doi.org/10.1007/11693383_22}
+}
+
+%
+@misc{Scott2019PairingImplementationRevisited,
+	author       = {Michael Scott},
+	title        = {Pairing Implementation Revisited},
+	year         = {2019},
+	howpublished = {Cryptology ePrint Archive, Paper 2019/077},
+	url          = {https://eprint.iacr.org/2019/077},
+	note         = {Available at \url{https://eprint.iacr.org/2019/077}}
+}
+
+@misc{howblswascreated,
+	author       = {Paulo S. L. M. Barreto and Ben Lynn and Michael Scott},
+	title        = {Constructing Elliptic Curves with Prescribed Embedding Degrees},
+	year         = {2002},
+	eprint       = {2002/088},
+	archivePrefix= {IACR},
+}
+
+% ON THE IMPLEMENTATION OF PAIRING-BASED CRYPTOSYSTEMS
+@phdthesis{lynnpairing2007,
+	author       = {Ben Lynn},
+	title        = {On the Implementation of Pairing-Based Cryptosystems},
+	school       = {Stanford University},
+	year         = {2007},
+	month        = {June},
+	type         = {PhD Dissertation},
+	address      = {Stanford, CA}
+}
+
+% CTNT_2020
+@online{ctnt2020lecture,
+	author	= {\'Alvaro Lozano-Robledo},
+	title	= {CTNT 2020 Lecture 1},
+	year	= {2020},
+	url		= {https://ctnt-summer.math.uconn.edu/wp-content/uploads/sites/1632/2020/06/lecture1-slides.pdf},
+	note = {Accessed: 2026-03-03}
+}
+
+% CTNT_2016
+@techreport{Sma10,
+	author       = {Nigel P. Smart},
+	title        = {ECRYPT II Yearly Report on Algorithms and Key Sizes (2009--2010)},
+	institution  = {ECRYPT II -- European Network of Excellence in Cryptology, EU FP7, ICT-2007-216676},
+	year         = {2010},
+	number       = {D.SPA.13},
+	note         = {Published as deliverable D.SPA.13},
+	url          = {http://www.ecrypt.eu.org/documents/D.SPA.13.pdf}
+}
+
+@article{SB06,
+	author  = {Scott, Michael and Barreto, Paulo S. L. M.},
+	title   = {Generating more MNT elliptic curves},
+	journal = {Designs, Codes and Cryptography},
+	year    = {2006},
+	volume  = {38},
+	number  = {2},
+	pages   = {209--217}
+}
+
+@article{MNT01,
+	author  = {Miyaji, Atsuko and Nakabayashi, Masaki and Takano, Shunzou},
+	title   = {New explicit conditions of elliptic curve traces for FR-reduction},
+	journal = {IEICE Transactions on Fundamentals of Electronics, Communications and Computer Sciences},
+	year    = {2001},
+	volume  = {E84-A},
+	number  = {5},
+	pages   = {1234--1243}
+}
+
+
+@unpublished{CP01,
+	author  = {Clifford Cocks and Richard G. E. Pinch},
+	title   = {ID-Based Cryptosystems Based on the Weil Pairing},
+	note    = {Unpublished manuscript},
+	year    = {2001}
+}
+
+@article{DEM05,
+	author  = {Dupont, R. and Enge, A. and Morain, F.},
+	title   = {Building curves with arbitrary small MOV degree over finite prime fields},
+	journal = {Journal of Cryptology},
+	year    = {2005},
+	volume  = {18},
+	number  = {2},
+	pages   = {79--89},
+	doi     = {10.1007/s00145-004-0146-7}
+}
+
+
+@misc{gitlabpairings192,
+	author       = {Guillevi, Vincent},
+	title        = {pairings-192},
+	year         = {2024},
+	howpublished = {GitLab repository},
+	url          = {https://gitlab.inria.fr/guillevi/pairings-192},
+	note         = {Accessed: 2026-06-12}
+}
+
+@article{AM93,
+	author  = {A. O. L. Atkin and François Morain},
+	title   = {Elliptic curves and primality proving},
+	journal = {Mathematics of Computation},
+	volume  = {61},
+	year    = {1993},
+	pages   = {29--68},
+	doi     = {10.1090/S0025-5718-1993-1183434-8}
+}
+
+% Taxonomy of Pairing-based Crpytography
+@misc{taxonomyofpbc,
+	author = {David Freeman and Michael Scott and Edlyn Teske},
+	title = {A taxonomy of pairing-friendly elliptic curves},
+	howpublished = {Cryptology {ePrint} Archive, Paper 2006/372},
+	year = {2006},
+	pages = {23-40, 43-48},
+	url = {https://eprint.iacr.org/2006/372}
+}
+
+@inproceedings{CLN11,
+	author    = {Craig Costello and Kristin E. Lauter and Michael Naehrig},
+	title     = {Attractive Subfamilies of {BLS} Curves for Implementing High-Security Pairings},
+	booktitle = {Progress in Cryptology -- INDOCRYPT 2011},
+	editor    = {Daniel J. Bernstein and Sanjit Chatterjee},
+	series    = {Lecture Notes in Computer Science},
+	volume     = {7107},
+	pages      = {320--342},
+	publisher  = {Springer},
+	year       = {2011},
+	doi        = {10.1007/978-3-642-25578-6_23}
+}
+
+@inproceedings{Hess2008PairingLattices,
+	author    = {Florian Hess},
+	title     = {Pairing Lattices},
+	booktitle = {Pairing-Based Cryptography -- Pairing 2008},
+	series    = {Lecture Notes in Computer Science},
+	volume    = {5209},
+	pages     = {18--38},
+	publisher = {Springer},
+	year      = {2008}
+}
+
+@article{LLP09,
+	author  = {Eunjeong Lee and
+	Hyang-Sook Lee and
+	Chang-Min Park},
+	title   = {Efficient and Generalized Pairing Computation on Abelian Varieties},
+	journal = {IEEE Transactions on Information Theory},
+	volume  = {55},
+	number  = {4},
+	pages   = {1793--1803},
+	year    = {2009},
+	doi     = {10.1109/TIT.2008.2010823}
+}
+
+@misc{Sco11,
+	author = {Michael Scott},
+	title = {On the Efficient Implementation of Pairing-Based Protocols},
+	howpublished = {Cryptology {ePrint} Archive, Paper 2011/334},
+	year = {2011},
+	url = {https://eprint.iacr.org/2011/334}
+}
+
+
+@thesis{Costello2012,
+	author      = {Craig Costello},
+	title       = {Fast Formulas for Computing Cryptographic Pairings},
+	type        = {PhD thesis},
+	institution = {Queensland University of Technology},
+	location    = {Brisbane, Australia},
+	date        = {2012}
+}
+
+% Attacks on ECC
+% --------------
+@incollection{FanVerbauwhede2012,
+	author    = {Junfeng Fan and Ingrid Verbauwhede},
+	title     = {An Updated Survey on Secure ECC Implementations: Attacks, Countermeasures and Cost},
+	booktitle = {Cryptography and Security: From Theory to Applications},
+	editor    = {David Naccache},
+	series    = {Lecture Notes in Computer Science},
+	volume    = {6805},
+	pages     = {265--282},
+	publisher = {Springer},
+	address   = {Berlin, Heidelberg},
+	year      = {2012},
+	doi       = {10.1007/978-3-642-28368-0_18}
+}
+% --------------
+
+% Security assumptions collection
+@report{maya6,
+	title       = {D.MAYA.6: Final Report on Main Computational Assumptions in Cryptography},
+	author      = {{ECRYPT II}},
+	institution = {ECRYPT II Project},
+	year        = {2013},
+	url         = {https://cordis.europa.eu/docs/projects/cnect/6/216676/080/deliverables/001-DMAYA6.pdf},
+	note        = {European Commission FP7, ICT-2007-216676}
+}
+
+
+% ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ MSC ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+% ===========================================================================================================================
+% Forrasok AU kurzusohkoz:
+% Cryptographic Computing
+%%
+%% IBE theory es implementacio
+% ===========================================================================================================================
+
+% Implementatio
+
+%% MIRACL:
+@online{lib.miracl,
+	title = {The MIRACL Core Cryptographic Library},
+	journal = {},
+	year = {},
+	month = {},
+	url = {https://github.com/miracl/core/tree/master/java},
+	note = {[Online; accessed 13. November. 2025]}
+}
+
+% -------------------------------------
+% MPC
+%% Pedersen VSS
+
+
+% Treshold Cryptography: Ho to build MPC instead of complex Distributed-Key-Share
+%% https://link.springer.com/chapter/10.1007/978-3-031-33386-6_13
+@Inbook{TresholdCrypto,
+	author="Cachin, Christian",
+	editor="Mulder, Valentin
+	and Mermoud, Alain
+	and Lenders, Vincent
+	and Tellenbach, Bernhard",
+	title="Multi-Party Threshold Cryptography",
+	bookTitle="Trends in Data Protection and Encryption Technologies ",
+	year="2023",
+	publisher="Springer Nature Switzerland",
+	address="Cham",
+	pages="65--69",
+	isbn="978-3-031-33386-6",
+	doi="10.1007/978-3-031-33386-6_13",
+	url="https://doi.org/10.1007/978-3-031-33386-6_13"
+}
+
+
+%% Shamir's secret sharing scheme
+
+%%% Distributed key sharing algorithm
+@misc{protocol.csirashi,
+	author = {Ward Beullens and Lucas Disson and Robi Pedersen and Frederik Vercauteren},
+	title = {{CSI}-{RAShi}: Distributed key generation for {CSIDH}},
+	howpublished = {Cryptology {ePrint} Archive, Paper 2020/1323},
+	year = {2020},
+	url = {https://eprint.iacr.org/2020/1323}
+}
+
+%%% ha kellene protocol: FROST protocol: https://eprint.iacr.org/2020/852.pdf
+@misc{protocol.frost,
+	author = {Chelsea Komlo and Ian Goldberg},
+	title = {{FROST}: Flexible Round-Optimized Schnorr Threshold Signatures},
+	howpublished = {Cryptology {ePrint} Archive, Paper 2020/852},
+	year = {2020},
+	url = {https://eprint.iacr.org/2020/852}
+}
+
+% TODO: ha van nem draft az is johet..
+@misc{protocol.frost.draft,
+	author       = {D. Connolly and Z. Koml{o} and I. Goldberg and C.A. Wood},
+	title        = {{FROST: Flexible Round-Optimized Schnorr Threshold Signatures} (Draft)},
+	howpublished = {\url{https://www.ietf.org/archive/id/draft-irtf-cfrg-frost-15.html}},
+	month        = sep,
+	year         = 2023,
+	note         = {Workgroup: CFRG; Intended Status: Informational; Expires: 22 March 2024},
+}
+
+@misc{ecc.hashing,
+	series =    {},
+	number =    9380,
+	howpublished =  {RFC 9380},
+	publisher = {RFC Editor},
+	doi =       {10.17487/RFC9380},
+	url =       {https://www.rfc-editor.org/info/rfc9380},
+	author =    {Armando Faz-Hernandez and Sam Scott and Nick Sullivan and Riad S. Wahby and Christopher A. Wood},
+	title =     {{Hashing to Elliptic Curves}},
+	pagetotal = 145,
+	year =      2023,
+	month =     aug
+}
+
+%%% https://eprint.iacr.org/2020/691.pdf
+
+%%% Distrubuted Key sharing --->
+
+%%%% https://medium.com/asecuritysite-when-bob-met-alice/the-magic-of-shamir-secret-shares-and-elliptic-curves-34297b9bc608
+%%%% https://asecuritysite.com/blog/2021-12-10_The-Magic-of-Shamir-Secret-Shares-and-Elliptic-Curves-34297b9bc608.html
+@misc{BillSSSecc,
+	author       = {Bill Buchanan},
+	title        = {The Magic of Shamir Secret Shares and Elliptic Curves},
+	howpublished = {Blog post on ASecuritySite.com},
+	url          = {https://asecuritysite.com/blog/2021-12-10_The-Magic-of-Shamir-Secret-Shares-and-Elliptic-Curves-34297b9bc608.html},
+	note         = {Accessed: 2025-11-08}
+}
+
+%%%% https://asecuritysite.com/kryptology/sss_theory
+%%% + implementation: https://asecuritysite.com/kryptology/sss01
+
+%%% PQC:: https://eprint.iacr.org/2023/899.pdf
+
+%%% https://asecuritysite.com/circl/sss_circl?t=4&n=8
+
+%%%% https://asecuritysite.com/encryption/pro_sss
+
+
+% Alap dokumentum:
+%% https://dl.acm.org/doi/pdf/10.1145/359168.359176
+
+@article{Shamir1979,
+	author    = {Adi Shamir},
+	title     = {How to share a secret},
+	journal   = {Communications of the Association for Computing Machinery},
+	volume    = {22},
+	number    = {11},
+	pages     = {612--613},
+	year      = {1979},
+	doi       = {10.1145/359168.359176},
+	url       = {https://dl.acm.org/doi/pdf/10.1145/359168.359176}
+}
+% -------------------------------------
+
+
+%% syssec handin-bol
+%%% ............................................
+
+% Custom TLS 1.3 VPN Lab
+@misc{customvpnlab,
+    author = {Miklos Vadasz, System Security Course Project},
+    title = {Mini TLS-based Tunelling},
+    year = {2025},
+    url = {"https://www.overleaf.com/read/vhtfqhcggpjv#9739bb"},
+    note = {Accessed: 2025-09-28}
+}
+
+% TLS13 Ciphersuite accordign to: RFC 5289
+% TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256/
+% Recommendation: https://ciphersuite.info/cs/TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256/"
+@online{tls13ciphersuite,
+    title = { TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois Counter Mode (GCM)},
+    journal = {},
+    author = { E. Rescorla},
+    year = {2008},
+    month = {},
+    note = {[Online; accessed 26. Marz. 2025]},
+    url = {https://datatracker.ietf.org/doc/html/rfc5289}
+}
+
+% wireshark
+@misc{wiresharkorg,
+    author = {Wireshark},
+    title = {},
+    year = {},
+    url = {https://www.wireshark.org/},
+    note = {Accessed: 2025-03-28}
+}
+
+% TLS 1.3 Security:
+%https://datatracker.ietf.org/doc/html/rfc8446
+@misc{tls13security,
+    author = {E. Rescorla},
+    title = {The Transport Layer Security (TLS) Protocol Version 1.3},
+    year = {2018},
+    url = {https://datatracker.ietf.org/doc/html/rfc8446},
+    note = {Accessed: 2025-03-28}
+}
+
+% allocated ip port numbers
+@misc{allocatednumbers,
+    author = {Joyce K. Reynolds},
+    title = {Assigned Numbers: RFC 1700 is Replaced by an On-line Database},
+    year = {2002},
+    url = {https://datatracker.ietf.org/doc/html/rfc3232},
+    note = {Accessed: 2025-03-28}
+}
+
+% OCI Containers
+
+@misc{oci.containers,
+    author = {Red Hat},
+    title = {Open Container Initiative support},
+    url = {https://docs.redhat.com/en/documentation/red_hat_quay/3/html/use_red_hat_quay/oci-intro},
+    note = {Accessed: 2025-10-28}
+}
+
+@misc{podman,
+    author = {podman},
+    title = {podman},
+    year = {2025},
+    url = {https://docs.podman.io/en/latest/},
+    note = {Accessed: 2025-03-28}
+}
+
+
+% Dockerfile
+@misc{docker.dockerfiles,
+    author = {},
+    title = {Dockerfiles},
+    year = {2025},
+    url = {https://docs.docker.com/reference/dockerfile/},
+    note = {Accessed: 2025-03-28}
+}
+
+@misc{docker,
+    author = {podman},
+    title = {podman},
+    year = {2025},
+    url = {https://www.docker.com/},
+    note = {Accessed: 2025-03-28}
+}
+
+%%%%% HTTP <- curl output
+@online{ip.http.standard,
+    title = {Hypertext Transfer Protocol},
+    journal = {},
+    year = {},
+    month = {},
+    url = {https://datatracker.ietf.org/doc/html/rfc9112},
+    note = {[Online; accessed 03. April. 2025]}
+}
+
+%%%% GET
+@online{ip.http.methods.get,
+    title = {Hypertext Transfer Protocol},
+    journal = {},
+    year = {},
+    month = {},
+    url = {https://datatracker.ietf.org/doc/html/rfc9112},
+    note = {[Online; accessed 03. April. 2025]}
+}
+
+
+% rbac separation of dutties
+@Book{sec.rbac.duties,
+    author       = {Paul C. van Oorschot},
+    title        = {Computer Security and the Internet: Tools and Jewels from Malware to Bitcoin},
+    year         = {2021},
+    publisher    = {Springer},
+    pages        = {370}
+}
+
+% ---------
+
+% Hash-to-curve BLS12-381
+@misc{wb19,
+	author = {Riad S.  Wahby and Dan Boneh},
+	title = {Fast and simple constant-time hashing to the {BLS12}-381 elliptic curve},
+	howpublished = {Cryptology {ePrint} Archive, Paper 2019/403},
+	year = {2019},
+	doi = {10.13154/tches.v2019.i4.154-179},
+	url = {https://eprint.iacr.org/2019/403}
+}
+
+
+% BLAKE2 wikipedia
+@misc{hash.blake.wiki,
+	author = {},
+	title = {{BLAKE (hash function)}},
+	howpublished = {\url{https://en.wikipedia.org/wiki/BLAKE_(hash_function)}}
+}
+
+
+% BLAKE2 benchmark
+@misc{hash.blake.benchmark,
+	author = {},
+	title = {BLAKE2 benchmark},
+	howpublished = {\url{https://github.com/BLAKE2/BLAKE2/tree/master/bench}}
+	}
+
+
+@misc{hash.blake.net,
+	author = {},
+	title = {BLAKE Implementation},
+	howpublished = {\url{https://www.blake2.net/}}
+}
+
+
+% Selected Hash function: BLAKE2b (alternative to SHA-256)
+%% OID for BLAKE2b: https://oid-base.com/get/1.3.6.1.4.1.1722.12.2.1
+@misc{rfc7693,
+	series =    {},
+	number =    7693,
+	howpublished =  {RFC 7693},
+	publisher = {RFC Editor},
+	doi =       {10.17487/RFC7693},
+	url =       {https://www.rfc-editor.org/info/rfc7693},
+	author =    {Markku-Juhani O. Saarinen and Jean-Philippe Aumasson},
+	title =     {{The BLAKE2 Cryptographic Hash and Message Authentication Code (MAC)}},
+	pagetotal = 30,
+	year =      2015,
+	month =     nov
+}
+
+
+% sha-256
+@techreport{nist.fips180.4.2015,
+	title        = {Secure Hash Standard (SHS)},
+	author       = {{National Institute of Standards and Technology}},
+	institution  = {National Institute of Standards and Technology},
+	year         = {2015},
+	number       = {FIPS PUB 180-4},
+	address      = {Gaithersburg, MD, USA},
+	doi          = {10.6028/NIST.FIPS.180-4},
+	url          = {https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf}
+}
+
+%
+
+
+
+% ChaCha cipher
+@misc{cipher.chacha,
+	author = {D. J. Bernstein},
+	title = {The ChaCha family of stream ciphers},
+	howpublished = {},
+	year = {},
+	url = {https://cr.yp.to/chacha.html}
+}
+
+% Analysis of BLAKE2b
+@misc{hash.blake2.analysis,
+	author = {Jian Guo and Pierre Karpman and Ivica Nikolic and Lei Wang and Shuang Wu},
+	title = {Analysis of {BLAKE2}},
+	howpublished = {Cryptology {ePrint} Archive, Paper 2013/467},
+	year = {2013},
+	url = {https://eprint.iacr.org/2013/467}
+}
+
+% Random oracle model
+@Book{Bellare1993,
+    author       = {M. Bellare and P. Rogaway},
+    title        = {Random Oracles Are Practical: a Paradigm for De-
+signing Efficient Protocols},
+    journal      = {In Proc. of the 1st CCS},
+    year         = {1993},
+    publisher    = {ACM Press, New York},
+    pages        = {62-73}
+}
+
+%%% ............................................
+
+% Implementacio specific
+% -------------------------------------
+
+    % RELIC <- ECC, pairings
+    %% x64-pbc-bn254
+    %x64-pbc-bn382
+    %x64-pbc-bn446
+@misc{relic-toolkit,
+    author = {D. F. Aranha and C. P. L. Gouv-a and T. Markmann and R. S. Wahby and K. Liao},
+    title = {{RELIC is an Efficient LIbrary for Cryptography}},
+    howpublished = {\url{https://github.com/relic-toolkit/relic}},
+}
+
+    % Optimal ATE pairing:
+    %% https://eprint.iacr.org/2010/526.pdf
+    @techreport{Aranha2010_526,
+    	author      = {Diego F. Aranha and Koray Karabina and Patrick Longa and Catherine H. Gebotys and Julio L-pez},
+    	title       = {Faster Explicit Formulas for Computing Pairings over Ordinary Curves},
+    	institution = {Cryptology ePrint Archive},
+    	number      = {2010/526},
+    	year        = {2010},
+    	url         = {https://eprint.iacr.org/2010/526.pdf},
+    	note        = {Extended version later published as Aranha et al., EUROCRYPT 2011}
+    }
+
+    %% TODO: Curve database for parameters:
+    %%% https://std.neuromancer.sk/bn/bn638
+% Nakamoto
+@inproceedings{FujisakiOkamoto,
+	author    = {E. Fujisaki and T. Okamoto},
+	title     = {Secure Integration of Asymmetric and Symmetric Encryption Schemes},
+	booktitle = {Advances in Cryptology -- {CRYPTO} '99},
+	series    = {Lecture Notes in Computer Science},
+	volume    = {1666},
+	pages     = {537--554},
+	publisher = {Springer},
+	year      = {1999},
+}
+
+
+% IBE with ECC
+%% https://github.com/peeyushy95/Identity-Based-Encryption/tree/master
+
+%% jPBC (Java Pairing Based Cryotigrohy)
+@INPROCEEDINGS{ecc.pairing.implement,
+    author={De Caro, Angelo and Iovino, Vincenzo},
+    booktitle={2011 IEEE Symposium on Computers and Communications (ISCC)},
+    title={jPBC: Java pairing based cryptography},
+    year={2011},
+    volume={},
+    number={},
+    pages={850-855},
+    keywords={Libraries;Cryptography;Java;Benchmark testing;Elliptic curves;Mobile communication;Zirconium;pairing-based cryptography;Java},
+    doi={10.1109/ISCC.2011.5983948}}
+
+%% Pairing Friendly Curve:f
+    %% https://www.ietf.org/archive/id/draft-irtf-cfrg-pairing-friendly-curves-08.html
+@techreport{ecc.pairing.curves.bls,
+	number =    {draft-irtf-cfrg-pairing-friendly-curves-12},
+	type =      {Internet-Draft},
+	institution =   {Internet Engineering Task Force},
+	publisher = {Internet Engineering Task Force},
+	note =      {Work in Progress},
+	url =       {https://datatracker.ietf.org/doc/draft-irtf-cfrg-pairing-friendly-curves/12/},
+	author =    {Yumi Sakemi and Satoru Kanno and Riad S. Wahby},
+	title =     {{Pairing-Friendly Curves}},
+	pagetotal = 54,
+	year =      2025,
+	month =     nov,
+	day =       2
+}
+
+
+%% asecurity site IBE
+@misc{asecuritysite_19459,
+    title = {Identity-based Encryption (IBE)},
+    year={2025},
+    organization = {Asecuritysite.com},
+    author = {Buchanan, William J},
+    url = {https://asecuritysite.com/encryption/ibe},
+    note={Accessed: October 25, 2025},
+    howpublished={\url{https://asecuritysite.com/encryption/ibe}}
+}
+
+
+
+% IBE architecture design, standards
+% -------------------------------------
+
+%% ETSI: Guide to Identity-Based Cryptography + itt van meg jopar hivatkozas amit erdemes vegignezni
+@misc{standard.etsi.TR103719,
+    url =       {https://www.etsi.org/deliver/etsi_tr/103700_103799/103719/01.01.01_60/tr_103719v010101p.pdf},
+    author =    {ETSI},
+    title =     {{Guide to Identity-Based Cryptography}}
+}
+
+%% RFC 5408: Identity-based encryption architecture and supporting data structure
+@misc{standard.rfc.5408.ibe,
+    number =    5408,
+    howpublished =  {RFC 5408},
+    publisher = {RFC Editor},
+    doi =       {10.17487/RFC5408},
+    url =       {https://www.rfc-editor.org/info/rfc5408},
+    author =    {Mark J. Schertler and Guido Appenzeller and Luther Martin},
+    title =     {{Identity-Based Encryption Architecture and Supporting Data Structures}},
+    pagetotal = 30,
+    year =      2009,
+    month =     jan
+}
+
+
+
+%% Send smtp from java
+%https://stackoverflow.com/questions/73580/how-do-i-send-an-smtp-message-from-java
+%https://stackoverflow.com/questions/46663/how-can-i-send-an-email-by-java-application-using-gmail-%yahoo-or-hotmail
+%https://commons.apache.org/proper/commons-email/
+
+% Cryptographic
+% -------------------------------------
+
+% Treshold cryptography
+
+%% 22
+@InProceedings{crypto.seckeydistdl,
+    author="Gennaro, Rosario
+        and Jarecki, Stanis{\l}aw
+        and Krawczyk, Hugo
+        and Rabin, Tal",
+    editor="Stern, Jacques",
+    title="Secure Distributed Key Generation for Discrete-Log Based Cryptosystems",
+    booktitle="Advances in Cryptology --- EUROCRYPT '99",
+    year="1999",
+    publisher="Springer Berlin Heidelberg",
+    address="Berlin, Heidelberg",
+    pages="295--310",
+    isbn="978-3-540-48910-8"
+}
+
+    %% TODO: Secret sharing for treshold cryptography
+    %%% https://csrc.nist.rip/Projects/threshold-cryptography
+    @misc{NISTThreshold2025,
+    	author       = {National Institute of Standards and Technology},
+    	title        = {Multi-Party Threshold Cryptography (MPTC) Project},
+    	howpublished = {\url{https://csrc.nist.gov/projects/threshold-cryptography}},
+    	year         = {2025},
+    	note         = {Accessed: YYYY-MM-DD}
+    }
+
+    %%% https://www.certik.com/resources/blog/threshold-cryptography-i-distributed-key-generation
+   @misc{CertiKThresholdBlog,
+   	author       = {CertiK},
+   	title        = {Threshold Cryptography I: Distributed Key Generation},
+   	howpublished = {\url{https://www.certik.com/resources/blog/threshold-cryptography-i-distributed-key-generation}},
+   	year         = {2023},
+   	note         = {Accessed: YYYY-MM-DD}
+   }
+
+
+    %%% https://dl.acm.org/doi/10.5555/1754868.1754929
+    @inproceedings{Pedersen1991,
+    	author    = {T.-P. Pedersen},
+    	title     = {A Threshold Cryptosystem Without a Trusted Party},
+    	booktitle = {Advances in Cryptology - {EUROCRYPT}--91},
+    	series    = {Lecture Notes in Computer Science},
+    	volume    = {547},
+    	pages     = {522--526},
+    	year      = {1991},
+    	doi       = {10.1007/3-540-46634-9_32},
+    	url       = {https://doi.org/10.1007/3-540-46634-9_32}
+    }
+
+    %% TODO: Secure Distributed Key Generation
+    %% ---------------------------------------
+
+    %%% https://en.wikipedia.org/wiki/Distributed_key_generation
+    %%%
+
+    %https://csrc.nist.gov/csrc/media/presentations/2023/mpts2023-day1-talk-dl-dkg/images-media/mpts2023-1b1-slides--katz--DKG-DL.pdf
+    @misc{Katz2023,
+    	author       = {Jonathan Katz},
+    	title        = {Distributed Key Generation (DKG) in the Discrete-Logarithm Setting},
+    	howpublished = {Presentation at NIST Workshop on Multi-Party Threshold Schemes (MPTS 2023)},
+    	month        = sep,
+    	year         = {2023},
+    	note         = {Slides available: \url{https://csrc.nist.gov/csrc/media/presentations/2023/mpts2023-day1-talk-dl-dkg/images-media/mpts2023-1b1-slides--katz--DKG-DL.pdf}}
+    }
+
+    %%% https://crypto.unibe.ch/archive/theses/2023.msc.markus.eggimann.pdf
+	@mastersthesis{Eggimann2023,
+		author       = {Markus Eggimann},
+		title        = {Design and Implementation of an Asynchronous Distributed Key Generation Protocol},
+		school       = {Universit-t Bern},
+		year         = {2023},
+		note         = {Master-s thesis. Available: \url{https://crypto.unibe.ch/archive/theses/2023.msc.markus.eggimann.pdf}}
+	}
+
+
+        %%%% %% 1
+            %Kate, Aniket; Goldberg, Ian (2010). "Distributed Private-Key Generators for Identity-Based Cryptography".
+            %Security and Cryptography for Networks. Lecture Notes in Computer Science. Vol. 6280. pp. 436-453.
+            %CiteSeerX 10.1.1.389.4486. doi:10.1007/978-3-642-15317-4_27. ISBN 978-3-642-15316-7.
+
+		@incollection{KateGoldberg2010,
+			author    = {Aniket Kate and Ian Goldberg},
+			title     = {Distributed Private-Key Generators for Identity-Based Cryptography},
+			booktitle = {Security and Cryptography for Networks -- {SCN} 2010},
+			series    = {Lecture Notes in Computer Science},
+			volume    = {6280},
+			pages     = {436--453},
+			publisher = {Springer},
+			year      = {2010},
+			doi       = {10.1007/978-3-642-15317-4_27},
+			isbn      = {978-3-642-15316-7},
+			url       = {https://doi.org/10.1007/978-3-642-15317-4_27}
+		}
+
+
+        %%% 2
+        %Gennaro, Rosario; Jarecki, Stanislaw; Krawczyk, Hugo; Rabin, Tal (24 May 2006).
+        %"Secure Distributed Key Generation for Discrete-Log Based Cryptosystems".
+        %Journal of Cryptology. 20 (1): 51-83. CiteSeerX 10.1.1.134.6445.
+        %doi:10.1007/s00145-006-0347-3. S2CID 3331212.
+        @article{Gennaro2006,
+        	author    = {Rosario Gennaro and Stanislaw Jarecki and Hugo Krawczyk and Tal Rabin},
+        	title     = {Secure Distributed Key Generation for Discrete-Log Based Cryptosystems},
+        	journal   = {Journal of Cryptology},
+        	volume    = {20},
+        	number    = {1},
+        	pages     = {51--83},
+        	year      = {2006},
+        	doi       = {10.1007/s00145-006-0347-3},
+        	url       = {https://doi.org/10.1007/s00145-006-0347-3}
+        }
+%% ---------------------------------------
+
+%% Pairings
+
+%%% TODO
+% https://course1.winona.edu/eerrthum/Papers/WeilVsTate.pdf
+%% https://crypto.stanford.edu/pbc/notes/ep/tate.html
+
+% Implementing Pairing with Pairing-friendly curves <- BN curve
+@inproceedings{ecc.pairings.param,
+    author = {Aranha, Diego and Fuentes-Casta-eda, Laura and Knapp, Edward and Menezes, Alfred and Rodr-iguez-Henr-quez, F},
+    year = {2013},
+    month = {01},
+    booktitle = {},
+    pages = {177-195},
+    title = {Implementing Pairings at the 192-Bit Security Level},
+    isbn = {978-3-642-36333-7},
+    doi = {10.1007/978-3-642-36334-4_11}
+}
+
+
+%%
+@phdthesis{lynn2007implementation,
+	author       = {Lynn, Ben},
+	title        = {On the Implementation of Pairing-based Cryptosystems},
+	school       = {Stanford University},
+	year         = {2007},
+	month        = jun,
+	note         = {PhD Dissertation. \url{https://crypto.stanford.edu/pbc/thesis.pdf}},
+}
+
+
+    % TODO: Add to .bib
+%[1] Aranha, D., Karabina, K., Longa, P., Gebotys, C., Rodriguez-Henriquez, F. and J. Lopez, "Faster Explicit Formulas for Computing Pairings over Ordinary Curves", Proceedings Lecture notes in computer sciences; EUROCRYPT --EUROCRYPT2011, 2011. [paper]
+@inproceedings{Aranha2011,
+	author    = {Diego F. Aranha and Kamil Karabina and Patrick Longa and Catherine Gebotys and Julio Lopez and Francisco Rodr{\'\i}guez-Henr{\'\i}quez},
+	title     = {Faster Explicit Formulas for Computing Pairings over Ordinary Curves},
+	booktitle = {Advances in Cryptology -- {EUROCRYPT} 2011},
+	series    = {Lecture Notes in Computer Science},
+	volume    = {6632},
+	pages     = {48--68},
+	publisher = {Springer},
+	address   = {Berlin, Heidelberg},
+	year      = {2011},
+	doi       = {10.1007/978-3-642-20465-4_4},
+	url       = {https://eprint.iacr.org/2010/526}
+}
+
+%[2] Barreto, P. S., & Naehrig, M. (2005, August). Pairing-friendly elliptic curves of prime order. In International workshop on selected areas in cryptography (pp. 319-331). Springer, Berlin, Heidelberg. [paper]
+@inproceedings{BarretoNaehrig2005,
+	author    = {Paulo S. L. M. Barreto and Michael Naehrig},
+	title     = {Pairing-Friendly Elliptic Curves of Prime Order},
+	booktitle = {Selected Areas in Cryptography -- {SAC} 2005},
+	series    = {Lecture Notes in Computer Science},
+	volume    = {3897},
+	pages     = {319--331},
+	publisher = {Springer},
+	address   = {Berlin, Heidelberg},
+	year      = {2006},
+	doi       = {10.1007/11693383_22},
+	url       = {https://doi.org/10.1007/11693383_22}
+}
+
+    % ECC: Implementing pairings in software.
+@online{ecc.fam.param.pair,
+    title = { Implement all the pairings in software!},
+    author = { Diego F. Aranha },
+    year = {2017},
+    note = {[Online; accessed 05. Nov. 2025]},
+    url = {https://caramba.inria.fr/sem-slides/201905241000.pdf}
+}
+
+%% Faster point multiplication on Elliptic Curves
+@inproceedings{GLV01,
+	author    = {Robert P. Gallant and Robert J. Lambert and Scott A. Vanstone},
+	title     = {Faster Point Multiplication on Elliptic Curves with Efficient Endomorphisms},
+	booktitle = {Advances in Cryptology --- CRYPTO 2001},
+	editor    = {Joe Kilian},
+	series    = {Lecture Notes in Computer Science},
+	volume    = {2139},
+	pages     = {190--200},
+	publisher = {Springer-Verlag},
+	address   = {Berlin, Heidelberg},
+	year      = {2001},
+	month     = aug,
+	isbn      = {978-3-540-42456-7},
+	note      = {Proceedings of the 21st Annual International Cryptology Conference (CRYPTO 2001), Santa Barbara, California, USA, August 19--23, 2001},
+	doi       = {10.1007/3-540-44647-8_11}
+}
+
+% All-in chapman
+@book{chapman17,
+	editor    = {Nadia El Mrabet and Marc Joye},
+	title     = {Guide to Pairing-Based Cryptography},
+	publisher = {CRC Press},
+	address   = {Boca Raton, FL},
+	year      = {2017},
+	series    = {Chapman \& Hall/CRC Cryptography and Network Security Series},
+	isbn      = {978-1-4987-2950-5}
+}
+
+
+%% Elliptic curve arithmetics
+
+@book{Sil09,
+	author    = {Joseph H. Silverman},
+	title     = {The Arithmetic of Elliptic Curves},
+	edition   = {2},
+	series    = {Graduate Texts in Mathematics},
+	volume    = {106},
+	publisher = {Springer},
+	year      = {2009},
+	address   = {New York},
+	isbn      = {978-0-387-09494-6}
+}
+
+
+%%% Choosing Elliptic curve family and curve parameters for BF based IBE
+@online{ecc.fam.param,
+    title = {  Introduction to Pairings },
+    author = { Diego F. Aranha },
+    year = {2017},
+    note = {[Online; accessed 25. May. 2025]},
+    url = {https://ecc2017.cs.ru.nl/slides/ecc2017school-aranha.pdf}
+}
+
+    %% Choosing curve families and safe parameters:
+
+@online{ecc.sec.param,
+    title = { SafeCurves: choosing safe curves for elliptic-curve cryptography },
+    author = { Daniel J. Bernstein and Tanja Lange},
+    year = {},
+    note = {[Online; accessed 25. Oct. 2025]},
+    url = {https://safecurves.cr.yp.to/index.html}
+}
+    %% TODO: safecurves eprint
+    %%% https://eprint.iacr.org/2024/1265.pdf
+
+    % osszefoglalo tabla standard-ok alapjan:
+    %%     %%% Altalanos m/2 okolszabaly: pl. ECC 1024bit key size ~ 512 bit symmetric key size
+%    %%%% TODO: lasd a parameter justification-t kesobb
+    % + bovebben: https://datatracker.ietf.org/doc/rfc4492/
+
+@online{ecc.sec.param.summ2012,
+    title = { Yearly Report on Algorithms and Keysizes },
+    author = { ECRYPT},
+    year = {2012},
+    note = {[Online; accessed 25. Oct. 2025]},
+    url = {https://cordis.europa.eu/docs/projects/cnect/6/216676/080/deliverables/002-DSPA20.pdf}
+}
+
+%%% TODO
+%
+% https://crypto.stanford.edu/pbc/notes/ep/
+% https://crypto.stanford.edu/pbc/notes/ep/redefine.html
+% https://eprint.iacr.org/2003/242.pdf
+
+% placeholder-cite
+@online{todo,
+	title = { TODO: Placeholder },
+	author = {TODO: Placeholder},
+	year = {TODO: Placeholder},
+	note = {[TODO: Placeholder]},
+	url = {TODO: Placeholder}
+}
+
+% Identity Based Encryption
+% -------------------------------------
+
+% IBE IETF standard beli valtozata
+    % TODO: https://www.ietf.org/rfc/rfc5091
+@misc{ibe.rfc5091,
+    number =    5091,
+    howpublished =  {RFC 5091},
+    publisher = {RFC Editor},
+    doi =       {10.17487/RFC5091},
+    url =       {https://www.rfc-editor.org/info/rfc5091},
+    author =    {Luther Martin and Xavier Boyen},
+    title =     {{Identity-Based Cryptography Standard (IBCS) \#1: Supersingular Curve Implementations of the BF and BB1 Cryptosystems}},
+    pagetotal = 63,
+    year =      2007,
+    month =     dec
+}
+
+% IND-CCA security for IBE in the Random-Oracle (RO) model
+    %% TODO:
+    %% TODO: https://www.cs.tau.ac.il/%7Ecanetti/materials/bchk06.pdf
+@online{ibe.sec.cca,
+    title = {  Identity based and CCA-secure encryption },
+    author = { Ilia Lotosh },
+    note = {[Online; accessed 25. May. 2025]},
+    url = {https://www.cs.tau.ac.il/~canetti/materials/sp09-sem-lec7.pdf}
+}
+
+% Shamir's original paper on IBE system for crypto system and signatures
+@InProceedings{Shamir41,
+    author={Shamir, Adi},
+    editor={Blakley, George Robert and Chaum, David},
+    title={Identity-Based Cryptosystems and Signature Schemes},
+    booktitle={Advances in Cryptology},
+    year={1985},
+    publisher={Springer Berlin Heidelberg},
+    address={Berlin, Heidelberg},
+    pages={47-53},
+    isbn={978-3-540-39568-3}
+}
+
+%% Boneh: IBE from Pairings ( itt mar szerepel a LWE alapu is (2023-bol!!) + anonymous IBE)
+@online{theory.ec.ibeupdate,
+    title = {  Identity Based Encryption },
+    author = { Dan Boneh },
+    year = {2023},
+    note = {[Online; accessed 25. May. 2025]},
+    url = {https://csrc.nist.gov/csrc/media/Presentations/2023/stppa5-ibe/images-media/20230209-stppa5-Dan-Boneh--IBE.pdf}
+}
+
+%
+@book{Gal12,
+	place={Cambridge},
+	title={Mathematics of Public Key Cryptography},
+	publisher={Cambridge University Press},
+	author={Galbraith, Steven D.},
+	pages={135},
+	year={2012}
+}
+
+@book{Gal05,
+	author    = {Steven D. Galbraith},
+	title     = {Pairings},
+	booktitle = {Advances in Elliptic Curve Cryptography},
+	series    = {London Mathematical Society Lecture Note Series},
+	volume    = {317},
+	pages     = {183--213},
+	publisher = {Cambridge University Press},
+	address   = {Cambridge},
+	year      = {2005},
+	isbn      = {9780521604154},
+	chapter   = {9},
+	editor    = {Ian F. Blake and Gadiel Seroussi and Nigel P. Smart}
+}
+
+
+% ----
+%% Boneh hivatkozott forrasok IBE construction-hoz:
+
+@inproceedings{CHKP10,
+	author    = {David Cash and Dennis Hofheinz and Eike Kiltz and Chris Peikert},
+	title     = {Bonsai Trees, or How to Delegate a Lattice Basis},
+	booktitle = {Advances in Cryptology -- {EUROCRYPT} 2010},
+	series    = {Lecture Notes in Computer Science},
+	volume    = {6110},
+	pages     = {523--552},
+	publisher = {Springer},
+	address   = {Berlin, Heidelberg},
+	year      = {2010},
+	doi       = {10.1007/978-3-642-13190-5_27},
+	url       = {https://doi.org/10.1007/978-3-642-13190-5_27},
+	note      = {Describes the Bonsai Tree approach to hierarchical identity-based encryption (HIBE) from LWE}
+}
+
+@inproceedings{GS03,
+	author    = {Craig Gentry and Alice Silverberg},
+	title     = {Hierarchical ID-Based Cryptography},
+	booktitle = {Advances in Cryptology -- {ASIACRYPT} 2002},
+	series    = {Lecture Notes in Computer Science},
+	volume    = {2501},
+	pages     = {548--566},
+	publisher = {Springer-Verlag},
+	address   = {London, UK},
+	year      = {2002},
+	doi       = {10.1007/3-540-36178-2_34},
+	url       = {https://doi.org/10.1007/3-540-36178-2_34}
+}
+
+
+
+@inproceedings{GPV08,
+	author    = {Craig Gentry and Chris Peikert and Vinod Vaikuntanathan},
+	title     = {Trapdoors for Hard Lattices and New Cryptographic Constructions},
+	booktitle = {Proceedings of the 40th Annual {ACM} Symposium on Theory of Computing ({STOC} 2008)},
+	year      = {2008},
+	pages     = {197--206},
+	publisher = {ACM},
+	address   = {New York, NY, USA},
+	doi       = {10.1145/1374376.1374407},
+	url       = {https://doi.org/10.1145/1374376.1374407}
+}
+
+@inproceedings{BGH07,
+	author    = {Dan Boneh and Craig Gentry and Michael Hamburg},
+	title     = {Space-Efficient Identity Based Encryption Without Pairings},
+	booktitle = {48th Annual {IEEE} Symposium on Foundations of Computer Science ({FOCS} 2007)},
+	year      = {2007},
+	pages     = {647--657},
+	publisher = {IEEE Computer Society},
+	address   = {Providence, RI, USA},
+	doi       = {10.1109/FOCS.2007.37},
+	url       = {https://doi.org/10.1109/FOCS.2007.37}
+}
+
+
+
+
+@inproceedings{BB04,
+  author    = {Dan Boneh and Xavier Boyen},
+  title     = {Secure Identity Based Encryption Without Random Oracles},
+  booktitle = {Advances in Cryptology - EUROCRYPT 2004},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {3027},
+  pages     = {223--238},
+  publisher = {Springer},
+  year      = {2004},
+  doi       = {10.1007/978-3-540-24676-3_14},
+  url       = {https://doi.org/10.1007/978-3-540-24676-3_14}
+}
+
+@inproceedings{Waters05,
+  author    = {Brent Waters},
+  title     = {Efficient Identity Based Encryption Without Random Oracles},
+  booktitle = {Advances in Cryptology - EUROCRYPT 2005},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {3494},
+  pages     = {114--127},
+  publisher = {Springer},
+  year      = {2005},
+  doi       = {10.1007/11426639_7},
+  url       = {https://doi.org/10.1007/11426639_7}
+}
+
+@inproceedings{Gentry06,
+  author    = {Craig Gentry},
+  title     = {Practical Identity-Based Encryption Without Random Oracles},
+  booktitle = {Advances in Cryptology - EUROCRYPT 2006},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {4004},
+  pages     = {445--464},
+  publisher = {Springer},
+  year      = {2006},
+  doi       = {10.1007/11761679_27},
+  url       = {https://doi.org/10.1007/11761679_27}
+}
+
+@inproceedings{Waters09,
+  author    = {Brent Waters},
+  title     = {Dual System Encryption: Realizing Fully Secure IBE and HIBE under Simple Assumptions},
+  booktitle = {Advances in Cryptology - CRYPTO 2009},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {5677},
+  pages     = {619--636},
+  publisher = {Springer},
+  year      = {2009},
+  doi       = {10.1007/978-3-642-03356-8_36},
+  url       = {https://doi.org/10.1007/978-3-642-03356-8_36}
+}
+
+@inproceedings{CHK04,
+  author    = {Ran Canetti and Shai Halevi and Jonathan Katz},
+  title     = {Chosen-Ciphertext Security from Identity-Based Encryption},
+  booktitle = {Advances in Cryptology - EUROCRYPT 2004},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {3027},
+  pages     = {207--222},
+  publisher = {Springer},
+  year      = {2004},
+  doi       = {10.1007/978-3-540-24676-3_14},
+  url       = {https://www.cs.umd.edu/~jkatz/papers/id-cca.pdf}
+}
+
+@inproceedings{BMW05,
+  author    = {Xavier Boyen and Qixiang Mei and Brent Waters},
+  title     = {Direct Chosen-Ciphertext Security from Identity-Based Techniques},
+  booktitle = {ACM Conference on Computer and Communications Security (CCS) 2005},
+  pages     = {320--329},
+  publisher = {ACM},
+  year      = {2005},
+  url       = {https://www.cs.cmu.edu/~goyal/ibe.pdf}
+}
+
+@inproceedings{BK04,
+  author    = {Dan Boneh and Jonathan Katz},
+  title     = {Improved Efficiency for CCA-Secure Cryptosystems built using Identity-Based Encryption},
+  booktitle = {RSA Conference on Topics in Cryptology - CT-RSA 2005 (preliminary version 2004)},
+  pages     = {87--103},
+  publisher = {Springer},
+  year      = {2005},
+  note      = {preliminary version 2004}
+}
+
+@inproceedings{BDOP04,
+  author    = {Dan Boneh and Giovanni Di Crescenzo and Rafail Ostrovsky and Giuseppe Persiano},
+  title     = {Public-Key Encryption with Keyword Search},
+  booktitle = {Advances in Cryptology - EUROCRYPT 2004},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {3027},
+  pages     = {506--522},
+  publisher = {Springer},
+  year      = {2004},
+  url       = {https://crypto.stanford.edu/~dabo/pubs/papers/encsearch.pdf}
+}
+
+
+
+@inproceedings{CHK03,
+  author    = {Ran Canetti and Shai Halevi and Jonathan Katz},
+  title     = {A Forward-Secure Public-Key Encryption Scheme},
+  booktitle = {Advances in Cryptology - EUROCRYPT 2003},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {2656},
+  pages     = {255--271},
+  publisher = {Springer},
+  year      = {2003},
+  url       = {http://eprint.iacr.org/2003/083}
+}
+
+@inproceedings{BBG05,
+  author    = {Dan Boneh and Xavier Boyen and Eu-Jin Goh},
+  title     = {Hierarchical Identity Based Encryption with Constant Size Ciphertext},
+  booktitle = {Advances in Cryptology - EUROCRYPT 2005},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {3494},
+  pages     = {440--456},
+  publisher = {Springer},
+  year      = {2005}
+}
+
+@techreport{GH08,
+  author       = {Matthew Green and Susan Hohenberger},
+  title        = {Universally Composable Adaptive Oblivious Transfer},
+  institution  = {Cryptology ePrint Archive},
+  number       = {2008/163},
+  year         = {2008},
+  url          = {https://eprint.iacr.org/2008/163}
+}
+
+% ECC history ( before BF 01 )
+@article{Kob87,
+	author  = {Koblitz, Neal},
+	title   = {Elliptic Curve Cryptosystems},
+	journal = {Mathematics of Computation},
+	volume  = {48},
+	number  = {177},
+	pages   = {203--209},
+	year    = {1987},
+	month   = {"jan"},
+	doi     = {10.1090/S0025-5718-1987-0866109-5},
+	publisher = {American Mathematical Society}
+}
+
+
+
+
+
+% ECC history ( before BF01 )
+@proceedings{Mil85,
+	title     = {CRYPTO '85: Advances in Cryptology},
+	editor    = {Williams, Hugh C.},
+	booktitle = {Advances in Cryptology --- CRYPTO '85},
+	year      = {1985},
+	publisher = {Springer-Verlag},
+	address   = {Berlin, Heidelberg},
+	isbn      = {978-3-540-16463-0},
+	eventdate = {1985-08-18/1985-08-22},
+	note      = {Proceedings of the conference held August 18--22, 1985}
+}
+
+
+
+% ----
+
+% BF01
+%% paywall mogotti teljes pdf: [https://crypto.stanford.edu/~dabo/papers/bfibe.pdf]
+@article{BF01,
+    author = {Boneh, Dan and Franklin, Matthew},
+    title = {Identity-Based Encryption from the Weil Pairing},
+    journal = {SIAM Journal on Computing},
+    volume = {32},
+    number = {3},
+    pages = {586-615},
+    year = {2003},
+    doi = {10.1137/S0097539701398521},
+    URL = {https://doi.org/10.1137/S0097539701398521},
+    eprint = {https://doi.org/10.1137/S0097539701398521}
+}
+
+% Computational vs. Decisional Diffie-Hellman
+@article{crypto.cdhddh,
+    author    = {Antoine Joux and Kim Nguyen},
+    title     = {Separating Decision Diffie-Hellman from Computational Diffie-Hellman in Cryptographic Groups},
+    journal   = {Journal of Cryptology},
+    year      = {2003},
+    volume    = {16},
+    number    = {4},
+    pages     = {239--247},
+    doi       = {10.1007/s00145-003-0052-4},
+    url       = {https://doi.org/10.1007/s00145-003-0052-4},
+    issn      = {1432-1378}
+}
+
+
+% ElGamal's public key cryptosstem
+@article{cryptosys.elgamal,
+    author={Elgamal, T.},
+    journal={IEEE Transactions on Information Theory},
+    title={A public key cryptosystem and a signature scheme based on discrete logarithms},
+    year={1985},
+    volume={31},
+    number={4},
+    pages={469-472},
+    doi={10.1109/TIT.1985.1057074}
+}
+
+
+% Diffie Hellman: Public-Key Crypto System
+@ARTICLE{DH76,
+	author={Diffie, W. and Hellman, M.},
+	journal={IEEE Transactions on Information Theory},
+	title={New directions in cryptography},
+	year={1976},
+	volume={22},
+	number={6},
+	pages={644-654},
+	keywords={Cryptography;Receivers;Authentication;Eavesdropping;Costs;Business;Public key cryptography},
+	doi={10.1109/TIT.1976.1055638}}
+
+
+
+% Beimportalt forrasok CryComp Project-bol
+%% ----
+
+@article{Shamir1979,
+	author    = {Adi Shamir},
+	title     = {How to share a secret},
+	journal   = {Communications of the Association for Computing Machinery},
+	volume    = {22},
+	number    = {11},
+	pages     = {612--613},
+	year      = {1979},
+	doi       = {10.1145/359168.359176},
+	url       = {https://dl.acm.org/doi/pdf/10.1145/359168.359176}
+}
+
+@inproceedings{FujisakiOkamoto,
+	author    = {E. Fujisaki and T. Okamoto},
+	title     = {Secure Integration of Asymmetric and Symmetric Encryption Schemes},
+	booktitle = {Advances in Cryptology -- {CRYPTO} '99},
+	series    = {Lecture Notes in Computer Science},
+	volume    = {1666},
+	pages     = {537--554},
+	publisher = {Springer},
+	year      = {1999},
+}
+
+@misc{ecc.hashing,
+	series =    {},
+	number =    9380,
+	howpublished =  {RFC 9380},
+	publisher = {RFC Editor},
+	doi =       {10.17487/RFC9380},
+	url =       {https://www.rfc-editor.org/info/rfc9380},
+	author =    {Armando Faz-Hernandez and Sam Scott and Nick Sullivan and Riad S. Wahby and Christopher A. Wood},
+	title =     {{Hashing to Elliptic Curves}},
+	pagetotal = 145,
+	year =      2023,
+	month =     aug
+}
+
+@online{ecc.fam.param.pair,
+	title = { Implement all the pairings in software!},
+	author = { Diego F. Aranha },
+	year = {2017},
+	note = {[Online; accessed 05. Nov. 2025]},
+	url = {https://caramba.inria.fr/sem-slides/201905241000.pdf}
+}
+
+@inproceedings{ecc.pairings.param,
+	author = {Aranha, Diego and Fuentes-Castañeda, Laura and Knapp, Edward and Menezes, Alfred and Rodríiguez-Henríquez, F},
+	year = {2013},
+	month = {01},
+	booktitle = {},
+	pages = {177-195},
+	title = {Implementing Pairings at the 192-Bit Security Level},
+	isbn = {978-3-642-36333-7},
+	doi = {10.1007/978-3-642-36334-4_11}
+}
+
+@phdthesis{lynn2007implementation,
+	author       = {Lynn, Ben},
+	title        = {On the Implementation of Pairing-based Cryptosystems},
+	school       = {Stanford University},
+	year         = {2007},
+	month        = jun,
+	note         = {PhD Dissertation. \url{https://crypto.stanford.edu/pbc/thesis.pdf}},
+}
+
+%% TODO: ext az implementaciot sagemath-ra beforditani !
+@online{lib.miracl,
+	title = {The MIRACL Core Cryptographic Library},
+	journal = {},
+	year = {},
+	month = {},
+	url = {https://github.com/miracl/core/tree/master/java},
+	note = {[Online; accessed 13. November. 2025]}
+}
+
+@inproceedings{Aranha2011,
+	author    = {Diego F. Aranha and Kamil Karabina and Patrick Longa and Catherine Gebotys and Julio Lopez and Francisco Rodr{\'\i}guez-Henr{\'\i}quez},
+	title     = {Faster Explicit Formulas for Computing Pairings over Ordinary Curves},
+	booktitle = {Advances in Cryptology -- {EUROCRYPT} 2011},
+	series    = {Lecture Notes in Computer Science},
+	volume    = {6632},
+	pages     = {48--68},
+	publisher = {Springer},
+	address   = {Berlin, Heidelberg},
+	year      = {2011},
+	doi       = {10.1007/978-3-642-20465-4_4},
+	url       = {https://doi.org/10.1007/978-3-642-20465-4_4}
+}
+
+% ------------------------------------
+%
+% ------------------------------------
+
+
+% ------------------------------------
+% Mathematical Preliminaries
+% ------------------------------------
+
+@book{hoffsteinintrotomathematicalcryptograhpy,
+	author    = {Hoffstein, Jeffrey and Pipher, Jill and Silverman, Joseph H.},
+	title     = {An Introduction to Mathematical Cryptography},
+	edition   = {2},
+	year      = {2014},
+	publisher = {Springer-Verlag},
+	series    = {Undergraduate Texts in Mathematics},
+	isbn      = {978-1-4939-1710-5},
+	pages     = {45,75},
+	doi       = {10.1007/978-1-4939-1711-2}
+}
