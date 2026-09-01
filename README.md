@@ -1,14 +1,14 @@
 # Master Thesis
 
-The repository contains the sources for my MSc Thesis (Aarhus University).
+This repository contains the source files for my MSc thesis in Computer Science at Aarhus University.
 
 ## Course Description
 
-Refer to: [https://kursuskatalog.au.dk/en/course/138418/Thesis-30-ECTS-Computer-Science]
+For the official thesis course description and additional information, refer to: [https://kursuskatalog.au.dk/en/course/138418/Thesis-30-ECTS-Computer-Science]
 
 # Compilation
 
-To compile the document make sure the following packages are present on the host system: 
+To compile the thesis, ensure that the following dependencies are installed on the host system:
 
 - `latexmk` — version `4.88`
 - `inputenc`
@@ -45,7 +45,9 @@ To compile the document make sure the following packages are present on the host
 
 # Autocompletions for TeXstudio
 
-TeXstudio specific completions for repository content can be installed using `setup_texstudio__completions.sh` script.
+This repository includes custom TeXstudio autocompletions for commands and content used throughout the thesis.
+
+To install them, run the setup_texstudio__completions.sh script:
 
 ```bash
 source setup_texstudio__completions.sh
